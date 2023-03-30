@@ -1,4 +1,4 @@
-# RPS-101 (Name pending)
+# Janken 101
 
 Group project where all the learning and knowledge obtained on the course Desarrollo Rápido de Aplicaciones will be aplied on the development of a Rock-Paper-Scissors game with 101 unique objects.
 

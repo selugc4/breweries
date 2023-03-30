@@ -4,9 +4,9 @@ services:
     image: postgres
     restart: always
     environment:
-      POSTGRES_USER: yourusername
-      POSTGRES_PASSWORD: yourpassword
-      POSTGRES_DB: yourdatabase
+      POSTGRES_USER: janken
+      POSTGRES_PASSWORD: janken
+      POSTGRES_DB: janken
     ports:
       - "5432:5432"
     volumes:

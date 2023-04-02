@@ -1,0 +1,36 @@
+.svg-card {
+    width: 700px;
+    height: fit-content;
+    position: relative;
+}
+
+.template-card {
+    width: 100%;
+    height: auto;
+}
+
+.object-icon {
+    position: absolute;
+    top: 42%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    max-height: 35%;
+}
+
+.svg-card>div {
+    width: 100%;
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 2px;
+}
+
+.svg-card span {
+    color: white;
+    font-size: 15px;
+    font-weight: 800;
+    text-transform: uppercase;
+}

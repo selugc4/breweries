@@ -1,3 +1,6 @@
-<div *ngFor="let object of objetos">
-    <app-card [name]="object"></app-card>
+<div *ngFor="let deck of decks">
+    <app-deck [deck]="deck"></app-deck>
+</div>
+<div *ngFor="let card of cards">
+    <app-card [name]="card"></app-card>
 </div>

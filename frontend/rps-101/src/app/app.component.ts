@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MockObjectsService } from './services/mock-objects.service';
+import { Deck } from './models/Deck';
 
 @Component({
   selector: 'app-root',
@@ -9,12 +10,13 @@ import { MockObjectsService } from './services/mock-objects.service';
 export class AppComponent {
   title = 'Janken 101';
 
-  objetos: string[] = [];
+  cards: string[] = [];
+  decks: Deck[] = [];
 
   constructor(private mock: MockObjectsService) { }
 
   ngOnInit() {
-    console.log(this.mock.getMockObjects());
-    this.objetos = this.mock.getMockObjects();
+    this.cards = this.mock.getMockObjects();
+    this.decks = this.mock.getMockDecks();
   }
 }

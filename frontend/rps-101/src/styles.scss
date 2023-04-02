@@ -1,5 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 
+:root {
+    --blue: #1A1F40;
+    --blue-90: #21264A;
+    --blue-80: #282E54;
+    --blue-70: #5F6892;
+    --blue-60: #8690BF;
+    --white: #FFFFFF;
+    --gray: #9092A4;
+    --orange-gradient: linear-gradient(180deg, #FBD03B, #FA7800);
+    --green-gradient: linear-gradient(90deg, #B3FFAB, #12FFF7);
+    --pink-gradient: linear-gradient(90deg, #FA669C, #E13387);
+    --purple-gradient: linear-gradient(90deg, #8257FC, #6736F1);
+    --background-opacity: #0F102580;
+    --card-opacity: #282E5490;
+}
+
 html,
 body {
     height: 100%;
@@ -18,8 +34,8 @@ html {
 
 body {
     margin: 0;
-    background-color: #21264A;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background: var(--blue);
+    font-family: "Titillium Web", Arial, Helvetica, sans-serif;
     display: flex;
     gap: 50px;
 }

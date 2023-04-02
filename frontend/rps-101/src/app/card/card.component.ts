@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { MockObjectsService } from '../services/mock-objects.service';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-card',
@@ -8,12 +7,16 @@ import { MockObjectsService } from '../services/mock-objects.service';
 })
 export class CardComponent {
 
-  constructor(private mock: MockObjectsService) { }
+  @ViewChild('card', { static: false }) cardElement: ElementRef = new ElementRef(null);
 
-  card_name = "";
+  @Input() name: string = "";
 
   ngOnInit() {
-    this.card_name = this.mock.getMockObjects()[0].toLowerCase();
+    this.name = this.name.toLowerCase();
+    setTimeout(() => {
+      const currentWidth = this.cardElement.nativeElement.clientWidth;
+      const newFontSize = currentWidth * 0.1;
+      this.cardElement.nativeElement.style.fontSize = `${newFontSize}px`;
+    }, 100);
   }
-
 }

@@ -15,12 +15,16 @@ export class DeckComponent {
   ngOnInit() {
     setTimeout(() => {
       const currentWidth = this.deckElement.nativeElement.clientWidth;
-      const newPrimaryFontSize = currentWidth * 0.1;
-      const newSecondaryFontSize = currentWidth * 0.035;
-      const primaryName = this.deckElement.nativeElement.childNodes[2];
+      const currentHeight = this.deckElement.nativeElement.clientHeight;
+      const newFontSize = currentWidth * 0.1;
+      const newHeight = currentHeight * 0.15;
+      const cardName = this.deckElement.nativeElement.childNodes[2];
       const aside = this.deckElement.nativeElement.childNodes[3];
-      aside.style.fontSize = `${newSecondaryFontSize}px`;
-      primaryName.style.fontSize = `${newPrimaryFontSize}px`;
+      const secondary_objects_container = aside.firstChild;
+      for (const secondary_object of secondary_objects_container.children) {
+        secondary_object.firstChild.firstChild.style.height = `${newHeight}px`;
+      }
+      cardName.style.fontSize = `${newFontSize}px`;
     }, 100);
   }
 }

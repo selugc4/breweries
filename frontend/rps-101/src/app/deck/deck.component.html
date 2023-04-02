@@ -1,18 +1,21 @@
-<div #deckElement class="svg-deck">
-  <img class="template-deck" src="assets/deck_template.svg" alt="">
-  <img class="object-deck-icon" src="assets/object-images/{{deck.cards[0].toLowerCase()}}.svg" alt="">
-  <div>
-    <span>{{deck.cards[0].toUpperCase()}}</span>
-  </div>
-
-  <aside>
-    <div class="secondary-objects">
-      <div class="object-deck-secondary-icon" *ngFor="let card of deck.cards.slice(1)">
-        <img src="assets/object-images/{{card.toLowerCase()}}.svg" alt="{{card}}">
-        <span class="object-deck-secondary-name">
-          {{card.toUpperCase()}}
-        </span>
-      </div>
+<div class="deck-container">
+  <div #deckElement class="svg-deck">
+    <img class="template-deck" src="assets/deck_template.svg" alt="">
+    <img class="object-deck-icon" src="assets/object-images/{{deck.cards[0].toLowerCase()}}.svg" alt="">
+    <div>
+      <span>{{deck.cards[0].toUpperCase()}}</span>
     </div>
-  </aside>
+
+    <aside>
+      <div class="secondary-objects">
+        <div class="object-deck-secondary-icon" *ngFor="let card of deck.cards.slice(1)">
+          <div>
+            <img src="assets/object-images/{{card.toLowerCase()}}.svg" alt="{{card}}"
+              matTooltip="{{card.toUpperCase()}}">
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+  <label class="deck-name">{{deck.name}}</label>
 </div>

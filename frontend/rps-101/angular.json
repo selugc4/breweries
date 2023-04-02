@@ -31,7 +31,8 @@
             ],
             "scripts": [],
             "styles": [
-              "src/custom-theme.scss"
+              "src/custom-theme.scss",
+              "src/styles.scss"
             ]
           },
           "configurations": {

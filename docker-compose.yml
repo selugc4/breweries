@@ -11,3 +11,9 @@ services:
       - "5432:5432"
     volumes:
       - ./data:/var/lib/postgresql/data
+      
+  frontend:
+    build: ./frontend/rps-101
+    ports:
+      - "8080:80"
+    restart: unless-stopped

@@ -1,1 +1,3 @@
-<app-card></app-card>
+<div *ngFor="let object of objetos">
+    <app-card [name]="object"></app-card>
+</div>

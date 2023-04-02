@@ -7,20 +7,14 @@ import { MockObjectsService } from './services/mock-objects.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'rps-101';
+  title = 'Janken 101';
 
-  objeto: string = ""
+  objetos: string[] = [];
 
   constructor(private mock: MockObjectsService) { }
 
   ngOnInit() {
     console.log(this.mock.getMockObjects());
-    console.log(this.getComponentWidth());
-    this.objeto = this.mock.getMockObjects()[0].toLowerCase();
-    this.objeto = "video game";
-  }
-
-  private getComponentWidth() {
-    return document.getElementById('rocket');
+    this.objetos = this.mock.getMockObjects();
   }
 }

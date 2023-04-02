@@ -1,7 +1,8 @@
 .svg-card {
-    width: 700px;
+    width: 100%;
     height: fit-content;
     position: relative;
+    font-size: 0px;
 }
 
 .template-card {
@@ -25,12 +26,11 @@
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    font-size: 2px;
 }
 
 .svg-card span {
     color: white;
-    font-size: 15px;
+    font-family: Krub, Arial, Helvetica, sans-serif;
     font-weight: 800;
     text-transform: uppercase;
 }

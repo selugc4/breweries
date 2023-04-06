@@ -9,11 +9,7 @@ import { DeckComponent } from './deck/deck.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    CardComponent,
-    DeckComponent
-  ],
+  declarations: [AppComponent, CardComponent, DeckComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -21,6 +17,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatTooltipModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

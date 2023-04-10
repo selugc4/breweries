@@ -1,6 +1,5 @@
-<div *ngFor="let deck of decks">
-    <app-deck [deck]="deck"></app-deck>
-</div>
-<div *ngFor="let card of cards">
-    <app-card [name]="card"></app-card>
+<div class="app-container">
+  <app-header></app-header>
+  <app-menu></app-menu>
+  <div #gameContainer></div>
 </div>

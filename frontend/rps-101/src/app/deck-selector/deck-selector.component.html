@@ -1,0 +1,48 @@
+<div class="dialog-container">
+  <mat-toolbar>
+    <div>
+      <h2>YOUR DECKS</h2>
+      <span class="subtitle">Select a deck to play the game</span>
+    </div>
+    <div class="search-close">
+      <!-- TODO: Sustituir por el componente de búsqueda -->
+      <div style="width: 250px; background-color: var(--blue-60); border-radius: 10px; padding: 5px 10px;">
+        Search deck ...
+      </div>
+      <mat-icon mat-dialog-close>close</mat-icon>
+    </div>
+  </mat-toolbar>
+
+  <div class="decks-list-container scrollbar" mat-dialog-content>
+    <div class="deck-container">
+      <div class="deck-image">
+        <div class="deck-selected" *ngIf="this.selectedDeck === this.randomDeck">
+          <mat-icon>check_circle</mat-icon>
+          <span>selected</span>
+        </div>
+        <img class="deck-elemet" src="assets/random_deck.svg" alt="Random Deck" (click)="selectDeck(this.randomDeck)" />
+      </div>
+      <span>Random deck</span>
+    </div>
+
+    <div *ngFor="let deck of userDecks ">
+      <div class="deck-container">
+        <div class="deck-image">
+          <div class="deck-selected" *ngIf="this.selectedDeck === deck">
+            <mat-icon>check_circle</mat-icon>
+            <span>selected</span>
+          </div>
+          <app-deck class="deck-element" [deck]="deck" [displayName]="false" (click)="selectDeck(deck)"></app-deck>
+        </div>
+        <span>{{deck.name}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-raised-button mat-button [mat-dialog-close]="selectedDeck"
+      class="mdc-button mdc-button--raised mat-mdc-raised-button mat-primary mat-mdc-button-base">
+      <span class="mdc-buttonlabel">Play</span>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<div>
+  <div class="title">
+    <h2>CARD DETAIL - {{ cardName.toUpperCase() }}</h2>
+  </div>
+
+  <div class="row">
+    <div class="column-left">
+      <div class="main-card">
+        <app-card [name]="cardName"> </app-card>
+      </div>
+      <div class="if-card" *ngIf="versus != null">
+        <span>"{{ cardName }} {{versus.outcome}} {{ versus.losingCard }}"</span>
+        <div class="selected-card">
+          <app-card [name]="versus.losingCard.toLowerCase()"></app-card>
+        </div>
+      </div>
+    </div>
+    <div class="column-right">
+      <mat-toolbar>
+        <span class="outcome"> Winning outcomes: </span>
+        <form>
+          <mat-form-field appearance="fill">
+            <mat-label>
+              <mat-icon aria-hidden="false" aria-label="Magnifying glass" fontIcon="search"></mat-icon>
+              Search...
+            </mat-label>
+            <input type="text" placeholder="Card name" aria-label="CardName" matInput [formControl]="myControl"
+              [matAutocomplete]="auto" />
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredCards | async" [value]="option">
+                {{ option }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </form>
+      </mat-toolbar>
+      <div class="card-list" *ngIf="filterCards()?.length != 0; else notFound">
+        <app-card (click)="versus = card" class="check" *ngFor="let card of filterCards()"
+          [name]="card.losingCard"></app-card>
+      </div>
+      <ng-template #notFound>
+        <div class="card-not-found">
+          <p>
+            No card with name "{{ cutString(myControl.value!) }}" has been found
+          </p>
+          <div>
+            <app-card name="Not Found"></app-card>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

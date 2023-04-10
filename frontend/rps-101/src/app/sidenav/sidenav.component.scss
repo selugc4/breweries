@@ -1,0 +1,73 @@
+mat-sidenav {
+    margin: 0px 0px 0px 40px;
+    width: 180px;
+    min-width: 80px;
+    height: 80%;
+    border-right: none;
+    background: var(--blue-80);
+    border-radius: 12px;
+    padding-top: 1%;
+    text-align: center;
+    position: relative !important; //Quitar este campo si queremos la barra de la izquierda fija 
+    margin-top: 80px; //TODO: QUITAR ESTO
+}
+
+mat-sidenav-container {
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+}
+
+mat-sidenav-content {
+    text-align: center;
+    background-color: transparent;
+}
+
+.mdc-list-item.mdc-list-item--with-one-line {
+    height: 100px;
+    margin-bottom: 15px;
+}
+
+.icon-span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--blue-60) !important;
+
+    label {
+        font-weight: 500;
+        font-size: 20px;
+    }
+
+    mat-icon {
+        font-size: 35px;
+        height: auto;
+        width: auto;
+    }
+}
+
+.router-link-active {
+    label {
+        font-weight: 700;
+        color: var(--white) !important;
+    }
+
+    mat-icon {
+        color: transparent;
+        background: var(--orange-gradient);
+        background-clip: text;
+        -webkit-background-clip: text;
+    }
+}
+
+.selected {
+    width: 8px;
+    height: 50px;
+    background: var(--orange-gradient);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    border-radius: 0 10px 10px 0;
+}

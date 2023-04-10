@@ -17,5 +17,5 @@
       </div>
     </aside>
   </div>
-  <label class="deck-name">{{deck.name}}</label>
+  <label *ngIf="displayName" class="deck-name">{{deck.name}}</label>
 </div>

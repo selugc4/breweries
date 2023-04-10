@@ -1,0 +1,40 @@
+<mat-sidenav-container> <!-- flex -->
+    <mat-sidenav #sidenav mode="side" opened="true"> <!-- witdh, position relative, [fixedInViewport]="true" -->
+        <mat-nav-list>
+            <a mat-list-item routerLink="/cards" routerLinkActive="router-link-active">
+                <div class="icon-span">
+                    <div routerLinkActive="selected"></div>
+                    <mat-icon>view_carousel</mat-icon>
+                    <label>Cards</label>
+                </div>
+            </a>
+            <a mat-list-item routerLink="/decks" routerLinkActive="router-link-active">
+                <div class="icon-span">
+                    <div routerLinkActive="selected"></div>
+                    <mat-icon>filter_none</mat-icon>
+                    <label>Decks</label>
+                </div>
+            </a>
+            <a mat-list-item routerLink="/game" routerLinkActive="router-link-active">
+                <div class="icon-span">
+                    <div routerLinkActive="selected"></div>
+                    <mat-icon>videogame_asset</mat-icon>
+                    <label>Play</label>
+                </div>
+            </a>
+            <a mat-list-item routerLink="/stats" routerLinkActive="router-link-active">
+                <div class="icon-span">
+                    <div routerLinkActive="selected"></div>
+                    <mat-icon>bar_chart</mat-icon>
+                    <label>Stats</label>
+                </div>
+            </a>
+
+        </mat-nav-list>
+        <!-- <a mat-list-item (click)="sidenav.toggle()" mat-list-item>Close</a> -->
+    </mat-sidenav>
+
+    <mat-sidenav-content style="margin: 0; margin-top: 80px;">
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

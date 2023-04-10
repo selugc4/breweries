@@ -1,0 +1,118 @@
+h2 {
+  font-size: 4vh;
+  color: white;
+  font-weight: 700;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+span {
+  font-size: 2vh;
+  color: white;
+  font-weight: 700;
+}
+
+p {
+  color: white;
+  font-size: 1.8vh;
+}
+
+mat-label {
+  display: inline-flex;
+  align-items: center;
+  color: #818ebb;
+}
+
+mat-icon {
+  margin-right: 5px;
+}
+
+.card-list {
+  height: 75vh;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(10%, 1fr));
+  grid-gap: 5%;
+  row-gap: 40px;
+  place-items: center;
+  justify-content: space-between;
+  align-content: start;
+  margin-right: 2%;
+  padding-right: 2.5%;
+  padding-bottom: 5%;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.card-not-found {
+  height: 70vh;
+  padding-top: 12vh;
+  text-align: center;
+  font-style: italic;
+}
+
+.card-not-found div {
+  display: inline-block;
+  width: 15%;
+}
+
+.outcome {
+  margin-bottom: 21px;
+}
+
+.title,
+mat-toolbar {
+  padding-right: 2.5%;
+  justify-content: space-between;
+  background: var(--blue);
+  align-items: baseline;
+}
+
+mat-toolbar {
+  padding-left: 0;
+  height: 10vh;
+}
+
+.title {
+  padding-left: 2.5%;
+  vertical-align: middle;
+  // height: 15vh;
+  // line-height: 15vh;
+}
+
+app-card.check {
+  cursor: pointer;
+}
+
+.main-card {
+  padding-right: 15%;
+  padding-left: 15%;
+}
+
+.selected-card {
+  padding-right: 22.5%;
+  padding-left: 22.5%;
+  margin-top: 25px;
+}
+
+.if-card {
+  margin: 20px;
+  text-align: center;
+}
+
+.if-card span {
+  font-style: italic;
+}
+
+.row {
+  display: flex;
+}
+
+.column-right {
+  flex: 80%;
+}
+
+.column-left {
+  flex: 20%;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+}

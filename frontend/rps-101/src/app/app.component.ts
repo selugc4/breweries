@@ -1,22 +1,51 @@
-import { Component } from '@angular/core';
-import { MockObjectsService } from './services/mock-objects.service';
-import { Deck } from './models/Deck';
+import {
+  Component,
+  ComponentFactoryResolver,
+  Injector,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
+import { GameService } from './services/game.service';
+import { GameParameters } from './models/GameParameters';
+import { DeckComponent } from './deck/deck.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  @ViewChild('gameContainer', { read: ViewContainerRef, static: true })
+  gameContainerElement?: ViewContainerRef;
+
   title = 'Janken 101';
 
-  cards: string[] = [];
-  decks: Deck[] = [];
-
-  constructor(private mock: MockObjectsService) { }
+  constructor(
+    private gameService: GameService,
+    private resolver: ComponentFactoryResolver,
+    private injector: Injector
+  ) {}
 
   ngOnInit() {
-    this.cards = this.mock.getMockObjects();
-    this.decks = this.mock.getMockDecks();
+    this.gameService.StartGameEvent.subscribe((parameters) => {
+      this.renderGame(parameters);
+    });
+    this.gameService.EndGameEvent.subscribe(() => {
+      this.destroyGame();
+    });
+  }
+
+  renderGame(parameters: GameParameters) {
+    const factory = this.resolver.resolveComponentFactory(DeckComponent); //Cambiar al componente de partida
+    const componentRef = factory.create(this.injector);
+    componentRef.instance.deck = parameters.deck; //Insertar aquí las dependencias del componente de partida
+    componentRef.location.nativeElement.className = 'game-container';
+    
+    this.gameContainerElement!.clear();
+    this.gameContainerElement!.insert(componentRef.hostView);
+  }
+
+  destroyGame(){
+    this.gameContainerElement!.clear();
   }
 }

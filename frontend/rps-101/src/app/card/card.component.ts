@@ -16,7 +16,7 @@ export class CardComponent {
     setTimeout(() => {
       const currentWidth = this.cardElement.nativeElement.clientWidth;
       const newFontSize = currentWidth * 0.1;
-      this.cardElement.nativeElement.style.fontSize = `${newFontSize}px`;
+      // this.cardElement.nativeElement.style.fontSize = `${newFontSize}px`;
     }, 100);
   }
 }

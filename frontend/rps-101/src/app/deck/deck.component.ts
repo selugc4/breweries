@@ -11,6 +11,7 @@ export class DeckComponent {
     new ElementRef(null);
 
   @Input() deck!: Deck;
+  @Input() displayName: boolean = true;
 
   ngOnInit() {
     setTimeout(() => {

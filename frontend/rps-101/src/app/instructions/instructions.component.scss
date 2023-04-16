@@ -1,0 +1,32 @@
+div{
+  background: #282E54;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  min-height: 15em;
+
+}
+
+h2{
+  color: #ffffff;
+  align-self: center;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+p{
+ color: #5F6892;
+ font-size: 25px;
+
+}
+.instructions{
+  margin-bottom: 3em;
+  margin-left: 3em;
+  margin-right: 3em;
+}
+.instruction{
+  width: 17.5em;
+
+}
+

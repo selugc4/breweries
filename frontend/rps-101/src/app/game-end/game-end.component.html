@@ -1,0 +1,15 @@
+<span [ngClass]="matchResult(text)">{{text}}</span>
+<div id="Match" >
+  <div class="round" *ngFor="let roundaux of rounds; let i = index;">
+    <div matTooltip="{{tooltipRound(roundaux[2])}} " id="{{checkId(roundaux[2])}}">
+      <p>{{i}}</p>
+    </div>
+    <div class = "roundCards">
+      <app-card matTooltip="{{tooltipName(roundaux[0])}}"id="{{checkCardId(roundaux[2],1)}}" class="object-icon" name="{{roundaux[0]}}" ></app-card>
+      <app-card matTooltip="{{tooltipName(roundaux[1])}}"  id="{{checkCardId(roundaux[2], 2)}}" class="object-icon" name="{{roundaux[1]}}"></app-card>
+    </div>
+    <p>"Beer catches Sun"</p>
+  </div>
+</div>
+<span class="message">{{message}}</span>
+<p class="messageActions">{{messageActions}}</p>

@@ -1,0 +1,160 @@
+span{
+  transform: translateY(-40%);
+}
+
+.WIN {
+  display: block;
+  font-family: 'Mirza';
+  background: linear-gradient(270deg, #12FFF7 0%, #B3FFAB 100%);
+  font-weight: 700;
+  font-size: 175px;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  height: 100%;
+  text-align: center;
+  width: 100%;
+}
+.LOSE{
+  display: block;
+  font-family: 'Mirza';
+  background: linear-gradient(270deg, #E13387 0%, #FF5085 50%, #FA669C 100%);
+  font-weight: 700;
+  font-size: 175px;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  height: 100%;
+  text-align: center;
+  width: 100%;
+}
+.DRAW {
+  display: block;
+  font-family: 'Mirza';
+  background: linear-gradient(270deg, #6736F1 0%, #6B36DB 50%, #8257FC 100%);
+  font-weight: 700;
+  font-size: 175px;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  height: 100%;
+  text-align: center;
+  width: 100%;
+}
+#Match{
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  align-items: center;
+  width: 100%;
+  height: 50%;
+  margin-bottom: 3%;
+}
+.round{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  margin-right: 80px;
+  margin-left: auto;
+
+}
+app-card{
+  width: 100px;
+  height: 150px;
+  background: rgba($color: white, $alpha: 0.8);
+  border-radius: 10px;
+}
+
+#victory{
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  color: var(--white);
+  background: var(--green-gradient) content-box;
+  border-radius: 8px;
+  margin-left: auto;
+  margin-right: auto;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10%;
+
+
+}
+#lose{
+  width: 50px;
+  height: 50px;
+  background: var(--pink-gradient) content-box;
+  border-radius: 8px;
+  margin-left: auto;
+  margin-right: auto;
+  align-self: center;
+  text-align: center;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10%;
+}
+#draw{
+  width: 50px;
+  height: 50px;
+  background: var(--purple-gradient) content-box;
+  border-radius: 8px;
+  margin-left: auto;
+  margin-right: auto;
+  align-self: center;
+    text-align: center;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10%;
+}
+
+p{
+  font: "Titillium Web";
+  color: var(--white);
+  text-align: center;
+  width: 100%;
+}
+
+.roundCards{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#lost{
+  opacity: 0.5;
+}
+
+.message{
+  text-decoration: none;
+  color: var(--white);
+  font-family: var(--titillium);
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  display: block;
+  font-size: 24px;
+}
+
+.messageActions{
+  font: "Titillium Web";
+  color: var(--white);
+  text-align: center;
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+

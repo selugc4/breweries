@@ -23,7 +23,7 @@ export class GameSelectorComponent {
 
     dialogRef.afterClosed().subscribe((deck) => {
       this.selectedDeck = deck;
-      
+
       if (this.selectedDeck){
         this.gameService.startGame(this.selectedGameMode!, this.selectedDeck);
       }

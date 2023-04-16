@@ -7,7 +7,7 @@ import { WinningOutcome } from '../models/CardOutcomes';
 })
 export class MockObjectsService {
   constructor() {}
-
+  
   getMockObjects() {
     return [
       'Air',

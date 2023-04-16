@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -31,6 +30,14 @@ import { MenuComponent } from './menu/menu.component';
 import { GameSelectorComponent } from './game-selector/game-selector.component';
 import { DeckSelectorComponent } from './deck-selector/deck-selector.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { GameComponent } from './game/game.component';
+import { CardGameDetailComponent } from './card-game-detail/card-game-detail.component';
+import { InstructionsComponent } from './instructions/instructions.component';
+import { ScoreboardComponent } from './scoreboard/scoreboard.component';
+import { GameEndComponent } from './game-end/game-end.component';
+import { MatMenuModule} from '@angular/material/menu';
+import { MatSliderModule} from '@angular/material/slider';
+import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AutocompleteComponent } from './autocomplete/autocomplete.component';
 
@@ -51,6 +58,11 @@ import { AutocompleteComponent } from './autocomplete/autocomplete.component';
     MenuComponent,
     GameSelectorComponent,
     DeckSelectorComponent,
+    GameComponent,
+    CardGameDetailComponent,
+    InstructionsComponent,
+    ScoreboardComponent,
+    GameEndComponent
     NotFoundComponent,
     AutocompleteComponent,
   ],
@@ -72,7 +84,10 @@ import { AutocompleteComponent } from './autocomplete/autocomplete.component';
     HttpClientModule,
     MatListModule,
     MatDialogModule,
-  ],
+    MatMenuModule,
+    MatSliderModule,
+    MatProgressSpinnerModule,
+    ],
   providers: [],
   bootstrap: [AppComponent],
 })

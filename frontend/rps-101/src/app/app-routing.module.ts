@@ -9,6 +9,7 @@ import { DeckDetailComponent } from './deck-detail/deck-detail.component';
 import { DeckListComponent } from './deck-list/deck-list.component';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
+
 const routes: Routes = [
   { path: '', redirectTo: '/decks', pathMatch: 'full' },
   { path: 'decks', component: DeckListComponent },

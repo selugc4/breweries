@@ -8,6 +8,7 @@ import {
 import { GameService } from './services/game.service';
 import { GameParameters } from './models/GameParameters';
 import { DeckComponent } from './deck/deck.component';
+import { GameComponent } from './game/game.component';
 
 @Component({
   selector: 'app-root',
@@ -36,11 +37,11 @@ export class AppComponent {
   }
 
   renderGame(parameters: GameParameters) {
-    const factory = this.resolver.resolveComponentFactory(DeckComponent); //Cambiar al componente de partida
+    const factory = this.resolver.resolveComponentFactory(GameComponent); //Cambiar al componente de partida
     const componentRef = factory.create(this.injector);
     componentRef.instance.deck = parameters.deck; //Insertar aquí las dependencias del componente de partida
     componentRef.location.nativeElement.className = 'game-container';
-    
+
     this.gameContainerElement!.clear();
     this.gameContainerElement!.insert(componentRef.hostView);
   }

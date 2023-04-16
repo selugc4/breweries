@@ -19,7 +19,7 @@
 .buttons {
     width: 40%;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     gap: 3%;
 }
 
@@ -61,7 +61,7 @@
     height: 80%;
     margin-top: 1%;
     gap: 3%;
-    justify-content: start;
+    justify-content: flex-start;
 }
 
 .details {

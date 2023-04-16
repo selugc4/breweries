@@ -21,7 +21,6 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CardDetailComponent } from './card-detail/card-detail.component';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { SidenavComponent } from './sidenav/sidenav.component';
 import { HeaderComponent } from './header/header.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { HttpClientModule } from '@angular/common/http';
@@ -35,9 +34,9 @@ import { CardGameDetailComponent } from './card-game-detail/card-game-detail.com
 import { InstructionsComponent } from './instructions/instructions.component';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 import { GameEndComponent } from './game-end/game-end.component';
-import { MatMenuModule} from '@angular/material/menu';
-import { MatSliderModule} from '@angular/material/slider';
-import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AutocompleteComponent } from './autocomplete/autocomplete.component';
 
@@ -53,7 +52,6 @@ import { AutocompleteComponent } from './autocomplete/autocomplete.component';
     DeckBuilderComponent,
     CardListComponent,
     CardDetailComponent,
-    SidenavComponent,
     HeaderComponent,
     MenuComponent,
     GameSelectorComponent,
@@ -62,7 +60,7 @@ import { AutocompleteComponent } from './autocomplete/autocomplete.component';
     CardGameDetailComponent,
     InstructionsComponent,
     ScoreboardComponent,
-    GameEndComponent
+    GameEndComponent,
     NotFoundComponent,
     AutocompleteComponent,
   ],
@@ -87,7 +85,7 @@ import { AutocompleteComponent } from './autocomplete/autocomplete.component';
     MatMenuModule,
     MatSliderModule,
     MatProgressSpinnerModule,
-    ],
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

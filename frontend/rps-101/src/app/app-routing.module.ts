@@ -9,12 +9,11 @@ import { DeckDetailComponent } from './deck-detail/deck-detail.component';
 import { DeckListComponent } from './deck-list/deck-list.component';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
-
 const routes: Routes = [
-  { path: '', redirectTo: '/decks', pathMatch: 'full' },
+  { path: '', redirectTo: '/play', pathMatch: 'full' },
   { path: 'decks', component: DeckListComponent },
   { path: 'decks/:deckId/details', component: DeckDetailComponent },
-  { path: 'decks/create', component: DeckBuilderComponent},
+  { path: 'decks/create', component: DeckBuilderComponent },
   { path: 'decks/:deckId/edit', component: DeckBuilderComponent },
   { path: 'play', component: GameSelectorComponent },
   { path: 'cards', component: CardListComponent },

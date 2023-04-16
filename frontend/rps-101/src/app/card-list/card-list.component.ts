@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { CardApiService } from '../services/card-api.service';
 
 @Component({
   selector: 'app-card-list',
@@ -12,37 +13,24 @@ import { Location } from '@angular/common';
   styleUrls: ['./card-list.component.scss'],
 })
 export class CardListComponent implements OnInit {
-  myControl = new FormControl('');
+  autocompleteControl = new FormControl('');
   cards!: string[];
-  filteredCards!: Observable<string[]>;
+  filteredCards!: string[];
   regularDistribution = 100 / 3 + '%';
 
   constructor(
     private mockObjectsService: MockObjectsService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private cardApi: CardApiService
   ) {}
 
   ngOnInit(): void {
-    this.filteredCards = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map((value) => this._filter(value || ''))
-    );
     this.cards = this.mockObjectsService.getMockObjects();
-  }
-
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.cards.filter((option) =>
-      option.toLowerCase().includes(filterValue)
-    );
-  }
-
-  filterCards(): string[] {
-    return this.cards.filter((name) =>
-      name.toLowerCase().includes(this.myControl.value?.toLocaleLowerCase()!)
-    );
+    //TODO: Autocomplete component does not work properly when the input comes from asyncronous calls
+    // this.cardApi.getCards().subscribe((response) => {
+    //   this.cards = response;
+    // });
   }
 
   cutString(value: string): string {
@@ -50,5 +38,9 @@ export class CardListComponent implements OnInit {
       return value.slice(0, 12) + '...';
     }
     return value;
+  }
+
+  getFiltered(filtered: string[]) {
+    this.filteredCards = filtered;
   }
 }

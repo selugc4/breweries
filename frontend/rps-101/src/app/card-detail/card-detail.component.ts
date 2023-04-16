@@ -15,42 +15,32 @@ import { WinningOutcome } from '../models/CardOutcomes';
   styleUrls: ['./card-detail.component.scss'],
 })
 export class CardDetailComponent implements OnInit {
-  myControl = new FormControl('');
+  autocompleteControl = new FormControl('');
   winningOutcomes!: WinningOutcome[];
   cardName!: string;
   versus?: WinningOutcome;
-  filteredCards!: Observable<WinningOutcome[]>;
+  filteredCards!: WinningOutcome[];
+  filterProperty: string = 'losingCard';
   regularDistribution = 100 / 3 + '%';
 
   constructor(
+    private mock: MockObjectsService,
     private route: ActivatedRoute,
-    private location: Location,
-    private cardApi: CardApiService,
-  ) { }
+    private cardApi: CardApiService
+  ) {}
 
   ngOnInit(): void {
-    this.filteredCards = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map((value) => this._filter(value || ''))
-    );
     this.cardName = String(this.route.snapshot.paramMap.get('name'));
-    this.cardApi.getCardOutcomes(this.cardName).subscribe((response) => {
-      this.winningOutcomes = response.winningOutcomes;
-    });
+    this.winningOutcomes = [];
+    //TODO: Autocomplete component does not work properly when the input comes from asyncronous calls
+    // this.cardApi.getCardOutcomes(this.cardName).subscribe((response) => {
+    //   this.winningOutcomes = response.winningOutcomes;
+    // });
+    this.winningOutcomes = this.mock.getMockWinningOutcomes(this.cardName);
   }
 
-  private _filter(value: string): WinningOutcome[] {
-    const filterValue = value.toLowerCase();
-
-    return this.winningOutcomes.filter((option) =>
-      option.losingCard.toLowerCase().includes(filterValue)
-    );
-  }
-
-  filterCards(): WinningOutcome[] {
-    return this.winningOutcomes.filter((option) =>
-      option.losingCard.toLowerCase().includes(this.myControl.value?.toLocaleLowerCase()!)
-    );
+  getFiltered(filtered: WinningOutcome[]) {
+    this.filteredCards = filtered;
   }
 
   cutString(value: string): string {

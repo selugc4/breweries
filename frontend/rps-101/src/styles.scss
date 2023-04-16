@@ -1,5 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 :root {
     --blue: #1a1f40;
@@ -62,14 +61,14 @@ app-root {
 }
 
 .mdc-dialog__surface {
-    background: none !important;
+  background: none !important;
 }
 
 .game-container {
-    width: 100vw;
-    height: calc(100vh - 80px);
-    position: fixed;
-    bottom: 0;
-    background-color: #FF000050;
-    z-index: 1000;
+  width: 100vw;
+  height: calc(100vh - 80px);
+  position: fixed;
+  bottom: 0;
+  background-color: #ff000050;
+  z-index: 1000;
 }

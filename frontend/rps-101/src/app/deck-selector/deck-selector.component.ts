@@ -2,7 +2,12 @@ import { Component, Inject } from '@angular/core';
 import { Deck } from '../models/Deck';
 import { MockObjectsService } from '../services/mock-objects.service';
 import { RandomDeckService } from '../services/random-deck.service';
-import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+} from '@angular/material/dialog';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-deck-selector',
@@ -10,8 +15,11 @@ import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dial
   styleUrls: ['./deck-selector.component.scss'],
 })
 export class DeckSelectorComponent {
-  userDecks?: Deck[];
+  autocompleteControl = new FormControl('');
+  userDecks!: Deck[];
   randomDeck?: Deck;
+  filteredDecks!: Deck[];
+  filterProperty: string = 'name';
 
   constructor(
     private mock: MockObjectsService,
@@ -28,5 +36,9 @@ export class DeckSelectorComponent {
 
   selectDeck(deck?: Deck) {
     this.selectedDeck = deck;
+  }
+
+  getFiltered(filtered: Deck[]) {
+    this.filteredDecks = filtered;
   }
 }

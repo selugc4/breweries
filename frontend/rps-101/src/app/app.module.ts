@@ -31,6 +31,7 @@ import { MenuComponent } from './menu/menu.component';
 import { GameSelectorComponent } from './game-selector/game-selector.component';
 import { DeckSelectorComponent } from './deck-selector/deck-selector.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { AutocompleteComponent } from './autocomplete/autocomplete.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
     MenuComponent,
     GameSelectorComponent,
     DeckSelectorComponent,
+    AutocompleteComponent,
   ],
   imports: [
     BrowserModule,

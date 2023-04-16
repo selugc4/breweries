@@ -5,10 +5,9 @@
       <span class="subtitle">Select a deck to play the game</span>
     </div>
     <div class="search-close">
-      <!-- TODO: Sustituir por el componente de búsqueda -->
-      <div style="width: 250px; background-color: var(--blue-60); border-radius: 10px; padding: 5px 10px;">
-        Search deck ...
-      </div>
+      <app-autocomplete (filteredOutput)="getFiltered($event)" [array]="userDecks" [filterProperty]="filterProperty"
+        [control]="autocompleteControl">
+      </app-autocomplete>
       <mat-icon mat-dialog-close>close</mat-icon>
     </div>
   </mat-toolbar>
@@ -25,7 +24,7 @@
       <span>Random deck</span>
     </div>
 
-    <div *ngFor="let deck of userDecks ">
+    <div *ngFor="let deck of filteredDecks ">
       <div class="deck-container">
         <div class="deck-image">
           <div class="deck-selected" *ngIf="this.selectedDeck === deck">

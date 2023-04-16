@@ -1,11 +1,8 @@
 <div class="header-decks-container">
     <span class="title">DECKS</span>
     <div class="search-container">
-        <mat-form-field style="height: 100%; width: 100%" appearance="fill">
-            <mat-label>Search...</mat-label>
-            <input matInput />
-            <mat-icon matPrefix>search</mat-icon>
-        </mat-form-field>
+        <app-autocomplete (filteredOutput)="getFiltered($event)" [array]="decks"
+            [control]="autocompleteControl" [filterProperty]="filterProperty"></app-autocomplete>
     </div>
 </div>
 
@@ -16,7 +13,7 @@
         </div>
     </div>
     <!--Cargar los mazos con bucle-->
-    <div *ngFor="let deck of decks ">
+    <div *ngFor="let deck of filteredDecks ">
         <app-deck class="deck-element " routerLink="/decks/{{deck.id}}/details" [deck]="deck "></app-deck>
     </div>
 </div>

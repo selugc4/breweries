@@ -59,16 +59,13 @@
     <div class="header-cards-container ">
       <span style="font-size: 2.5vh; color: white ">All cards :</span>
       <div class="search-container ">
-        <mat-form-field style="height: 100%; width: 100% " appearance="fill">
-          <mat-label>Search...</mat-label>
-          <input matInput />
-          <mat-icon matPrefix>search</mat-icon>
-        </mat-form-field>
+        <app-autocomplete (filteredOutput)="getFiltered($event)" [array]="cards"
+          [control]="autocompleteControl"></app-autocomplete>
       </div>
     </div>
 
     <div class="cards-deck-container ">
-      <div *ngFor="let card of cards " style="height: 100%; width: 10%; margin-bottom: 1%;">
+      <div *ngFor="let card of filteredCards " style="height: 100%; width: 10%; margin-bottom: 1%;">
         <div class="choose-card-container">
           <div *ngIf="deckCards.includes(card)">
             <img class="added-background" src="assets/empty_card_template.svg " style="opacity: 90%;"

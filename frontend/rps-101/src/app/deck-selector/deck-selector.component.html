@@ -1,5 +1,5 @@
 <div class="dialog-container">
-  <mat-toolbar>
+  <mat-toolbar class="section-header">
     <div>
       <h2>YOUR DECKS</h2>
       <span class="subtitle">Select a deck to play the game</span>
@@ -12,29 +12,27 @@
     </div>
   </mat-toolbar>
 
-  <div class="decks-list-container scrollbar" mat-dialog-content>
+  <div class="decks-list-container" mat-dialog-content>
     <div class="deck-container">
       <div class="deck-image">
         <div class="deck-selected" *ngIf="this.selectedDeck === this.randomDeck">
           <mat-icon>check_circle</mat-icon>
           <span>selected</span>
         </div>
-        <img class="deck-elemet" src="assets/random_deck.svg" alt="Random Deck" (click)="selectDeck(this.randomDeck)" />
+        <img class="clickable" src="assets/random_deck.svg" alt="Random Deck" (click)="selectDeck(this.randomDeck)" />
       </div>
       <span>Random deck</span>
     </div>
 
-    <div *ngFor="let deck of filteredDecks ">
-      <div class="deck-container">
-        <div class="deck-image">
-          <div class="deck-selected" *ngIf="this.selectedDeck === deck">
-            <mat-icon>check_circle</mat-icon>
-            <span>selected</span>
-          </div>
-          <app-deck class="deck-element" [deck]="deck" [displayName]="false" (click)="selectDeck(deck)"></app-deck>
+    <div class="deck-container" *ngFor="let deck of filteredDecks ">
+      <div class="deck-image">
+        <div class="deck-selected" *ngIf="this.selectedDeck === deck">
+          <mat-icon>check_circle</mat-icon>
+          <span>selected</span>
         </div>
-        <span>{{deck.name}}</span>
+        <app-deck class="clickable" [deck]="deck" [displayName]="false" (click)="selectDeck(deck)"></app-deck>
       </div>
+      <span>{{deck.name}}</span>
     </div>
   </div>
 

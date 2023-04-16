@@ -1,79 +1,67 @@
-<div class="deck-edition-container">
-  <div class="main-container">
-    <mat-toolbar class="mat-toolbar mat-toolbar-single-row">
-      <span style="font-size: 4vh">DECK {{typeName}}</span>
-      <div class="buttons">
-        <button mat-raised-button=""
-          class="mdc-button mdc-button--raised mat-mdc-raised-button mat-primary mat-mdc-button-base"
-          (click)="onSave()">
-          <mat-icon aria-hidden="false" fontIcon="check"></mat-icon>
-          <span class="mdc-buttonlabel">Save</span>
-        </button>
-        <button mat-raised-button=""
-          class="mdc-button mdc-button--raised mat-mdc-raised-button mat-primary mat-mdc-button-base"
-          (click)="onCancel()">
-          <mat-icon aria-hidden="false" fontIcon="close"></mat-icon>
-          <span class="mdc-buttonlabel">Cancel</span>
-        </button>
-      </div>
-    </mat-toolbar>
-    <div class="deck-contents-container">
-      <app-card [ngClass]="{'main-card': deckCards.length != 0, 'initial-main-card': deckCards.length == 0}"
-        [name]="mainCardName"></app-card>
-      <div class="cards-rows">
-        <span class="details">Name* :</span>
-        <div
-          [ngClass]="{'deckname-container-filled': deckCards.length != 0, 'deckname-container-initial': deckCards.length == 0}">
-          <mat-form-field id="deckname" style="height: 100%; width: 100%;" appearance="fill">
-            <input matInput value="{{deck ? deck.name : ''}}" maxlength="50" />
-            <div [hidden]="!requestFailed ">
-              <small>{{ error }}</small>
-            </div>
-          </mat-form-field>
+<div>
+  <mat-toolbar class="section-header">
+    <h2>DECK {{typeName}}</h2>
+    <div class="buttons">
+      <button mat-raised-button=""
+        class="mdc-button mdc-button--raised mat-mdc-raised-button mat-primary mat-mdc-button-base" (click)="onSave()">
+        <mat-icon aria-hidden="false" fontIcon="check"></mat-icon>
+        <span class="mdc-buttonlabel">Save</span>
+      </button>
+      <button mat-raised-button=""
+        class="mdc-button mdc-button--raised mat-mdc-raised-button mat-primary mat-mdc-button-base"
+        (click)="onCancel()">
+        <mat-icon aria-hidden="false" fontIcon="close"></mat-icon>
+        <span class="mdc-buttonlabel">Cancel</span>
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <div class="deck-contents-container">
+    <app-card *ngIf="deckCards.length" class="main-card" [name]="mainCardName"></app-card>
+    <img style="height: 100%; object-fit: cover;" *ngIf="!deckCards.length" class="main-card"
+      src="assets/empty_card_template.svg " alt="Empty Deck">
+    <div class="cards-rows">
+      <h4>Name* :</h4>
+      <mat-form-field id="deckname" appearance="fill">
+        <input matInput value="{{deck ? deck.name : ''}}" placeholder="Deck Name" maxlength="50" />
+        <div [hidden]="!requestFailed ">
+          <small>{{ error }}</small>
         </div>
-        <span class="details " style="margin-top: 2%;">Deck cards :</span>
-        <div class="deck-container">
-          <div class="filled-cards-container">
-            <div *ngFor=" let card of deckCards " style="height: 100%; width: 100%; margin-right: 3%; ">
-              <div class="deck-card-container">
-                <img class="delete-card" (click)="onDelete(card)" src="assets/delete_button_template.svg "
-                  alt="Delete button" />
-                <app-card class="secondary-card" (click)="onDelete(card)" [name]="card "></app-card>
-              </div>
-            </div>
+      </mat-form-field>
+
+      <h4>Deck cards :</h4>
+      <div class="deck-container">
+        <div class="deck-item" *ngFor="let empty of [].constructor(5); let i=index">
+          <div *ngIf="deckCards[i]" class="deck-card-container">
+            <img class="delete-card clickable" (click)="onDelete(deckCards[i])" src="assets/delete_button_template.svg "
+              alt="Delete button" />
+            <app-card class="secondary-card" [name]="deckCards[i]"></app-card>
           </div>
-          <div
-            [ngClass]="{'empty-cards-container': deckCards.length != 0, 'initial-empty-cards-container': deckCards.length == 0}"
-            *ngIf="deckCards.length < 5 ">
-            <div *ngFor="let empty of [].constructor(5 - deckCards.length); let i=index " style=" height:57% ">
-              <div class="svg-empty-card ">
-                <img class="empty-secondary-card " src="assets/empty_card_template.svg " alt="Empty card " />
-              </div>
-            </div>
+          <div *ngIf="!deckCards[i]" class="svg-empty-card ">
+            <img class="empty-secondary-card " src="assets/empty_card_template.svg " alt="Empty card" />
           </div>
         </div>
+
       </div>
     </div>
   </div>
-  <div class="cards-container ">
-    <div class="header-cards-container ">
-      <span style="font-size: 2.5vh; color: white ">All cards :</span>
-      <div class="search-container ">
-        <app-autocomplete (filteredOutput)="getFiltered($event)" [array]="cards"
-          [control]="autocompleteControl"></app-autocomplete>
-      </div>
-    </div>
+</div>
 
-    <div class="cards-deck-container ">
-      <div *ngFor="let card of filteredCards " style="height: 100%; width: 10%; margin-bottom: 1%;">
-        <div class="choose-card-container">
-          <div *ngIf="deckCards.includes(card)">
-            <img class="added-background" src="assets/empty_card_template.svg " style="opacity: 90%;"
-              alt="Empty card " />
-            <img class="added-card" src="assets/added_template.svg " alt="Added card " />
-          </div>
-          <app-card class="card-list" [name]="card " (click)="onAdd(card) "></app-card>
+<div class="cards-container ">
+  <div class="header-cards-container ">
+    <h4>All cards :</h4>
+    <app-autocomplete (filteredOutput)="getFiltered($event)" [array]="cards"
+      [control]="autocompleteControl"></app-autocomplete>
+  </div>
+
+  <div class="grid-list">
+    <div *ngFor="let card of filteredCards ">
+      <div class="choose-card-container">
+        <div *ngIf="deckCards.includes(card)">
+          <img class="added-background" src="assets/empty_card_template.svg " style="opacity: 90%;" alt="Empty card " />
+          <img class="added-card" src="assets/added_template.svg " alt="Added card " />
         </div>
+        <app-card class="clickable" [name]="card " (click)="onAdd(card) "></app-card>
       </div>
     </div>
   </div>

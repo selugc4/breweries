@@ -1,82 +1,9 @@
-.search-container {
-    width: 20%;
-    height: 100%;
-    margin-right: 2.5%;
-}
-
-.header-decks-container {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    align-items: center;
-    height: 5%;
-    margin: 1%;
-}
-
-.decks-list-container {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: row;
-    padding-top: 2%;
-    gap: 5%;
-    height: 92%;
-    margin: 1%;
-    flex-wrap: wrap;
-}
-
-.title {
-    font-size: 4vh;
-    color: white;
-    font-weight: bold;
-}
-
-.svg-new-deck {
-    width: 200px;
-    height: fit-content;
-    position: relative;
-    white-space: nowrap;
-}
-
-.deck-element {
-    width: 200px;
-    height: fit-content;
-}
-
-.new-deck-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.svg-new-deck>div {
-    position: absolute;
-    bottom: 15%;
-    left: 40%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-}
-
-.template-deck {
+.svg-new-deck>img {
     width: 100%;
     height: auto;
 }
 
-.decks-list-container::-webkit-scrollbar {
-    width: 12px;
-}
-
-.decks-list-container::-webkit-scrollbar-track {
-    border-radius: 8px;
-    background-color: var(--blue-80);
-}
-
-.decks-list-container::-webkit-scrollbar-thumb {
-    border-radius: 8px;
-    background-color: var(--blue-70);
-}
-
-app-deck.deck-element {
-  cursor: pointer;
+.grid-list {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 }
 

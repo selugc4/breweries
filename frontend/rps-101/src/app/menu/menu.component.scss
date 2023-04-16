@@ -96,7 +96,9 @@
 }
 
 .sidenav-content {
-    margin-top: 100px;
-    margin-left: 180px;
-    // height: calc(100vh - 180px);
+    padding-top: 100px;
+    padding-left: 180px;
+    padding-right: 40px;
+    height: calc(100vh - 180px);
+    width: 100%;
 }

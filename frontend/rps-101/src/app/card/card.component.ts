@@ -7,16 +7,9 @@ import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 })
 export class CardComponent {
 
-  @ViewChild('card', { static: false }) cardElement: ElementRef = new ElementRef(null);
+  @Input() name: string = "";
 
-  @Input() name: string = ""; template : string = "";
-
-  ngOnInit() {
+  ngOnChanges(){
     this.name = this.name.toLowerCase();
-    setTimeout(() => {
-      const currentWidth = this.cardElement.nativeElement.clientWidth;
-      const newFontSize = currentWidth * 0.1;
-      // this.cardElement.nativeElement.style.fontSize = `${newFontSize}px`;
-    }, 100);
   }
 }

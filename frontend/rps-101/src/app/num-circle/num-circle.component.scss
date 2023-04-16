@@ -1,51 +1,59 @@
-.circle-back {
-    width: 200px;
-    height: 200px;
-    -moz-border-radius: 50%;
-    -webkit-border-radius: 50%;
-    border-radius: 50%;
-    background: var(--blue-80);
-}
-
-.circle-top {
-    position: absolute;
-    width: 180px;
-    height: 180px;
-    -moz-border-radius: 50%;
-    -webkit-border-radius: 50%;
-    border-radius: 50%;
-    border: 1px solid var(--blue);
-    background: var(--blue-80);
+.circle-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    container-type: inline-size;
 }
 
 .circle-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    position: relative;
+    width: 100%;
 }
 
-.big-number {
+.circle-back {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: var(--blue-80);
+    padding: 50%;
+}
+
+
+.circle-top {
     position: absolute;
-    font-size: 100px;
-    font-weight: bolder;
-    background: var(--orange-gradient);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90cqi;
+    height: 90cqi;
+    border-radius: 50%;
+    border: 1.5cqi solid var(--blue);
+    background-color: var(--blue-80);
+}
+
+
+.big-number {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: transparent;
+    background-image: var(--orange-gradient);
+    background-clip: text;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: tomato;
+    font-family: var(--krub);
+    font-size: 45cqi;
+    font-weight: 800;
+    margin: 0;
 }
 
 .big-text {
-    display: flex;
     justify-content: center;
-    font-family: " Titillium Web ", Arial, Helvetica, sans-serif;
+    font-family: var(--titillium);
     color: white;
-    font-style: normal;
-    font-size: 5vh;
-    margin-top: 5%;
-    font-weight: 700;
+    font-weight: 800;
+    font-size: 15cqi;
 }

@@ -1,16 +1,3 @@
-.deck-detail-container {
-    width: 100%;
-    height: 100%;
-}
-
-.mat-toolbar {
-    justify-content: space-between;
-    background-color: var(--blue);
-    color: white;
-    font-weight: bold;
-    margin-bottom: 2%;
-}
-
 .mat-mdc-raised-button:not(:disabled) {
     color: var(--blue-60);
     background-color: var(--blue-80);
@@ -23,63 +10,55 @@
     gap: 3%;
 }
 
-.main-container {
-    height: 5%;
+.deck-container {
+    height: 100%;
+}
+
+.deck-info {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    gap: 40px;
+    padding-bottom: 40px;
+}
+
+.deck-info app-deck {
+    width: 18%;
 }
 
 .stats-container {
+    width: 60%;
+    gap: 30px;
     display: flex;
     flex-direction: row;
-    height: 100%;
 }
-
-.stats-rows {
+.stats-container app-num-circle {
+    width: 100%
+}
+.deck-cards-container {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    width: 100%;
+    gap: 10px;
 }
 
-.stats-balls {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-}
+@media (max-width: 1000px) {
+    .deck-info {
+        gap: 0px;
+        justify-content: space-between;
+    }
 
-.cards-container {
-    display: flex;
-    flex-direction: column;
-    height: 30%;
-    margin-top: 2%;
-}
+    .deck-info app-deck {
+        width: 40%;
+    }
 
-.cards-deck-container {
-    display: flex;
-    flex-direction: row;
-    height: 80%;
-    margin-top: 1%;
-    gap: 3%;
-    justify-content: flex-start;
-}
+    .stats-container {
+        width: 40%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
 
-.details {
-    font-size: 2.5vh;
-    color: white;
-}
-
-.details-edit {
-    font-size: 2.5vh;
-    color: var(--blue-60);
-    margin-bottom: 1%;
-}
-
-app-deck.main-card {
-  display: flex;}
-
-app-card.deck-card {
-  display: flex;
-  width: 70%;
-  height: 70%;
-}
+    .grid-list {
+        // width: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+  }

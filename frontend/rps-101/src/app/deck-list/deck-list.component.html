@@ -1,19 +1,15 @@
-<div class="header-decks-container">
-    <span class="title">DECKS</span>
-    <div class="search-container">
-        <app-autocomplete (filteredOutput)="getFiltered($event)" [array]="decks"
-            [control]="autocompleteControl" [filterProperty]="filterProperty"></app-autocomplete>
-    </div>
-</div>
+<mat-toolbar class="section-header">
+    <h2>DECKS</h2>
+    <app-autocomplete (filteredOutput)="getFiltered($event)" [array]="decks" [control]="autocompleteControl"
+        [filterProperty]="filterProperty">
+    </app-autocomplete>
+</mat-toolbar>
 
-<div class="decks-list-container scrollbar " id="scrollbar2 ">
-    <div class="new-deck-container " routerLink="/decks/create">
-        <div class="svg-new-deck ">
-            <img class="template-deck " src="assets/new_deck_template.svg " alt="New Deck " />
-        </div>
+<div class="grid-list">
+    <div class="svg-new-deck">
+        <img class="clickable" routerLink="/decks/create" src="assets/new_deck_template.svg " alt="New Deck" />
     </div>
-    <!--Cargar los mazos con bucle-->
     <div *ngFor="let deck of filteredDecks ">
-        <app-deck class="deck-element " routerLink="/decks/{{deck.id}}/details" [deck]="deck "></app-deck>
+        <app-deck class="clickable" routerLink="/decks/{{deck.id}}/details" [deck]="deck "></app-deck>
     </div>
 </div>

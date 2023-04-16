@@ -1,41 +1,33 @@
-<div class="deck-detail-container">
-  <div class="main-container">
-    <mat-toolbar class="mat-toolbar mat-toolbar-single-row">
-      <span style="font-size:4vh">DECK DETAILS - {{deck.name}}</span>
-      <div class="buttons">
-        <button mat-raised-button=""
-          class="mdc-button mdc-button--raised mat-mdc-raised-button mat-primary mat-mdc-button-base"
-          (click)="onEditClick()">
-          <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="edit"></mat-icon>
-          <span class="mdc-buttonlabel">Edit Deck</span>
-        </button>
-        <button mat-raised-button="" (click)="onDeleteDialogClick()"
-          class="mdc-button mdc-button--raised mat-mdc-raised-button mat-primary mat-mdc-button-base">
-          <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="delete"></mat-icon>
-          <span class="mdc-buttonlabel">Delete Deck</span>
-        </button>
-      </div>
-    </mat-toolbar>
-    <div class="stats-container">
-      <app-deck class="main-card" [deck]="deck"></app-deck>
-      <div class="stats-rows">
-        <div class="stats-balls">
-          <app-num-circle class="stat-circle"></app-num-circle>
-          <app-num-circle class="stat-circle"></app-num-circle>
-          <app-num-circle class="stat-circle"></app-num-circle>
-          <app-num-circle class="stat-circle"></app-num-circle>
-        </div>
-      </div>
-    </div>
+<mat-toolbar class="section-header">
+  <h2>DECK DETAILS</h2>
+  <div class="buttons">
+    <button mat-raised-button=""
+      class="mdc-button mdc-button--raised mat-mdc-raised-button mat-primary mat-mdc-button-base"
+      (click)="onEditClick()">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="edit"></mat-icon>
+      <span class="mdc-buttonlabel">Edit Deck</span>
+    </button>
+    <button mat-raised-button="" (click)="onDeleteDialogClick()"
+      class="mdc-button mdc-button--raised mat-mdc-raised-button mat-primary mat-mdc-button-base">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="delete"></mat-icon>
+      <span class="mdc-buttonlabel">Delete Deck</span>
+    </button>
   </div>
-  <div class="cards-container ">
-    <span style="font-size:2.5vh ; color:white ">Deck cards :</span>
-    <div class="cards-deck-container ">
-      <div *ngFor=" let card of deck.cards " style="height: 57%; margin-right: 6vh; ">
-        <div class="deck-card-container">
-          <app-card class="deck-card" [name]="card "></app-card>
-        </div>
-      </div>
-    </div>
+</mat-toolbar>
+
+<div class="deck-info">
+  <app-deck [deck]="deck"></app-deck>
+  <div class="stats-container">
+    <app-num-circle></app-num-circle>
+    <app-num-circle></app-num-circle>
+    <app-num-circle></app-num-circle>
+    <app-num-circle></app-num-circle>
+  </div>
+</div>
+
+<div class="deck-cards-container">
+  <h4>Deck cards:</h4>
+  <div class="grid-list">
+    <app-card [name]="card " *ngFor=" let card of deck.cards "></app-card>
   </div>
 </div>

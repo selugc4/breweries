@@ -48,8 +48,30 @@ a {
     text-decoration: none;
 }
 
+h2 {
+    font-size: 30px;
+    color: white;
+    font-weight: 700;
+    margin: 0;
+}
+
+h4 {
+    color: white;
+    font-size: 20px;
+    font-weight: 400;
+    margin: 0;
+}
+
 .no-background {
     background: none;
+}
+
+mat-toolbar.section-header {
+    justify-content: space-between;
+    background: var(--blue);
+    margin: 0;
+    padding: 0;
+    margin-bottom: 40px;
 }
 
 mat-icon {
@@ -61,6 +83,23 @@ app-root {
     width: 100%;
 }
 
+.grid-list {
+    // width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-gap: 30px;
+    // overflow-y: scroll;
+    justify-content: space-around;
+    align-content: start;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.clickable label{
+    pointer-events: none;
+}
 
 .mdc-dialog__surface {
    background: none !important;
@@ -73,4 +112,26 @@ app-root {
   bottom: 0;
   background-color: #FF000050;
   z-index: 1000;
+}
+
+*::-webkit-scrollbar {
+    width: 12px;
+}
+  
+*::-webkit-scrollbar-track {
+    border-radius: 8px;
+    background-color: var(--blue-80);
+}
+  
+*::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: var(--blue-70);
+}
+  
+app-deck {
+    width: 100%;
+}
+
+app-card {
+    width: 100%;
 }

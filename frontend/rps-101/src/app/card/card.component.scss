@@ -1,14 +1,14 @@
 .svg-card {
-    width: 100%;
-    height: fit-content;
     position: relative;
-    // font-size: 0px;
-    font-size: 16px;
+    container-type: inline-size;
+}
+
+.card-name {
+  font-size: 11cqi;
 }
 
 .template-card {
   width: 100%;
-  height: auto;
 }
 
 .object-icon {
@@ -34,4 +34,10 @@
   font-family: Krub, Arial, Helvetica, sans-serif;
   font-weight: 800;
   text-transform: uppercase;
+}
+
+@container (min-width: 200px) {
+  .card-name {
+    font-size: 10cqi;
+  }
 }

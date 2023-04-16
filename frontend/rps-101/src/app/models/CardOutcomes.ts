@@ -1,9 +1,9 @@
 export interface CardOutcomes {
-  card: string;
-  winningOutcomes: WinningOutcome[];
+    card: string;
+    winningOutcomes: WinningOutcome[];
 }
 
 export interface WinningOutcome {
-  outcome: string;
-  losingCard: string;
+    outcome: string;
+    losingCard: string;
 }

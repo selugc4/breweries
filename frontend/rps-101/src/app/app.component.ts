@@ -9,7 +9,6 @@ import { GameService } from './services/game.service';
 import { GameParameters } from './models/GameParameters';
 import { DeckComponent } from './deck/deck.component';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

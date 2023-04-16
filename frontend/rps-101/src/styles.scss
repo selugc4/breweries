@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
 :root {
     --blue: #1a1f40;
     --blue-90: #21264a;
@@ -25,7 +26,7 @@ body {
 }
 
 html {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 *,
@@ -36,11 +37,11 @@ html {
 }
 
 body {
-    margin: 0;
-    background: var(--blue);
-    font-family: "Titillium Web", Arial, Helvetica, sans-serif;
-    display: flex;
-    gap: 50px;
+  margin: 0;
+  background: var(--blue);
+  font-family: "Titillium Web", Arial, Helvetica, sans-serif;
+  display: flex;
+  gap: 50px;
 }
 
 a {
@@ -60,8 +61,9 @@ app-root {
     width: 100%;
 }
 
+
 .mdc-dialog__surface {
-  background: none !important;
+   background: none !important;
 }
 
 .game-container {
@@ -69,6 +71,6 @@ app-root {
   height: calc(100vh - 80px);
   position: fixed;
   bottom: 0;
-  background-color: #ff000050;
+  background-color: #FF000050;
   z-index: 1000;
 }

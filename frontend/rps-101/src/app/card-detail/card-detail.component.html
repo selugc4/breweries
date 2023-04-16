@@ -9,9 +9,7 @@
         <app-card [name]="cardName"> </app-card>
       </div>
       <div class="if-card" *ngIf="versus != null">
-        <span
-          >"{{ cardName }} {{ versus.outcome }} {{ versus.losingCard }}"</span
-        >
+        <span>"{{ cardName }} {{versus.outcome}} {{ versus.losingCard }}"</span>
         <div class="selected-card">
           <app-card [name]="versus.losingCard.toLowerCase()"></app-card>
         </div>

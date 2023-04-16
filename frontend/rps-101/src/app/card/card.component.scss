@@ -1,37 +1,37 @@
 .svg-card {
-    width: 100%;
-    height: fit-content;
-    position: relative;
-    // font-size: 0px;
-    font-size: 16px;
+  width: 100%;
+  height: fit-content;
+  position: relative;
+  // font-size: 0px;
+  font-size: 16px;
 }
 
 .template-card {
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: auto;
 }
 
 .object-icon {
-    position: absolute;
-    top: 42%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 40%;
-    max-height: 35%;
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  max-height: 35%;
 }
 
 .svg-card>div {
-    width: 100%;
-    position: absolute;
-    bottom: 15%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
+  width: 100%;
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
 
 .svg-card span {
-    color: white;
-    font-family: Krub, Arial, Helvetica, sans-serif;
-    font-weight: 800;
-    text-transform: uppercase;
+  color: white;
+  font-family: Krub, Arial, Helvetica, sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
 }

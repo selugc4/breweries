@@ -1,6 +1,26 @@
 .app-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.deck-edition {
   height: 100%;
+  width: auto;
+  padding: 1%;
+  color: var(--blue-60)
+}
+
+.deck-detail {
+  height: 100%;
+  width: auto;
+  padding: 1%;
+  color: var(--blue-60)
+}
+.deck-list {
+  height: 100%;
+  width: auto;
+  padding: 1%;
+  color: var(--blue-60)
 }

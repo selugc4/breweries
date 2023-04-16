@@ -1,0 +1,22 @@
+<div class="header-decks-container">
+    <span class="title">DECKS</span>
+    <div class="search-container">
+        <mat-form-field style="height: 100%; width: 100%" appearance="fill">
+            <mat-label>Search...</mat-label>
+            <input matInput />
+            <mat-icon matPrefix>search</mat-icon>
+        </mat-form-field>
+    </div>
+</div>
+
+<div class="decks-list-container scrollbar " id="scrollbar2 ">
+    <div class="new-deck-container " routerLink="/decks/create">
+        <div class="svg-new-deck ">
+            <img class="template-deck " src="assets/new_deck_template.svg " alt="New Deck " />
+        </div>
+    </div>
+    <!--Cargar los mazos con bucle-->
+    <div *ngFor="let deck of decks ">
+        <app-deck class="deck-element " routerLink="/decks/{{deck.id}}/details" [deck]="deck "></app-deck>
+    </div>
+</div>

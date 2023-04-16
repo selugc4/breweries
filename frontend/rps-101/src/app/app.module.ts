@@ -7,6 +7,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CardComponent } from './card/card.component';
 import { DeckComponent } from './deck/deck.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { DeckListComponent } from './deck-list/deck-list.component';
+import { DeckDetailComponent } from './deck-detail/deck-detail.component';
+import { NumCircleComponent } from './num-circle/num-circle.component';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
+import { DeckBuilderComponent } from './deck-builder/deck-builder.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -32,6 +37,11 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
     AppComponent,
     CardComponent,
     DeckComponent,
+    DeckListComponent,
+    DeckDetailComponent,
+    NumCircleComponent,
+    DeleteDialogComponent,
+    DeckBuilderComponent,
     CardListComponent,
     CardDetailComponent,
     SidenavComponent,

@@ -1,0 +1,51 @@
+.circle-back {
+    width: 200px;
+    height: 200px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    background: var(--blue-80);
+}
+
+.circle-top {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    border: 1px solid var(--blue);
+    background: var(--blue-80);
+}
+
+.circle-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.big-number {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    font-size: 100px;
+    font-weight: bolder;
+    background: var(--orange-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: tomato;
+}
+
+.big-text {
+    display: flex;
+    justify-content: center;
+    font-family: " Titillium Web ", Arial, Helvetica, sans-serif;
+    color: white;
+    font-style: normal;
+    font-size: 5vh;
+    margin-top: 5%;
+    font-weight: 700;
+}

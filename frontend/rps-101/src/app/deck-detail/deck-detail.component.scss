@@ -1,0 +1,85 @@
+.deck-detail-container {
+    width: 100%;
+    height: 100%;
+}
+
+.mat-toolbar {
+    justify-content: space-between;
+    background-color: var(--blue);
+    color: white;
+    font-weight: bold;
+    margin-bottom: 2%;
+}
+
+.mat-mdc-raised-button:not(:disabled) {
+    color: var(--blue-60);
+    background-color: var(--blue-80);
+}
+
+.buttons {
+    width: 40%;
+    display: flex;
+    justify-content: end;
+    gap: 3%;
+}
+
+.main-container {
+    height: 5%;
+    display: flex;
+    flex-direction: column;
+}
+
+.stats-container {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.stats-rows {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.stats-balls {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.cards-container {
+    display: flex;
+    flex-direction: column;
+    height: 30%;
+    margin-top: 2%;
+}
+
+.cards-deck-container {
+    display: flex;
+    flex-direction: row;
+    height: 80%;
+    margin-top: 1%;
+    gap: 3%;
+    justify-content: start;
+}
+
+.details {
+    font-size: 2.5vh;
+    color: white;
+}
+
+.details-edit {
+    font-size: 2.5vh;
+    color: var(--blue-60);
+    margin-bottom: 1%;
+}
+
+app-deck.main-card {
+  display: flex;}
+
+app-card.deck-card {
+  display: flex;
+  width: 70%;
+  height: 70%;
+}

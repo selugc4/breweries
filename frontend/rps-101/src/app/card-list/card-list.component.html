@@ -4,26 +4,13 @@
     <form>
       <mat-form-field appearance="fill">
         <mat-label>
-          <mat-icon
-            aria-hidden="false"
-            aria-label="Magnifying glass"
-            fontIcon="search"
-          ></mat-icon>
+          <mat-icon aria-hidden="false" aria-label="Magnifying glass" fontIcon="search"></mat-icon>
           Search...
         </mat-label>
-        <input
-          type="text"
-          placeholder="Card name"
-          aria-label="CardName"
-          matInput
-          [formControl]="myControl"
-          [matAutocomplete]="auto"
-        />
+        <input type="text" placeholder="Card name" aria-label="CardName" matInput [formControl]="myControl"
+          [matAutocomplete]="auto" />
         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-          <mat-option
-            *ngFor="let option of filteredCards | async"
-            [value]="option"
-          >
+          <mat-option *ngFor="let option of filteredCards | async" [value]="option">
             {{ option }}
           </mat-option>
         </mat-autocomplete>
@@ -31,12 +18,7 @@
     </form>
   </mat-toolbar>
   <div class="card-list" *ngIf="filterCards()?.length != 0; else notFound">
-    <app-card
-      class="check"
-      routerLink="/cards/{{ card }}"
-      *ngFor="let card of filterCards()"
-      [name]="card"
-    ></app-card>
+    <app-card class="check" routerLink="/cards/{{ card }}" *ngFor="let card of filterCards()" [name]="card"></app-card>
   </div>
   <ng-template #notFound>
     <div class="card-not-found">

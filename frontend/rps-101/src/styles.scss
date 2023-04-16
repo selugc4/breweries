@@ -1,76 +1,75 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 :root {
-  --blue: #1a1f40;
-  --blue-90: #21264a;
-  --blue-80: #282e54;
-  --blue-70: #5f6892;
-  --blue-60: #8690bf;
-  --white: #ffffff;
-  --gray: #9092a4;
-  --orange-gradient: linear-gradient(180deg, #fbd03b, #fa7800);
-  --green-gradient: linear-gradient(90deg, #b3ffab, #12fff7);
-  --pink-gradient: linear-gradient(90deg, #fa669c, #e13387);
-  --purple-gradient: linear-gradient(90deg, #8257fc, #6736f1);
-  --background-opacity: #0f102580;
-  --card-opacity: #282e5490;
-  --titillium: "Titillium Web", Arial, Helvetica, sans-serif;
-  --krub: Krub, Arial, Helvetica, sans-serif;
+    --blue: #1a1f40;
+    --blue-90: #21264a;
+    --blue-80: #282e54;
+    --blue-70: #5f6892;
+    --blue-60: #8690bf;
+    --white: #ffffff;
+    --gray: #9092a4;
+    --orange-gradient: linear-gradient(180deg, #fbd03b, #fa7800);
+    --green-gradient: linear-gradient(90deg, #b3ffab, #12fff7);
+    --pink-gradient: linear-gradient(90deg, #fa669c, #e13387);
+    --purple-gradient: linear-gradient(90deg, #8257fc, #6736f1);
+    --background-opacity: #0f102580;
+    --card-opacity: #282e5490;
+    --titillium: "Titillium Web", Arial, Helvetica, sans-serif;
+    --krub: Krub, Arial, Helvetica, sans-serif;
 }
 
 html,
 body {
-  height: 100%;
-  width: 100%;
+    height: 100%;
+    width: 100%;
 }
 
 html {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 *,
 *:after,
 *:before {
-  box-sizing: inherit;
-  font-family: inherit;
+    box-sizing: inherit;
+    font-family: inherit;
 }
 
 body {
-  margin: 0;
-  background: var(--blue);
-  font-family: "Titillium Web", Arial, Helvetica, sans-serif;
-  display: flex;
-  gap: 50px;
+    margin: 0;
+    background: var(--blue);
+    font-family: "Titillium Web", Arial, Helvetica, sans-serif;
+    display: flex;
+    gap: 50px;
 }
 
 a {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .no-background {
-  background: none;
+    background: none;
 }
 
 mat-icon {
-  width: auto !important;
-  height: auto !important;
+    width: auto !important;
+    height: auto !important;
 }
 
 app-root {
-  width: 100%;
+    width: 100%;
 }
 
-
 .mdc-dialog__surface {
-   background: none !important;
+    background: none !important;
 }
 
 .game-container {
-  width: 100vw;
-  height: calc(100vh - 80px);
-  position: fixed;
-  bottom: 0;
-  background-color: #FF000050;
-  z-index: 1000;
+    width: 100vw;
+    height: calc(100vh - 80px);
+    position: fixed;
+    bottom: 0;
+    background-color: #FF000050;
+    z-index: 1000;
 }

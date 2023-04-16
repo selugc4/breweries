@@ -9,7 +9,7 @@ export class CardComponent {
 
   @ViewChild('card', { static: false }) cardElement: ElementRef = new ElementRef(null);
 
-  @Input() name: string = "";
+  @Input() name: string = ""; template : string = "";
 
   ngOnInit() {
     this.name = this.name.toLowerCase();

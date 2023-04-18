@@ -1,91 +1,55 @@
-<!--
-<dialog id="dialogStart">
-  <button (click)="startMatch()">Start New Game </button>
-</dialog>
--->
-<div class="matchView" (contextmenu)="disableRightClick($event)">
-
-  <div mat-dialog-content id="dialogStart" *ngIf="dialogResume">
-    <button (click)="startTimer()">Resume Game </button>
-  </div>
-  <div mat-dialog-content id="dialogEnd" *ngIf="dialogEnd">
-    <app-game-end text={{endText}} [rounds]="rounds"> </app-game-end>
-    <div class="horizontalButtons">
-     <a (click)="restartMatch(); ">Replay</a>
-     <a (click)="signup()" routerLink="">Sign-up</a>
-    </div>
-  </div>
-  <div mat-dialog-content id="dialogStart" *ngIf="dialogBlock" (click) ="close()">
-    <span>Do you want to <mark>{{dialogText}}</mark> this game?</span>
-    <div  *ngIf="dialogText === 'END'; then thenBlock; else elseBlock"></div>
-    <ng-template #thenBlock><button (click)="endMatch(); " id="endButton">End Game </button></ng-template>
-    <ng-template #elseBlock><button (click)="restartMatch(); ">Restart Game</button></ng-template>
-  </div>
-<div id="left">
-  <div class="enemy">
-    <img src="assets/player.svg" class="userImg" alt="player image">
-    <span>ROCKBOT</span>
-  </div>
-  <div *ngIf="activeDetail===5;else details">
-    <app-instructions class="instructions"></app-instructions>
-  </div>
-  <ng-template #details>
-    <app-card-game-detail class="instructions" name={{playerDeck[activeDetail]}}></app-card-game-detail>
-  </ng-template>
-</div>
-<div class="matchTable">
-  <div class="tableCenter">
-    <div id="enemyUsedCard"></div>
-    <span id="spanCenterTable">JANKEN 101</span>
-    <div id="playerUsedCard"></div>
-  </div>
-  <div class="decks">
-    <div class="enemyDeck">
-        <div class="card" *ngFor="let card of enemyDeck; let i = index;">
-          <app-card name = {{card}}></app-card>
-        </div>
+<main class="game">
+  <div class="side-content">
+    <div class="user">
+      <div class="user-img">
+        <img src="assets/user.svg" alt="">
       </div>
-    <div class="playerDeck">
-        <div class="card" *ngFor="let card of playerDeck; let i = index;">
-          <app-card (contextmenu)="changeInstructionstoDetails(i)" id = "player-{{i}}" (click)="activateCard(i)" [ngClass]="[(activeCard[i] === true)? (putCard[i])? 'usedCard' : 'chosenCard'  : '' ]"  name = {{card}}></app-card>
-          <div (click)="[(activeCard[i] === true)? playRound(i): '']"></div>
-        </div>
+      <span>ROCKBOT</span>
+    </div>
+    <app-instructions></app-instructions>
+    <div></div>
+  </div>
+  <div class="game-board">
+    <mat-progress-spinner class="progress colorprogress" strokeWidth="1.5" [color]="color" [mode]="mode" [value]=100>
+    </mat-progress-spinner>
+    <mat-progress-spinner class="progress" strokeWidth="1.5" [color]="color" [mode]="mode" [value]="value">
+    </mat-progress-spinner>
+
+    <div class="game-round">
+      <div class="cards oponent-cards">
+        <div></div>
+        <app-card *ngFor="let empty of [].constructor(5);" card="camera"></app-card>
+      </div>
+      <div class="game-board-center">
+        <span>JANKEN 101</span>
+      </div>
+      <div class="cards user-cards">
+        <div></div>
+        <app-card class="user-card" *ngFor="let empty of [].constructor(5);" card="camera"
+          (click)="throwCard($event)"></app-card>
+        <div class="empty-card"></div>
+      </div>
     </div>
   </div>
-    <mat-progress-spinner mode="determinate" value="{{roundTime}}" diameter="1000" strokeWidth="20" id="progressSpinnerTimer" ></mat-progress-spinner>
-    <mat-progress-spinner mode="determinate" value="100" diameter="1000" strokeWidth="20" id="progressSpinnerBackground" ></mat-progress-spinner>
-</div>
-<div id="matchMenu">
-  <div id="matchItems">
-  <div id="buttons">
-    <mat-icon (click)="pauseGame();" id="pauseButton">pause</mat-icon>
-  <button mat-icon-button [matMenuTriggerFor]="menu" id="buttonMenu">
-    <mat-icon id="settings-icon">settings</mat-icon>
-  </button>
-  <mat-menu #menu class="user-menu">
-    <menu mat-menu-item class="option" (click)="exitGame()">Exit Game</menu>
-    <menu mat-menu-item class="option" (click)="restartGame()" >Restart Game</menu>
-    <div id="slider" (click)="$event.stopPropagation()">
-    <img id="sliderIcon" src="{{soundIcon}}" alt="game-settings" (click)="enableOrDisableAudio()">
-    <menu mat-menu-item class="option"  id="sliderElement">
-      <mat-slider min="0" max="100" step="1" value="">
-        <input matSliderThumb>
-      </mat-slider>
-    </menu>
+  <div class="side-content">
+    <div class="controls-timer">
+      <div class="controls">
+        <button>
+          <img src="assets/pause.svg" alt="pause">
+        </button>
+        <button>
+          <img src="assets/settings.svg" alt="settings">
+        </button>
+      </div>
+      <span class="timer">{{ display }}</span>
     </div>
-  </mat-menu>
+    <app-scoreboard></app-scoreboard>
+    <div class="user">
+      <span>ANONYMOUS</span>
+      <div class="user-img">
+        <img src="assets/user.svg" alt="">
+      </div>
+    </div>
   </div>
-  <p placeholder="00:00">{{display}}<p></p>
-  </div>
-    <app-scoreboard class="instructions" [rounds]="rounds" [round]="round"> </app-scoreboard>
-  <div class="player">
-    <img src="assets/player.svg" class="userImg" alt="player image">
-    <span>PLAYER</span>
-  </div>
-</div>
-</div>
-
-
-
-<!--<app-game-end></app-game-end> -->
-
+</main>
+<app-round-result class="round-result"></app-round-result>

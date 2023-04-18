@@ -1,586 +1,228 @@
-@media screen and (max-width: 2000px) {
-  .decks{
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 90%;
-    width: 30%;
-    margin-left: -1.5%;
-  }
-  .card{
-    flex-grow: 0;
-    flex-shrink: 0;
-    width: 15%;
-    height: 10%;
-    margin-left: 5%;
-  }
-
-  .no-card{
-    position: absolute;
-    z-index: 2;
-    background-color: #1A1F40;
-    width: 87.73px;
-    height: 131.34px;
-    top: 57%;
-    left: 46.5%;
-  }
-  #dialogStart{
-    align-self: center;
-    justify-content: center;
-    width: 100%;
-    background-color: rgba($color: #1A1F40, $alpha: 0.3);
-    border: none;
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    z-index: 100;
-    min-height: 100%;
-  }
-
-
-
-  #dialogStart button {
-    align-self: center;
-    margin-left: auto;
-    margin-right: auto;
-    width: 15%;
-    height: 4em;
-    background: var(--orange-gradient);
-    color: white;
-    border-radius: 12px;
-  }
-
-  .matchView{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    background-color: var(--blue-90);
-    justify-content: space-between;
-  }
-
-
-  mat-progress-spinner {
-    width: 700px !important;
-    height: 700px !important;
-  }
-
-  .tableCenter {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 35%;
-    height: 79%;
-    background-color: rgba(#282E54, 0.9);
-    border-radius: 200%;
-  }
-
-  .tableCenter #enemyUsedCard{
-    z-index: 2;
-    background-color: #1A1F40;
-    width: 87.73px;
-    height: 131.34px;
-
-  }
-
-  .tableCenter #playerUsedCard{
-    z-index: 2;
-    background-color: #1A1F40;
-    width: 87.73px;
-    height: 131.34px;
-
-  }
-
-
-#matchMenu{
+.game {
   width: 100%;
   height: 100%;
-  display: grid;
-  grid-template-rows: 1fr 1fr ;
+  padding: 40px;
+  border-radius: 12px;
+  background-color: var(--blue-90);
+  display: flex;
+  flex-direction: row;
   align-items: center;
-  grid-column-gap: 50%;
-  margin-right: 5%;
-  margin-top: 3%;
+  justify-content: space-between;
+  gap: 40px;
+  position: relative;
+  overflow-x: overlay;
 }
 
+.side-content {
+  width: 250px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
 
-#matchMenu #matchItems {
-  width: 100%;
+.side-content:last-child {
   align-items: flex-end;
-  align-self: flex-end;
-  justify-content: space-around;
+}
+
+.user {
   display: flex;
-  flex-direction: column;
-  margin-bottom: 10%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--white);
+  font-family: var(--titillium);
+  font-weight: 400;
 }
 
-
-#matchMenu p{
-  width: min-content;
-  align-self: flex-end;
-  text-align: end;
-  margin-right: 2%;
-  font-size: medium;
-}
-
-
-.material-icons{
-  font-size: 25px;
-  cursor: pointer;
-  color: var(--blue-90);
-  background-color: transparent;
-    text-shadow: -1px -1px 0 var(--gray), 1px -1px 0 var(--gray), -1px 1px 0  var(--gray), 1px 1px 0 var(--gray);
-
-}
-
-#settings-icon{
-  position: absolute;
-  transform: translate(-50%, -50%);
-  font-size: 25px;
-
-}
-
-
-.enemy{
+.user-img {
+  width: 42px;
+  height: 42px;
+  background: var(--purple-gradient);
+  border-radius: 50%;
   display: flex;
   align-items: center;
-  margin-top: 18%;
-
+  justify-content: center;
 }
 
-.player{
-  display: flex;
-  align-items: center;
-  align-self: flex-end;
-  justify-content: flex-end;
-  margin-bottom: 15%;
-  transform: translateY(-50%);
+.user-img:last-child {
+  background: var(--pink-gradient);
 }
 
-
+.user-img img {
+  width: 36px;
+  height: 36px;
+  background-color: var(--blue);
+  border-radius: 50%;
+  padding: 3px;
 }
 
-@media screen and (min-width: 2001px) {
-  .decks{
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 90%;
-    width: 30%;
-    margin-left: -1.5%;
-  }
-
-  .card{
-    flex-grow: 0;
-    flex-shrink: 0;
-    width: 15%;
-    height: 10%;
-    margin-left: 5%;
-  }
-
-  .no-card{
-    position: absolute;
-    z-index: 2;
-    background-color: #1A1F40;
-    width: 87.73px;
-    height: 131.34px;
-    top: 51%;
-    left: 39.3%;
-  }
-
-
-  #dialogStart{
-    align-self: center;
-    justify-content: center;
-    width: 100%;
-    background-color: rgba($color: #1A1F40, $alpha: 0.3);
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    z-index: 100;
-    min-height: 100%;
-  }
-
-  #dialogStart span{
-    width: 100%;
-    height: 100%;
-    text-align: center;
-
-  }
-
-
-
-  #dialogStart button {
-    align-self: center;
-    margin-left: auto;
-    margin-right: auto;
-    width: 15%;
-    height: 4em;
-    background: var(--orange-gradient);
-    color: white;
-    border-radius: 12px;
-  }
-
-  .matchView{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    background-color: var(--blue-90);
-    justify-content: space-between;
-
-}
-
-.tableCenter{
-  position: absolute;
+.controls-timer {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgba(#282E54,0.9);
-  border-radius: 200%;
-  width: 37.5%;
-  height: 79%;
+  gap: 10px;
 }
 
-.tableCenter #enemyUsedCard{
-  z-index: 2;
-  background-color: #1A1F40;
-  width: 103.06px;
-  height: 154.3px;
-
-}
-
-.tableCenter #playerUsedCard{
-  z-index: 2;
-  background-color: #1A1F40;
-  width: 103.06px;
-  height: 154.3px;
-
-}
-
-
-#matchMenu{
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-rows: 0.5fr 3fr ;
+.controls {
+  display: flex;
+  flex-direction: row;
   align-items: center;
-  grid-column-gap: 10%;
-  margin-right: 5%;
+  justify-content: center;
+  gap: 15px;
 }
 
-
-#matchMenu p{
-  width: min-content;
-  align-self: flex-end;
-  text-align: end;
-  margin-right: 2%;
-}
-
-.material-icons{
-  font-size: 40px;
+.controls button {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  color: var(--blue-90);
-  background-color: transparent;
-    text-shadow: -1px -1px 0 var(--gray), 1px -1px 0 var(--gray), -1px 1px 0  var(--gray), 1px 1px 0 var(--gray);
-
+  padding: 0;
 }
 
-#settings-icon{
-  position: absolute;
-  transform: translate(-50%, -50%);
-  font-size: 34px;
-
-}
-
-
-.enemy{
-  display: flex;
-  align-items: center;
-  margin-top: 18%;
-  margin-bottom: 19%;
-
-}
-
-
-.player{
-  display: flex;
-  align-items: center;
-  align-self: flex-end;
-  justify-content: flex-end;
-  margin-bottom: 15%;
-}
-
-
-
-}
-
-p{
-  color: white;
-  font-size: 20px;
-  margin: 0;
+.timer {
+  width: 100%;
   text-align: center;
+  font-family: var(--krub);
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--white);
 }
 
-span{
-  font-family: 'Titillium Web';
-  color: white;
-  font-size: 20px;
-  font-weight: bold;
-
-}
-
-
-
-mark{
-  background:  var(--orange-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-
-#buttons{
+.game-board {
+  min-width: max(600px, min(calc(100vh - 240px), calc(100vw - 240px)));
+  min-height: max(600px, min(calc(100vh - 240px), calc(100vw - 240px)));
+  border-radius: 50%;
+  background-color: var(--blue-80);
+  position: relative;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
   align-items: center;
-  width: 100%;
-  height: 100%;
-}
-
-
-#pauseButton{
-  margin-right: 1%;
-}
-
-
-mat-icon-button{
-  width: 0 !important;
-
-}
-
-.mat-mdc-icon-button .mat-mdc-button-touch-target{
-  width: 0;
-}
-
-#buttonMenu.mat-mdc-icon-button{
-  --mat-mdc-button-persistent-ripple-color: none;
-  --mat-mdc-button-ripple-color: none;
-}
-
-#buttonMenu span{
-  width: min-content;
-  height: min-content;
-
-}
-
-.mat-mdc-menu-item {
   justify-content: center;
 }
-::ng-deep .user-menu {
-  background-color: #1A1F40;
+
+.progress {
+  position: absolute;
+  width: max(600px, min(calc(100vh - 240px), calc(100vw - 240px))) !important;
+  height: max(600px, min(calc(100vh - 240px), calc(100vw - 240px))) !important;
 }
 
-::ng-deep span.mdc-list-item__primary-text{
-  color: white ;
+.uploader-status ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #000000;
 }
 
-::ng-deep .mat-mdc-slider.mat-primary{
-  --mdc-slider-handle-color:  white;
-  --mdc-slider-focus-handle-color:   white;
-  --mdc-slider-hover-handle-color:  white;
-  --mdc-slider-active-track-color:  white;
-  --mdc-slider-inactive-track-color:   white;
-  --mdc-slider-with-tick-marks-active-container-color:   white;
-  --mdc-slider-with-tick-marks-inactive-container-color:  white;
-  --mat-mdc-slider-ripple-color:  white;
-  --mat-mdc-slider-hover-ripple-color: rgba(63, 81, 181, 0.05);
-  --mat-mdc-slider-focus-ripple-color: rgba(63, 81, 181, 0.2);
-
+.mat-mdc-progress-spinner {
+  --mdc-circular-progress-active-indicator-color: #E13387;
 }
 
+.colorprogress {
+  filter: (1);
+  stroke-opacity: 0.4;
+}
 
-#slider{
+*::-webkit-scrollbar {
+  height: 8px;
+}
+
+.game-round {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
 }
 
-
-#sliderIcon {
-  margin-right: 4%;
-  margin-left: 5%;
-}
-#panels {
+.cards {
   display: flex;
-}
-
-
-.matchTable{
-  display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
+  gap: 16px;
   width: 100%;
-  background-color: var(--blue-90);
-  margin-right: 5%;
-
-}
-
-#left{
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-rows: 0fr 1fr;
-  align-items: flex-start;
-  margin-left: 5%;
-  margin-right: 5%;
-  grid-row-gap: 1em;
-
-}
-
-#matchMenu #matchItems {
-  width: 100%;
-  align-items: flex-end;
-  align-self: flex-end;
-  justify-content: space-around;
-  display: flex;
-  flex-direction: column;
-}
-
-
-
-
-
-.player .userImg{
-  background: linear-gradient(var(--blue-90), var(--blue-90)) padding-box,
-  var(--purple-gradient) border-box;
-
-}
-app-scoreboard{
-  margin-bottom: 10%;
-}
-
-
-.userImg{
-  background: linear-gradient(var(--blue-90), var(--blue-90)) padding-box,
-              var(--pink-gradient) border-box;
-  border-radius: 5em;
-  border: 4px solid transparent;
-  margin-right: 2em;
-
-}
-.mat-mdc-progress-spinner {
-  --mdc-circular-progress-active-indicator-color: #E13387;
-
-}
-
-
-
-
-
-#progressSpinnerBackground{
-  position: absolute;
-  stroke-opacity: 0.4;
-  z-index: 1;
-}
-
-
-
-#userName{
-  display: flex;
-  flex-direction: column;
-}
-
-
-.enemyDeck{
-  align-self: flex-start;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start ;
-  z-index: 3;
-  width: 100%;
-}
-
-.playerDeck{
-  align-self: flex-start;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: center;
-  z-index: 3;
-  width: 100%;
-
-}
-
-
-.chosenCard{
   position: relative;
-  bottom: 5em;
-}
-.usedCard{
-  position: absolute;
-  z-index: 2;
-  background-color: #1A1F40;
-  width: 87.73px;
-  height: 131.34px;
-  top: 55%;
-  left: 47%;
-}.tableCenter span{
-  margin-top: 5%;
-  margin-bottom: 5%;
-  font-size: 60px;
-  color: var(--blue-90);
-  width: 100%;
-  text-align: center;
-
 }
 
-#dialogEnd{
-  align-self: center;
-  justify-content: center;
-  width: 100%;
-  background-color: rgba($color: #1A1F40, $alpha: 0.8);
-  border: none;
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 100;
-  min-height: 100%;
+.oponent-cards {
+  top: -20px;
 }
 
-
-
-.horizontalButtons{
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.user-cards {
+  bottom: -20px;
 }
-.horizontalButtons a{
+
+.cards app-card {
+  width: 100px;
+}
+
+.user-card {
+  position: relative;
+  top: 0;
   cursor: pointer;
-  text-decoration: none;
-  color: var(--white);
-  font-family: var(--titillium);
-  font-weight: 700;
-  width: 75px;
-  text-align: center;
-
+  transition: all 0.3s ease-in-out;
 }
 
-.horizontalButtons a:last-child{
-  background-image: var(--orange-gradient);
-  padding: 10px 16px;
+.user-card:hover {
+  top: -10px;
+}
+
+.game-board-center span {
+  font-family: var(--krub);
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--blue-90);
+}
+
+.user-cards > div:first-child {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 200px;
+  width: 100px;
+  height: 150px;
   border-radius: 12px;
-  width: max-content;
-  margin-left: 30px;
+  background-color: var(--blue-90);
 }
 
-app-game-end{
-  margin-bottom: 50px;
+.oponent-cards > div:first-child {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 200px;
+  width: 100px;
+  height: 150px;
+  border-radius: 12px;
+  background-color: var(--blue-90);
 }
+
+.throw-card {
+  transition: all 0.3s ease-in-out;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -200px;
+}
+
+.empty-card {
+  height: 150px;
+}
+
+.round-result {
+  transition: all 0.3s ease-in-out;
+  visibility: hidden;
+  opacity: 0;
+} 
+
+.show-round-result {
+  visibility: visible;
+  opacity: 1;
+}
+

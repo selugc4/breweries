@@ -1,25 +1,6 @@
-<div>
-<h2>SCOREBOARD</h2>
-<div id="Match" *ngFor="let roundaux of rounds; let i = index;">
-  <div class="round">
-  <h3 [ngClass]="(i === round)? 'actual' : (i < round ) ? 'passedRound' : ''">{{i+1}}</h3>
-  <ng-container *ngIf="roundaux[2] === ''; else played;">
-    <div id="no-played" ></div>
-    <div id="no-card"></div>
-  </ng-container>
-  <ng-template #played>
-    <div matTooltip="{{tooltipRound(roundaux[2])}}"id="{{checkId(roundaux[2])}}"></div>
-    <img matTooltip="{{tooltipName(roundaux[0])}}"  id="{{checkCardId(roundaux[2], 1)}}" class="object-icon" src="assets/object-images/{{roundaux[0]}}.svg" alt="{{roundaux[0]}}">
-  </ng-template>
-
-  <h3 [ngClass]="(i === round)? 'actual' : (i < round ) ? 'passedRound' : ''" id="vs">VS</h3>
-  <ng-container *ngIf="roundaux[2] === ''; else played2;">
-      <div id="no-card"></div>
-    </ng-container>
-    <ng-template #played2>
-    <img matTooltip="{{tooltipName(roundaux[1])}}"id="{{checkCardId(roundaux[2],2)}}" class="object-icon" src="assets/object-images/{{roundaux[1]}}.svg" alt="{{roundaux[0]}}">
-    </ng-template>
-    <div class="round">
-
-</div>
+<div class="scoreboard-container">
+  <h3>SCOREBOARD</h3>
+  <div class="rounds-container">
+    <app-scoreboard-round *ngFor="let empty of [].constructor(5); let i=index"></app-scoreboard-round>
+  </div>
 </div>

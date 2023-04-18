@@ -13,7 +13,7 @@
     --green-gradient: linear-gradient(90deg, #b3ffab, #12fff7);
     --pink-gradient: linear-gradient(90deg, #fa669c, #e13387);
     --purple-gradient: linear-gradient(90deg, #8257fc, #6736f1);
-    --background-opacity: #0f102580;
+    --background-opacity: #0f102599;
     --card-opacity: #282e5490;
     --titillium: "Titillium Web", Arial, Helvetica, sans-serif;
     --krub: Krub, Arial, Helvetica, sans-serif;
@@ -50,6 +50,13 @@ a {
 
 h2 {
     font-size: 30px;
+    color: white;
+    font-weight: 700;
+    margin: 0;
+}
+
+h3 {
+    font-size: 25px;
     color: white;
     font-weight: 700;
     margin: 0;
@@ -110,7 +117,9 @@ app-root {
   height: calc(100vh - 80px);
   position: fixed;
   bottom: 0;
-  background-color: #FF000050;
+  background-color: var(--blue);
+  padding: 40px;
+  padding-top: 20px;
   z-index: 1000;
 }
 

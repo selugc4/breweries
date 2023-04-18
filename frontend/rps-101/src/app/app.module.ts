@@ -40,6 +40,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AutocompleteComponent } from './autocomplete/autocomplete.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ScoreboardRoundComponent } from './scoreboard-round/scoreboard-round.component';
+import { RoundResultComponent } from './round-result/round-result.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,6 +66,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     GameEndComponent,
     NotFoundComponent,
     AutocompleteComponent,
+    ScoreboardRoundComponent,
+    RoundResultComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,7 +90,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatMenuModule,
     MatSliderModule,
     MatProgressSpinnerModule,
-    DragDropModule
+    DragDropModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

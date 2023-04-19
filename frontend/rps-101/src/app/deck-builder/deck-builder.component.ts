@@ -78,7 +78,8 @@ export class DeckBuilderComponent {
     moveItemInArray(
       $event.container.data,
       $event.previousIndex,
-      $event.currentIndex)
+      $event.currentIndex
+    );
     this.mainCardName = this.deckCards[0].toLowerCase();
   }
 }

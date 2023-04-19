@@ -101,3 +101,11 @@ mat-form-field {
 h4 {
     margin-bottom: 10px;
 }
+
+.cdk-drag-handle {
+    cursor: grab;
+}
+
+.cdk-drop-list-dragging{
+    cursor: grab;
+}

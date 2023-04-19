@@ -35,7 +35,7 @@
           <div *ngIf="deckCards[i]" class="deck-card-container">
             <img class="delete-card clickable" (click)="onDelete(deckCards[i])" src="assets/delete_button_template.svg "
               alt="Delete button" />
-            <app-card cdkDragHandle class="secondary-card" [name]="deckCards[i]"></app-card>
+            <app-card cdkDragHandle [name]="deckCards[i]"></app-card>
           </div>
           <div *ngIf="!deckCards[i]" class="svg-empty-card ">
             <img class="empty-secondary-card " src="assets/empty_card_template.svg " alt="Empty card" />

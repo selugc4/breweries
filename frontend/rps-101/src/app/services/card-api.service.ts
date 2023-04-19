@@ -32,7 +32,7 @@ export class CardApiService {
     );
   }
 
-  getMatchResult(card1: string, card2: string): Observable<BattleOutcome> {
+  getBattleResult(card1: string, card2: string): Observable<BattleOutcome> {
     return this.api.get<BattleOutcome>(`${this.rps101Url}/match?object_one=${card1}&object_two=${card2}`);
   }
 }

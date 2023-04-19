@@ -4,6 +4,9 @@ import { MockObjectsService } from '../services/mock-objects.service';
 import { CardApiService } from 'app/services/card-api.service';
 import { RandomDeckService } from '../services/random-deck.service';
 import { Deck } from 'app/models/Deck';
+import { GameService } from 'app/services/game.service';
+import { GameMode } from 'app/models/GameMode';
+import { BattleOutcome, PlayerResult } from 'app/models/BattleOutcome';
 import {
   trigger,
   state,
@@ -12,7 +15,6 @@ import {
   transition,
 } from '@angular/animations';
 import { ViewContainerRef } from '@angular/core';
-import { AppComponent } from 'app/app.component';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 @Component({
@@ -28,30 +30,27 @@ import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 export class GameComponent implements OnInit {
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger | undefined;
   @Input() gamemode: GameMode = GameMode.Exposed;
-  @Input() deck?: Deck;
+  @Input() playerDeck!: Deck;
 
   constructor(
     private randomDeckService: RandomDeckService,
     private cardApiService: CardApiService,
-    private appComp: AppComponent
+    private gameService: GameService
   ) {}
-  color: ThemePalette = 'primary';
-  mode: ProgressSpinnerMode = 'determinate';
-  value = 50;
-  soundIcon: string = 'assets/audio-on.svg';
-  soundActivated: boolean = true;
+
+  spinnerColor: ThemePalette = 'primary';
+  spinnerMode: ProgressSpinnerMode = 'determinate';
+  spinnerValue = 50;
+
   rightClickCard: boolean = false;
-  restartDeck: string[] = [];
   roundTime: number = 0;
   time: number = 0;
   activatedChrono: boolean = true;
   activeDetails: boolean[] = Array(5);
   activeDetail: number = 5;
-  display = '00:00';
-  interval: any;
+  timer: any;
   round: number = 0;
-  playerDeck: string[] = [];
-  enemyDeck: string[] = [];
+  enemyDeck!: Deck;
   dialogText: string = 'END';
   dialogBlock: boolean = false;
   activeCard: boolean[] = Array(5);
@@ -70,11 +69,29 @@ export class GameComponent implements OnInit {
   NUEVO CODIGO (INICIO)
   */
 
+
+  playCard($event: MouseEvent, cardIndex: number){
+    this.throwCard($event);
+
+    const enemyCardIndex = Math.floor(Math.random() * (5 - this.round));
+    const enemyCard = this.enemyDeck.cards[enemyCardIndex];
+    this.enemyDeck.cards.splice(enemyCardIndex, 1);
+
+    const playerCard = this.playerDeck.cards[cardIndex];
+
+    const outcome: BattleOutcome = this.getBattleResult(playerCard, enemyCard);
+
+  }
+
+  //TODO: Añadir lanzamiento de carta del enemigo
   throwCard($event: MouseEvent) {
     const elemento = $event.currentTarget as HTMLElement;
     console.log(elemento);
     elemento.classList.remove('user-card');
     elemento.classList.add('throw-card');
+  }
+
+  displayRoundResult(){
     const roundResultComponent = document.querySelector('.round-result');
     setTimeout(() => {
       roundResultComponent?.classList.add('show-round-result');
@@ -91,28 +108,17 @@ export class GameComponent implements OnInit {
     this.roundTime = 100;
     this.dialogStart = false;
 
-    if (this.deck === undefined) {
-      this.playerDeck = this.getPlayerDeck(
-        this.randomDeckService.getRandomDeck().cards
-      );
-    } else {
-      this.playerDeck = this.getPlayerDeck(this.deck.cards);
-    }
+    this.enemyDeck = this.randomDeckService.getRandomDeck();
 
-    this.enemyDeck = this.getPlayerDeck(
-      this.randomDeckService.getRandomDeck().cards
-    );
     this.startTimer();
   }
 
   restartMatch() {
     this.time = 0;
     this.activatedChrono = true;
-    this.display = '00:00';
-    this.interval = 0;
+    // this.display = '00:00';
+    // this.interval = 0;
     this.round = 0;
-    this.playerDeck = [];
-    this.enemyDeck = [];
     this.restartScoreboard();
     this.dialogBlock = false;
     this.activeDetail = 5;
@@ -130,23 +136,8 @@ export class GameComponent implements OnInit {
     $event.preventDefault();
   }
   startTimer() {
-    this.dialogResume = false;
-    this.activatedChrono = true;
-
-    this.interval = setInterval(() => {
-      if (this.time === 0) {
-        this.time++;
-      } else {
-        this.time++;
-      }
-      this.roundTime = this.roundTime - 100 / 60;
-      if (this.roundTime <= 0) {
-        this.rounds[this.round] = this.playRound(
-          Math.floor(Math.random() * (5 - this.round))
-        );
-        this.nextRound();
-      }
-      this.display = this.transform(this.time);
+    setInterval(() => {
+      this.timer++;
     }, 1000);
   }
 
@@ -160,20 +151,11 @@ export class GameComponent implements OnInit {
   }
   pauseTimer() {
     this.activatedChrono = false;
-    clearInterval(this.interval);
+    //clearInterval(this.interval);
   }
 
-  enableOrDisableAudio() {
-    this.soundActivated = !this.soundActivated;
-
-    if (this.soundActivated) {
-      this.soundIcon = 'assets/audio-on.svg';
-    } else {
-      this.soundIcon = 'assets/audio-off.svg';
-    }
-  }
   nextRound() {
-    clearInterval(this.interval);
+    //clearInterval(this.interval);
     if (this.round >= 4) {
       this.dialogResult();
     } else {
@@ -191,17 +173,15 @@ export class GameComponent implements OnInit {
     this.roundTime = 100;
     this.time = 0;
     this.activatedChrono = false;
-    this.display = '00:00';
-    this.interval = 0;
+    // this.display = '00:00';
+    // this.interval = 0;
     this.round = 0;
     this.restartScoreboard();
-    this.playerDeck = [];
-    this.enemyDeck = [];
     this.activeDetail = 5;
   }
 
   signup() {
-    this.appComp.destroyGame();
+    this.gameService.endGame();
   }
   dialogResult() {
     this.getEndText();
@@ -241,27 +221,6 @@ export class GameComponent implements OnInit {
     this.dialogText = 'RESTART';
   }
 
-  numSequence(): Array<number> {
-    return Array(5);
-  }
-  getRandom101(index: number): number {
-    return Math.floor(Math.random() * (101 - index));
-  }
-  getCard(i: number, cards: string[]): string {
-    let card: string = cards[i];
-    return card;
-  }
-  getDeck(): Array<string> {
-    let mock: MockObjectsService = new MockObjectsService();
-    let cards: string[] = mock.getMockObjects();
-    let deck: string[] = [];
-    for (let i = 0; i < 5; i++) {
-      let random = this.getRandom101(i);
-      deck[i] = this.getCard(random, cards).toLowerCase();
-      cards.splice(random, 1);
-    }
-    return deck;
-  }
   changeClass(element: string): void {
     let activeCard = document.getElementById(element);
     activeCard!.classList.add('chosenCard');
@@ -269,7 +228,7 @@ export class GameComponent implements OnInit {
   activateCard(index: number) {
     if (this.activeCard[index] === true) {
       this.putCard[index] = true;
-      this.rounds[this.round] = this.playRound(index);
+      //this.rounds[this.round] = this.playRound(index);
       this.nextRound();
     } else {
       for (let i = 0; i < this.activeCard.length; i++) {
@@ -294,33 +253,22 @@ export class GameComponent implements OnInit {
     //syncDelay(2000);
     var message = '';
     var enemyChosenIndex = Math.floor(Math.random() * (5 - this.round));
-    var chosenCard = this.playerDeck[index];
-    var enemyChosenCard = this.enemyDeck[enemyChosenIndex];
+    var chosenCard = this.playerDeck.cards[index];
+    var enemyChosenCard = this.enemyDeck.cards[enemyChosenIndex];
 
-    var played: string[] = this.apiCall(chosenCard, enemyChosenCard);
+    // var played: string[] = this.getBattleResult(chosenCard, enemyChosenCard);
 
-    this.removeUserCard(index);
+    // this.enemyDeck.cards.splice(enemyChosenIndex, 1);
 
-    this.enemyDeck.splice(enemyChosenIndex, 1);
-
-    if (chosenCard === played[0]) {
-      message = 'WIN';
-    } else if (enemyChosenCard === played[0]) {
-      message = 'LOSE';
-    } else {
-      message = 'DRAW';
-    }
+    // if (chosenCard === played[0]) {
+    //   message = 'WIN';
+    // } else if (enemyChosenCard === played[0]) {
+    //   message = 'LOSE';
+    // } else {
+    //   message = 'DRAW';
+    // }
 
     return Array(chosenCard, enemyChosenCard, message);
-  }
-
-  removeUserCard(index: number) {
-    this.playerDeck.splice(index, 1);
-
-    for (let i = 0; i < this.activeCard.length; i++) {
-      this.activeCard[i] = false;
-      this.putCard[i] = false;
-    }
   }
 
   restartScoreboard() {
@@ -342,34 +290,28 @@ export class GameComponent implements OnInit {
     window.location.reload();
   }
 
-  apiCall(chosenCard: string, enemyChosenCard: string): string[] {
-    var played = this.cardApiService.getMatchResult(
-      chosenCard,
-      enemyChosenCard
-    );
-    var arrayPlay: string[] = [];
+  getBattleResult(playerCard: string, enemyCard: string): BattleOutcome {
+    let outcome: BattleOutcome;
 
-    played.subscribe((play) => {
-      arrayPlay[0] = play.winner.toLowerCase();
-      arrayPlay[1] = play.outcome.toLowerCase();
-      arrayPlay[2] = play.loser.toLowerCase();
+    this.cardApiService.getBattleResult(
+      playerCard,
+      enemyCard
+    ).subscribe(response => {
+      outcome = response;
+
+      if (outcome.winner === playerCard){
+        outcome.playerResult = PlayerResult.WIN;
+      }
+      else if (outcome.loser === playerCard){
+        outcome.playerResult = PlayerResult.LOSE;
+      }
+      else{
+        outcome.playerResult = PlayerResult.DRAW;
+      }
     });
 
-    return arrayPlay;
+    return outcome!;
   }
-  getPlayerDeck(cards: string[]): string[] {
-    var aux = [];
-    for (var i = 0; i < cards.length; i++) {
-      aux[i] = cards[i].toLowerCase();
-    }
-    return aux;
-  }
-}
-
-export enum GameMode {
-  Hidden,
-  Rivals,
-  Exposed,
 }
 
 function syncDelay(milliseconds: number) {

@@ -39,7 +39,7 @@ export class AppComponent {
   renderGame(parameters: GameParameters) {
     const factory = this.resolver.resolveComponentFactory(GameComponent); //Cambiar al componente de partida
     const componentRef = factory.create(this.injector);
-    componentRef.instance.deck = parameters.deck; //Insertar aquí las dependencias del componente de partida
+    componentRef.instance.playerDeck = parameters.deck; //Insertar aquí las dependencias del componente de partida
     componentRef.location.nativeElement.className = 'game-container';
 
     this.gameContainerElement!.clear();

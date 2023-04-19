@@ -10,23 +10,23 @@
     <div></div>
   </div>
   <div class="game-board">
-    <mat-progress-spinner class="progress colorprogress" strokeWidth="1.5" [color]="color" [mode]="mode" [value]=100>
+    <mat-progress-spinner class="progress colorprogress" strokeWidth="1.5" [color]="spinnerColor" [mode]="spinnerMode" [value]=100>
     </mat-progress-spinner>
-    <mat-progress-spinner class="progress" strokeWidth="1.5" [color]="color" [mode]="mode" [value]="value">
+    <mat-progress-spinner class="progress" strokeWidth="1.5" [color]="spinnerColor" [mode]="spinnerMode" [value]="spinnerValue">
     </mat-progress-spinner>
 
     <div class="game-round">
       <div class="cards oponent-cards">
         <div></div>
-        <app-card *ngFor="let empty of [].constructor(5);" card="camera"></app-card>
+        <app-card *ngFor="let card of enemyDeck.cards;" [name]="card"></app-card>
       </div>
       <div class="game-board-center">
         <span>JANKEN 101</span>
       </div>
       <div class="cards user-cards">
         <div></div>
-        <app-card class="user-card" *ngFor="let empty of [].constructor(5);" card="camera"
-          (click)="throwCard($event)"></app-card>
+        <app-card class="user-card" *ngFor="let card of playerDeck.cards; let i = index" [name]="card"
+          (click)="playCard($event, i)"></app-card>
         <div class="empty-card"></div>
       </div>
     </div>
@@ -41,7 +41,7 @@
           <img src="assets/settings.svg" alt="settings">
         </button>
       </div>
-      <span class="timer">{{ display }}</span>
+      <span class="timer">{{ time | date: 'mm:ss' }}</span>
     </div>
     <app-scoreboard></app-scoreboard>
     <div class="user">

@@ -1,25 +1,22 @@
 <div class="dialog-container">
-    <span class="title">REMOVE DECK</span>
-    <div class="subtitle" mat-dialog-content>
-        Are you sure you want to remove the deck?
-    </div>
-
-    <div class="text" mat-dialog-content>
-        This action is irreversible and will delete all the cards and information associated with this deck. Please confirm that you want to proceed with the removal.
+    <mat-icon mat-dialog-close class="close-icon">close</mat-icon>
+    <h2>REMOVE DECK</h2>
+    <div class="dialog-info">
+        <span>Are you sure you want to remove the deck?</span>
+        <p>This action is irreversible and will delete all the cards and information associated with this deck. Please
+            confirm that you want to proceed with the removal.</p>
     </div>
     <div class="buttons" mat-dialog-actions>
-        <button mat-raised-button="" mat-button mat-dialog-close class="mdc-button mdc-button--raised mat-mdc-raised-button mat-primary mat-mdc-button-base">
-      <mat-icon
-        aria-hidden="false"
-        fontIcon="check"></mat-icon>
-      <span class="mdc-buttonlabel" (click)="onConfirm()">Confirm</span>
-    </button>
+        <button mat-raised-button="" mat-button mat-dialog-close
+            class="mdc-button mdc-button--raised mat-mdc-raised-button mat-primary mat-mdc-button-base">
+            <mat-icon aria-hidden="false" fontIcon="check"></mat-icon>
+            <span class="mdc-buttonlabel" (click)="onConfirm()">Confirm</span>
+        </button>
 
-        <button mat-raised-button="" mat-button mat-dialog-close class="mdc-button mdc-button--raised mat-mdc-raised-button mat-primary mat-mdc-button-base">
-      <mat-icon
-        aria-hidden="false"
-        fontIcon="close"></mat-icon>
-      <span class="mdc-buttonlabel">Cancel</span>
-    </button>
+        <button mat-raised-button="" mat-button mat-dialog-close
+            class="mdc-button mdc-button--raised mat-mdc-raised-button mat-primary mat-mdc-button-base">
+            <mat-icon aria-hidden="false" fontIcon="close"></mat-icon>
+            <span class="mdc-buttonlabel">Cancel</span>
+        </button>
     </div>
 </div>

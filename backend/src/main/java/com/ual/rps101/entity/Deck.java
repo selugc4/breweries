@@ -4,8 +4,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "decks")
@@ -17,10 +17,9 @@ public class Deck {
     @NotBlank(message = "Name is mandatory")
     private String name;
    
-    @NotBlank(message = "Cards are mandatory")
+    @Size(min=0,message = "Cards are mandatory")
     private String[] cards;
 
-    @NotBlank
     private int wins, draws, loses;
 
     public Deck() {

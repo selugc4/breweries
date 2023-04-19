@@ -17,3 +17,12 @@ services:
     ports:
       - "8080:80"
     restart: unless-stopped
+
+  backend:
+    build: ./backend
+    
+    depends_on:
+      - postgres
+    ports:
+      - "8081:8081"
+    restart: unless-stopped

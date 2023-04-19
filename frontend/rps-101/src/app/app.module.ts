@@ -39,7 +39,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AutocompleteComponent } from './autocomplete/autocomplete.component';
-
+import { DragDropModule } from '@angular/cdk/drag-drop';
 @NgModule({
   declarations: [
     AppComponent,
@@ -85,6 +85,7 @@ import { AutocompleteComponent } from './autocomplete/autocomplete.component';
     MatMenuModule,
     MatSliderModule,
     MatProgressSpinnerModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent],

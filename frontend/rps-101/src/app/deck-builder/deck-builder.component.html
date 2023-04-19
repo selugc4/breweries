@@ -30,8 +30,8 @@
       </mat-form-field>
 
       <h4>Deck cards :</h4>
-      <div class="deck-container">
-        <div class="deck-item" *ngFor="let empty of [].constructor(5); let i=index">
+      <div cdkDropList class="deck-container" [cdkDropListData]="deckCards" (cdkDropListDropped)="drop($event)">
+        <div cdkDrag class="deck-item" *ngFor="let empty of [].constructor(5); let i=index">
           <div *ngIf="deckCards[i]" class="deck-card-container">
             <img class="delete-card clickable" (click)="onDelete(deckCards[i])" src="assets/delete_button_template.svg "
               alt="Delete button" />

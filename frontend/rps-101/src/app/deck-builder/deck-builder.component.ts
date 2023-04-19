@@ -4,6 +4,7 @@ import { Deck } from '../models/Deck';
 import { Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-deck-builder',
@@ -71,5 +72,13 @@ export class DeckBuilderComponent {
 
   getFiltered(filtered: string[]) {
     this.filteredCards = filtered;
+  }
+
+  drop($event: CdkDragDrop<string[]>) {
+    moveItemInArray(
+      $event.container.data,
+      $event.previousIndex,
+      $event.currentIndex)
+    this.mainCardName = this.deckCards[0].toLowerCase();
   }
 }

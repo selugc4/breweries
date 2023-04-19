@@ -6,27 +6,39 @@
       </div>
       <span>ROCKBOT</span>
     </div>
+    <!-- Code for determining if there's a selected card to show details 
+      <ng-container *ngIf="selectedCardDetails === ''; else cardDetails">
+      <app-instructions></app-instructions>
+    </ng-container>
+
+    <ng-template #cardDetails>
+      <app-card-detail card=selectedCardDetails></app-card-detail>
+    </ng-template> -->
     <app-instructions></app-instructions>
     <div></div>
   </div>
   <div class="game-board">
-    <mat-progress-spinner class="progress colorprogress" strokeWidth="1.5" [color]="spinnerColor" [mode]="spinnerMode" [value]=100>
+    <mat-progress-spinner class="progress colorprogress" strokeWidth="1.5" [mode]="spinnerMode" [value]=100>
     </mat-progress-spinner>
-    <mat-progress-spinner class="progress" strokeWidth="1.5" [color]="spinnerColor" [mode]="spinnerMode" [value]="spinnerValue">
+    <mat-progress-spinner class="progress" strokeWidth="1.5" [mode]="spinnerMode" [value]="spinnerValue">
     </mat-progress-spinner>
 
     <div class="game-round">
       <div class="cards oponent-cards">
         <div></div>
-        <app-card *ngFor="let card of enemyDeck.cards;" [name]="card"></app-card>
+        <div class="empty-card"></div>
+        <app-card class="oponent-card" *ngFor="let card of enemyDeck.cards; let i = index" [name]="card"
+          [id]="'oponent-card-' + i"></app-card>
+        <div class="empty-card"></div>
       </div>
       <div class="game-board-center">
         <span>JANKEN 101</span>
       </div>
       <div class="cards user-cards">
         <div></div>
-        <app-card class="user-card" *ngFor="let card of playerDeck.cards; let i = index" [name]="card"
-          (click)="playCard($event, i)"></app-card>
+        <div class="empty-card"></div>
+        <app-card class="user-card" *ngFor="let card of playerDeckInGame.cards; let i = index" [name]="card"
+          (click)="playCard(i)" (contextmenu)="getCardWinDetails(i, $event)" [id]="'user-card-' + i"></app-card>
         <div class="empty-card"></div>
       </div>
     </div>
@@ -35,15 +47,15 @@
     <div class="controls-timer">
       <div class="controls">
         <button>
-          <img src="assets/pause.svg" alt="pause">
+          <img src="assets/pause.svg" (click)="pauseTimer()" alt="pause">
         </button>
         <button>
           <img src="assets/settings.svg" alt="settings">
         </button>
       </div>
-      <span class="timer">{{ time | date: 'mm:ss' }}</span>
+      <span class="timer">{{ currentGlobalTime * 1000 | date:'mm:ss'}}</span>
     </div>
-    <app-scoreboard></app-scoreboard>
+    <app-scoreboard [roundHistory]="roundHistory"></app-scoreboard>
     <div class="user">
       <span>ANONYMOUS</span>
       <div class="user-img">
@@ -52,4 +64,5 @@
     </div>
   </div>
 </main>
-<app-round-result class="round-result"></app-round-result>
+<app-round-result class="round-result" [roundOutcome]="roundOutcome"
+  (click)="closeRoundResult($event)"></app-round-result>

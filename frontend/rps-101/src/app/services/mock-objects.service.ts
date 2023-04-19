@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Deck } from '../models/Deck';
 import { WinningOutcome } from '../models/CardOutcomes';
+import { BattleOutcome, PlayerResult } from '../models/BattleOutcome';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MockObjectsService {
   constructor() {}
-  
+
   getMockObjects() {
     return [
       'Air',
@@ -173,5 +175,23 @@ export class MockObjectsService {
       { outcome: 'incinerates', losingCard: 'Wall' },
       { outcome: 'has power of', losingCard: 'Sun' },
     ];
+  }
+
+  getMockBattleResult(card1: string, card2: string): Observable<BattleOutcome> {
+    if (Math.round(Math.random()) == 0) {
+      return of({
+        winner: card1,
+        loser: card2,
+        outcome: 'starts reaction',
+        playerResult: PlayerResult.WIN,
+      });
+    } else {
+      return of({
+        winner: card1,
+        loser: card2,
+        outcome: 'starts reaction',
+        playerResult: PlayerResult.WIN,
+      });
+    }
   }
 }

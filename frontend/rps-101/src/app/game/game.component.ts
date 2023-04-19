@@ -7,6 +7,7 @@ import { Deck } from 'app/models/Deck';
 import { GameService } from 'app/services/game.service';
 import { GameMode } from 'app/models/GameMode';
 import { BattleOutcome, PlayerResult } from 'app/models/BattleOutcome';
+import { Observable, lastValueFrom } from 'rxjs';
 import {
   trigger,
   state,
@@ -35,22 +36,37 @@ export class GameComponent implements OnInit {
   constructor(
     private randomDeckService: RandomDeckService,
     private cardApiService: CardApiService,
-    private gameService: GameService
+    private gameService: GameService,
+    private mockService: MockObjectsService
   ) {}
 
-  spinnerColor: ThemePalette = 'primary';
+  //Spinner Properties
   spinnerMode: ProgressSpinnerMode = 'determinate';
-  spinnerValue = 50;
+  spinnerValue = 100;
+
+  //Timer related Properties
+  ROUND_TIME: number = 60;
+  currentRoundTime: number = this.ROUND_TIME;
+  isPausedTimer: boolean = false;
+  currentGlobalTime: number = 0;
+
+  //Round related Properties
+  currentRound: number = 0;
+  roundOutcome!: BattleOutcome;
+  roundHistory: BattleOutcome[] = [];
 
   rightClickCard: boolean = false;
-  roundTime: number = 0;
-  time: number = 0;
-  activatedChrono: boolean = true;
+
   activeDetails: boolean[] = Array(5);
   activeDetail: number = 5;
-  timer: any;
-  round: number = 0;
+
+  //Deck & Card related Properties
   enemyDeck!: Deck;
+  indexEnemyCard: number = -1;
+  playerDeckInGame!: Deck; //Use this Variable for all the ingame actions of the player Deck
+  indexPlayerCard: number = -1;
+  selectedCardDetails: string = '';
+
   dialogText: string = 'END';
   dialogBlock: boolean = false;
   activeCard: boolean[] = Array(5);
@@ -65,61 +81,73 @@ export class GameComponent implements OnInit {
     this.startMatch();
   }
 
-  /*
-  NUEVO CODIGO (INICIO)
-  */
+  async playCard(cardIndex: number) {
+    //TODO: Comprobar que no se puedan lanzar dos cartas a la vez
 
+    this.pauseTimer();
 
-  playCard($event: MouseEvent, cardIndex: number){
-    this.throwCard($event);
+    this.indexEnemyCard = Math.floor(Math.random() * (5 - this.currentRound));
+    this.indexPlayerCard = cardIndex;
+    this.throwCards(cardIndex, this.indexEnemyCard);
 
-    const enemyCardIndex = Math.floor(Math.random() * (5 - this.round));
-    const enemyCard = this.enemyDeck.cards[enemyCardIndex];
-    this.enemyDeck.cards.splice(enemyCardIndex, 1);
+    const enemyCard = this.enemyDeck.cards[this.indexEnemyCard];
+    const playerCard = this.playerDeckInGame.cards[cardIndex];
 
-    const playerCard = this.playerDeck.cards[cardIndex];
+    this.roundOutcome = await this.getBattleResult(playerCard, enemyCard);
+    this.roundHistory[this.currentRound] = this.roundOutcome;
 
-    const outcome: BattleOutcome = this.getBattleResult(playerCard, enemyCard);
-
+    this.displayRoundResult();
   }
 
-  //TODO: Añadir lanzamiento de carta del enemigo
-  throwCard($event: MouseEvent) {
-    const elemento = $event.currentTarget as HTMLElement;
-    console.log(elemento);
-    elemento.classList.remove('user-card');
-    elemento.classList.add('throw-card');
+  throwCards(userId: number, oponentId: number) {
+    const playerCard = document.querySelector('#user-card-' + userId);
+    const oponentCard = document.querySelector('#oponent-card-' + oponentId);
+    playerCard?.classList.remove('user-card');
+    playerCard?.classList.add('throw-user-card');
+    oponentCard?.classList.remove('oponent-card');
+    oponentCard?.classList.add('throw-oponent-card');
   }
 
-  displayRoundResult(){
+  displayRoundResult() {
     const roundResultComponent = document.querySelector('.round-result');
     setTimeout(() => {
       roundResultComponent?.classList.add('show-round-result');
-    }, 1000);
-    setTimeout(() => {
-      roundResultComponent?.classList.remove('show-round-result');
-    }, 3000);
+    }, 250);
   }
-  /*
-  NUEVO CODIGO (FIN)
-  */
+
+  closeRoundResult($event: MouseEvent) {
+    $event.stopPropagation();
+    const roundResultComponent = $event.currentTarget as HTMLElement;
+    roundResultComponent?.classList.remove('show-round-result');
+    this.removePlayedCards();
+    this.nextRound();
+  }
+
+  removePlayedCards() {
+    this.enemyDeck.cards.splice(this.indexEnemyCard, 1);
+    this.playerDeckInGame.cards.splice(this.indexPlayerCard, 1);
+    this.selectedCardDetails = '';
+  }
 
   startMatch() {
-    this.roundTime = 100;
+    this.currentRoundTime = this.ROUND_TIME;
+    this.roundHistory = [];
+    this.roundHistory.length = 5;
+    this.currentRound = 0;
+    this.currentGlobalTime = 0;
     this.dialogStart = false;
+    this.isPausedTimer = false;
 
+    this.selectedCardDetails = '';
     this.enemyDeck = this.randomDeckService.getRandomDeck();
-
+    this.playerDeckInGame = structuredClone(this.playerDeck);
     this.startTimer();
   }
 
+  //TODO: Quitarlo para que se use siempre StartMatch
   restartMatch() {
-    this.time = 0;
-    this.activatedChrono = true;
-    // this.display = '00:00';
-    // this.interval = 0;
-    this.round = 0;
-    this.restartScoreboard();
+    this.isPausedTimer = true;
+    this.currentRoundTime = this.ROUND_TIME;
     this.dialogBlock = false;
     this.activeDetail = 5;
     this.dialogEnd = false;
@@ -128,56 +156,78 @@ export class GameComponent implements OnInit {
     this.startMatch();
   }
 
-  openMenu() {
-    this.trigger?.openMenu();
-  }
-
-  disableRightClick($event: MouseEvent) {
-    $event.preventDefault();
-  }
-  startTimer() {
-    setInterval(() => {
-      this.timer++;
-    }, 1000);
-  }
-
-  transform(value: number): string {
-    const minutes: number = Math.floor(value / 60);
-    return (
-      String(minutes).padStart(2, '0') +
-      ':' +
-      String(value - minutes * 60).padStart(2, '0')
-    );
-  }
-  pauseTimer() {
-    this.activatedChrono = false;
-    //clearInterval(this.interval);
-  }
-
-  nextRound() {
-    //clearInterval(this.interval);
-    if (this.round >= 4) {
-      this.dialogResult();
-    } else {
-      this.roundTime = 100;
-      this.round++;
-      this.startTimer();
-    }
-  }
-
+  //TODO: Incluir que el reseteo de datos lo haga StartMatch?
   endMatch() {
     this.dialogEnd = false;
     this.dialogBlock = false;
     this.dialogStart = true;
     this.pauseTimer();
-    this.roundTime = 100;
-    this.time = 0;
-    this.activatedChrono = false;
-    // this.display = '00:00';
-    // this.interval = 0;
-    this.round = 0;
-    this.restartScoreboard();
+    this.isPausedTimer = true;
+    this.currentRound = 0;
     this.activeDetail = 5;
+  }
+
+  startTimer() {
+    setInterval(() => {
+      if (!this.isPausedTimer) {
+        this.currentGlobalTime = this.currentGlobalTime + 0.1;
+        this.currentRoundTime = this.currentRoundTime - 0.1;
+        this.spinnerValue = this.currentRoundTime / (this.ROUND_TIME / 100);
+        if (this.spinnerValue <= 0) {
+          this.playCard(0);
+        }
+      }
+    }, 100);
+  }
+
+  pauseTimer() {
+    this.isPausedTimer = true;
+  }
+
+  resumeTimer() {
+    this.isPausedTimer = false;
+  }
+
+  nextRound() {
+    if (this.currentRound >= 4) {
+      console.log('Implementar final de juego');
+    } else {
+      this.currentRoundTime = this.ROUND_TIME;
+      this.currentRound++;
+      this.resumeTimer();
+    }
+  }
+
+  getCardWinDetails(index: number, event: MouseEvent) {
+    event.preventDefault();
+    this.selectedCardDetails = this.playerDeckInGame.cards[index];
+  }
+
+  async getBattleResult(
+    playerCard: string,
+    enemyCard: string
+  ): Promise<BattleOutcome> {
+    let outcome = await lastValueFrom(
+      this.mockService.getMockBattleResult(
+        playerCard,
+        enemyCard
+      ) as Observable<BattleOutcome>
+    );
+
+    if (outcome.winner === playerCard) {
+      outcome.playerResult = PlayerResult.WIN;
+    } else if (outcome.loser === playerCard) {
+      outcome.playerResult = PlayerResult.LOSE;
+    } else {
+      outcome.playerResult = PlayerResult.DRAW;
+    }
+
+    return outcome;
+  }
+
+  //TODO: Funciones no revisadas/usadas aun
+  openMenu() {
+    this.trigger?.openMenu();
   }
 
   signup() {
@@ -215,6 +265,7 @@ export class GameComponent implements OnInit {
     this.pauseTimer();
     this.dialogResume = true;
   }
+
   restartGame() {
     this.pauseTimer();
     this.dialogBlock = true;
@@ -237,7 +288,7 @@ export class GameComponent implements OnInit {
       this.activeCard[index] = true;
     }
   }
-  changeInstructionstoDetails(index: number) {
+  changeInstructionsToDetails(index: number) {
     for (let i = 0; i < this.activeDetails.length; i++) {
       this.activeDetails[i] = false;
     }
@@ -249,75 +300,11 @@ export class GameComponent implements OnInit {
     }
   }
 
-  playRound(index: number): string[] {
-    //syncDelay(2000);
-    var message = '';
-    var enemyChosenIndex = Math.floor(Math.random() * (5 - this.round));
-    var chosenCard = this.playerDeck.cards[index];
-    var enemyChosenCard = this.enemyDeck.cards[enemyChosenIndex];
-
-    // var played: string[] = this.getBattleResult(chosenCard, enemyChosenCard);
-
-    // this.enemyDeck.cards.splice(enemyChosenIndex, 1);
-
-    // if (chosenCard === played[0]) {
-    //   message = 'WIN';
-    // } else if (enemyChosenCard === played[0]) {
-    //   message = 'LOSE';
-    // } else {
-    //   message = 'DRAW';
-    // }
-
-    return Array(chosenCard, enemyChosenCard, message);
-  }
-
-  restartScoreboard() {
-    this.rounds = [];
-    this.rounds.length = 5;
-    for (var i: number = 0; i < 5; i++) {
-      this.rounds[i] = [];
-      for (var j: number = 0; j < 3; j++) {
-        this.rounds[i][j] = '';
-      }
-    }
-  }
-
   close() {
     this.dialogBlock = false;
     this.startTimer();
   }
   reloadCurrentPage() {
     window.location.reload();
-  }
-
-  getBattleResult(playerCard: string, enemyCard: string): BattleOutcome {
-    let outcome: BattleOutcome;
-
-    this.cardApiService.getBattleResult(
-      playerCard,
-      enemyCard
-    ).subscribe(response => {
-      outcome = response;
-
-      if (outcome.winner === playerCard){
-        outcome.playerResult = PlayerResult.WIN;
-      }
-      else if (outcome.loser === playerCard){
-        outcome.playerResult = PlayerResult.LOSE;
-      }
-      else{
-        outcome.playerResult = PlayerResult.DRAW;
-      }
-    });
-
-    return outcome!;
-  }
-}
-
-function syncDelay(milliseconds: number) {
-  var start = new Date().getTime();
-  var end = 0;
-  while (end - start < milliseconds) {
-    end = new Date().getTime();
   }
 }

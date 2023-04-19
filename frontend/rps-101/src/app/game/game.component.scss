@@ -95,8 +95,8 @@
 }
 
 .game-board {
-  min-width: max(600px, min(calc(100vh - 240px), calc(100vw - 240px)));
-  min-height: max(600px, min(calc(100vh - 240px), calc(100vw - 240px)));
+  min-width: max(500px, min(calc(100vh - 240px), calc(100vw - 240px)));
+  min-height: max(500px, min(calc(100vh - 240px), calc(100vw - 240px)));
   border-radius: 50%;
   background-color: var(--blue-80);
   position: relative;
@@ -108,8 +108,8 @@
 
 .progress {
   position: absolute;
-  width: max(600px, min(calc(100vh - 240px), calc(100vw - 240px))) !important;
-  height: max(600px, min(calc(100vh - 240px), calc(100vw - 240px))) !important;
+  width: max(500px, min(calc(100vh - 240px), calc(100vw - 240px))) !important;
+  height: max(500px, min(calc(100vh - 240px), calc(100vw - 240px))) !important;
 }
 
 .uploader-status ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
@@ -163,6 +163,13 @@
   width: 100px;
 }
 
+.oponent-card {
+  position: relative;
+  bottom: 0;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
 .user-card {
   position: relative;
   top: 0;
@@ -203,12 +210,20 @@
   background-color: var(--blue-90);
 }
 
-.throw-card {
+.throw-user-card {
   transition: all 0.3s ease-in-out;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   top: -200px;
+}
+
+.throw-oponent-card {
+  transition: all 0.3s ease-in-out;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -200px;
 }
 
 .empty-card {
@@ -226,3 +241,39 @@
   opacity: 1;
 }
 
+
+
+@media (max-height: 950px) {
+  .cards app-card {
+    width: 75px;
+  }
+
+  .user-cards > div:first-child {
+    width: 75px;
+    height: 112px;
+    bottom: 140px;
+  }
+  
+  .oponent-cards > div:first-child {
+    width: 75px;
+    height: 112px;
+    top: 140px;
+  }
+
+  .throw-user-card {
+    top: -140px;
+  }
+
+  .throw-oponent-card {
+    bottom: -140px;
+  }
+
+  .empty-card {
+    height: 112px;
+  }
+
+  .game-board-center span {
+    font-size: 30px;
+  }
+
+}

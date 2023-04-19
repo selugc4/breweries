@@ -1,9 +1,9 @@
-<div class="round-result">
-  <span class="round-title win">YOU WIN</span>
+<div class="round-result" *ngIf="this.roundOutcome">
+  <span class="round-title" [ngClass]="titleClass">{{titleMessage}}</span>
   <div class="card-battle">
-    <app-card></app-card>
+    <app-card [name]="playerCard"></app-card>
     <img src="assets/ray.svg" alt="">
-    <app-card></app-card>
+    <app-card [name]="enemyCard"></app-card>
   </div>
-  <span class="battle-result">"Beer catches Sun"</span>
+  <span class="battle-result">"{{roundOutcome.winner}} {{roundOutcome.outcome}} {{roundOutcome.loser}}"</span>
 </div>

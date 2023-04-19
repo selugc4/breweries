@@ -30,12 +30,12 @@
       </mat-form-field>
 
       <h4>Deck cards :</h4>
-      <div cdkDropList class="deck-container" [cdkDropListData]="deckCards" (cdkDropListDropped)="drop($event)">
+      <div cdkDropList cdkDropListOrientation="horizontal" class="deck-container" [cdkDropListData]="deckCards" (cdkDropListDropped)="drop($event)">
         <div cdkDrag class="deck-item" *ngFor="let empty of [].constructor(5); let i=index">
           <div *ngIf="deckCards[i]" class="deck-card-container">
             <img class="delete-card clickable" (click)="onDelete(deckCards[i])" src="assets/delete_button_template.svg "
               alt="Delete button" />
-            <app-card class="secondary-card" [name]="deckCards[i]"></app-card>
+            <app-card cdkDragHandle class="secondary-card" [name]="deckCards[i]"></app-card>
           </div>
           <div *ngIf="!deckCards[i]" class="svg-empty-card ">
             <img class="empty-secondary-card " src="assets/empty_card_template.svg " alt="Empty card" />

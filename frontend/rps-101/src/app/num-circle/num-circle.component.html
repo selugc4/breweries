@@ -2,7 +2,7 @@
     <div class="circle-container">
         <div class="circle-back"></div>
         <div class="circle-top"></div>
-        <div class="big-number">99</div>
+        <div class="big-number" [ngClass]=text.toLowerCase()>{{number}}</div>
     </div>
-    <div class="big-text">GAMES</div>
+    <div class="big-text">{{text}}</div>
 </div>

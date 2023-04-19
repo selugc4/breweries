@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-num-circle',
@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./num-circle.component.scss']
 })
 export class NumCircleComponent {
-
+    @Input() number: number = 0;
+    @Input() text: string = "";
 }

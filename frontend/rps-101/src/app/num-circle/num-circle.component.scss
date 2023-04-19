@@ -41,7 +41,6 @@
     left: 50%;
     transform: translate(-50%, -50%);
     color: transparent;
-    background-image: var(--orange-gradient);
     background-clip: text;
     -webkit-background-clip: text;
     font-family: var(--krub);
@@ -57,3 +56,20 @@
     font-weight: 800;
     font-size: 15cqi;
 }
+
+.games{
+  background-image: var(--orange-gradient);
+}
+
+.wins{
+  background-image: var(--green-gradient);
+}
+
+.losses{
+  background-image: var(--pink-gradient);
+}
+
+.draws{
+  background-image: var(--purple-gradient);
+}
+

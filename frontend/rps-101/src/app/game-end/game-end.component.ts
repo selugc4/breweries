@@ -1,73 +1,74 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { BattleOutcome, PlayerResult } from 'app/models/BattleOutcome';
 
 @Component({
   selector: 'app-game-end',
   templateUrl: './game-end.component.html',
-  styleUrls: ['./game-end.component.scss']
+  styleUrls: ['./game-end.component.scss'],
 })
 export class GameEndComponent {
-  @Input() text : string = "";
-  @Input() rounds : string[][] = [];
+  @Input() roundHistory: BattleOutcome[] = [];
+  @Output() replayClickEvent = new EventEmitter<void>();
+  @Output() exitClickEvent = new EventEmitter<void>();
 
-  message: string = "";
-  messageActions: string = "";
-  checkCardId(valor: string, player: number): string{
+  message: string = '';
+  footerMessage: string = '';
 
-    if(player === 1 && valor === "WIN"){
-      return "win";
-    }else if (player === 2 && valor === "LOSE"){
-      return "win";
-    }else if (player === 1 && valor === "LOSE"){
-      return "lost";
-    }else if (player === 2 && valor === "WIN"){
-      return "lost";
-    }else{
-      return "lost";
-    }
+  resultTitle: string = '';
+  resultClass: string = '';
+  resultMessage: string = '';
 
-  }
-  tooltipName(name : string) : string {
-    if(name === "t.v."){
-      return "T.V.";
-    }else if(name === "u.f.o"){
-      return "U.F.O";
-    }else if( name === "video game"){
-      return "Video Game";
-    }
-     let firstChar =  name.charAt(0).toUpperCase();
-      return firstChar+ name.slice(1);
-  }
-  checkId(valor: string): string{
+  roundCards: [string, string][] = [];
 
-    if(valor.length == 0){
-      return "no-card";
-    }else{
-      if(valor === "WIN"){
-        return "victory";
-      }else if(valor === "LOSE"){
-        return "lose";
-      }else{
-        return "draw";
+  ngOnInit() {
+    let wins = 0;
+    let losses = 0;
+    let draws = 0;
+    for (let index = 0; index < this.roundHistory.length; index++) {
+      const round = this.roundHistory[index];
+
+      switch (round.playerResult) {
+        case PlayerResult.WIN:
+          this.roundCards.push([round.winner, round.loser]);
+          wins++;
+          break;
+        case PlayerResult.LOSE:
+          this.roundCards.push([round.loser, round.winner]);
+          losses++;
+          break;
+        case PlayerResult.DRAW:
+          this.roundCards.push([round.winner, round.winner]);
+          draws++;
+          break;
       }
     }
+
+    if (wins > losses) {
+      this.resultTitle = 'WIN';
+      this.resultMessage =
+        "Congratulations, you've won this match of JANKEN 101!";
+      this.resultClass = 'win';
+    } else if (losses > wins) {
+      this.resultTitle = 'LOST';
+      this.resultMessage =
+        'Oops! You lost this match of JANKEN 101. Better luck next time!';
+      this.resultClass = 'lose';
+    } else {
+      this.resultTitle = 'DRAW';
+      this.resultMessage =
+        "It's a tie! You and your opponent both played well in this match of JANKEN 101.";
+      this.resultClass = 'draw';
+    }
+
+    this.footerMessage =
+      'To continue playing and unlock great advantages such as viewing 101 cards, creating your own decks, and accessing all game modes, please sign up now.';
   }
-  tooltipRound(name : string) : string {
-    name = name.toLowerCase();
-    let firstChar =  name.charAt(0).toUpperCase();
-    return firstChar+ name.slice(1);
 
-
+  clickReplay() {
+    this.replayClickEvent.emit();
   }
 
-  matchResult(result : string) : string {
-    this.message = "Congratulations, you've won your first game of JANKEN 101!"
-    this.messageActions = "To continue playing and unlock great advantages such as viewing 101 cards, creating your own decks, and accessing all game modes, please sign up now."
-    if(result === "YOU WIN!"){
-      return "WIN";
-    }else if( result === "YOU LOSE!"){
-      return "LOSE";
-    }else
-      return "DRAW";
-
+  clickExit() {
+    this.exitClickEvent.emit();
   }
 }

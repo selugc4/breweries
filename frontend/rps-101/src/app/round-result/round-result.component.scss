@@ -34,11 +34,11 @@
 }
 
 .card-battle img {
-  width: 10%;
+  width: 9%;
   height: auto;
 }
 .card-battle app-card {
-  width: 15%;
+  width: 12%;
 }
 
 .battle-result {
@@ -59,4 +59,20 @@
 
 .lose {
   background-image: var(--pink-gradient);
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--blue-60);
+  text-align: center;
+  transition: color 0.2s ease-in-out;
+  margin-bottom: 30px;
+}
+
+button:hover {
+  color: var(--white);
 }

@@ -17,7 +17,7 @@ public class Deck {
     @NotBlank(message = "Name is mandatory")
     private String name;
    
-    @Size(min=0,message = "Cards are mandatory")
+    @Size(min=0, max=5, message = "Cards are mandatory (0-5 cards/deck)")
     private String[] cards;
 
     private int wins, draws, loses;

@@ -1,5 +1,5 @@
 <mat-toolbar class="header">
-    <a routerLink="/" class="logo">
+    <a routerLink="/" (click)="destroyGame()" class="logo">
         <span>JANKEN</span>
         <span>101</span>
     </a>
@@ -11,8 +11,8 @@
     </div>
     <ng-template #noRegister>
         <div class="links">
-            <a routerLink="">Sign up</a>
-            <a routerLink="">Log in</a>
+            <a routerLink="" (click)="destroyGame()">Sign up</a>
+            <a routerLink="" (click)="destroyGame()">Log in</a>
         </div>
     </ng-template>
 </mat-toolbar>

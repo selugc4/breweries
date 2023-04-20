@@ -1,160 +1,172 @@
-span{
-  transform: translateY(-40%);
-}
-
-.WIN {
-  display: block;
-  font-family: 'Mirza';
-  background: linear-gradient(270deg, #12FFF7 0%, #B3FFAB 100%);
-  font-weight: 700;
-  font-size: 175px;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  height: 100%;
-  text-align: center;
-  width: 100%;
-}
-.LOSE{
-  display: block;
-  font-family: 'Mirza';
-  background: linear-gradient(270deg, #E13387 0%, #FF5085 50%, #FA669C 100%);
-  font-weight: 700;
-  font-size: 175px;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  height: 100%;
-  text-align: center;
-  width: 100%;
-}
-.DRAW {
-  display: block;
-  font-family: 'Mirza';
-  background: linear-gradient(270deg, #6736F1 0%, #6B36DB 50%, #8257FC 100%);
-  font-weight: 700;
-  font-size: 175px;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  height: 100%;
-  text-align: center;
-  width: 100%;
-}
-#Match{
-  display: grid;
-  justify-content: center;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  align-items: center;
-  width: 100%;
-  height: 50%;
-  margin-bottom: 3%;
-}
-.round{
-  width: 100%;
-  height: 100%;
+.game-result {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: var(--background-opacity);
   display: flex;
   flex-direction: column;
-  align-content: center;
-  justify-content: center;
-  justify-items: center;
-  margin-right: 80px;
-  margin-left: auto;
-
-}
-app-card{
-  width: 100px;
-  height: 150px;
-  background: rgba($color: white, $alpha: 0.8);
-  border-radius: 10px;
-}
-
-#victory{
-  width: 50px;
-  height: 50px;
-  text-align: center;
-  color: var(--white);
-  background: var(--green-gradient) content-box;
-  border-radius: 8px;
-  margin-left: auto;
-  margin-right: auto;
-  align-self: center;
-  display: flex;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 10%;
-
-
-}
-#lose{
-  width: 50px;
-  height: 50px;
-  background: var(--pink-gradient) content-box;
-  border-radius: 8px;
-  margin-left: auto;
-  margin-right: auto;
-  align-self: center;
-  text-align: center;
-  color: var(--white);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 10%;
-}
-#draw{
-  width: 50px;
-  height: 50px;
-  background: var(--purple-gradient) content-box;
-  border-radius: 8px;
-  margin-left: auto;
-  margin-right: auto;
-  align-self: center;
-    text-align: center;
-  color: var(--white);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 10%;
-}
-
-p{
-  font: "Titillium Web";
-  color: var(--white);
-  text-align: center;
-  width: 100%;
-}
-
-.roundCards{
-  display: flex;
   justify-content: space-evenly;
+  z-index: 1000;
 }
 
-#lost{
-  opacity: 0.5;
+.game-result-title {
+  font-family: var(--krub);
+  font-size: 150px;
+  font-weight: 700;
+  text-align: center;
+  color: transparent;
+  background-image: var(--orange-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
 }
 
-.message{
+.win {
+  background-image: var(--green-gradient);
+}
+
+.draw {
+  background-image: var(--purple-gradient);
+}
+
+.lose {
+  background-image: var(--pink-gradient);
+}
+
+.game-result-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+.game-result-content > span {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--white);
+  text-align: center;
+}
+
+.scoreboard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
+.round-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.number-round {
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.number-round > span {
+  font-weight: 700;
+  color: var(--white);
+}
+
+.round-cards {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.card {
+  width: 100px;
+  position: relative;
+}
+
+.card-lose {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  background-color: var(--card-opacity);
+}
+
+.round-result > p {
+  color: var(--white);
+  font-weight: 600;
+  font-size: 16px;
+  font-style: italic;
+  margin: 0;
+  margin-top: -10px;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  border: none;
+  background-color: var(--blue-90);
+}
+
+.end-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  text-align: center;
+}
+
+.end-message > span {
+  font-weight: 700;
+}
+
+.end-message p {
+  max-width: 550px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 30px;
+}
+
+.buttons button {
+  border: none;
+  color: var(--white);
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  background: none;
+}
+
+.buttons a {
   text-decoration: none;
   color: var(--white);
   font-family: var(--titillium);
-  font-weight: bold;
+  font-size: 16px;
+  font-weight: 700;
+  width: 75px;
   text-align: center;
-  width: 100%;
-  display: block;
-  font-size: 24px;
+  width: 100px;
+  background-image: var(--orange-gradient);
+  padding-block: 10px;
+  border-radius: 12px;
+  cursor: pointer;
 }
-
-.messageActions{
-  font: "Titillium Web";
-  color: var(--white);
-  text-align: center;
-  width: 40%;
-  display: flex;
-  justify-content: center;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-
-
-

@@ -1,15 +1,34 @@
-<span [ngClass]="matchResult(text)">{{text}}</span>
-<div id="Match" >
-  <div class="round" *ngFor="let roundaux of rounds; let i = index;">
-    <div matTooltip="{{tooltipRound(roundaux[2])}} " id="{{checkId(roundaux[2])}}">
-      <p>{{i}}</p>
+<div class="game-result">
+  <span class="game-result-title" [ngClass]="resultClass">YOU {{resultTitle}}!</span>
+  <div class="game-result-content">
+    <span>SCOREBOARD</span>
+    <div class="scoreboard">
+      <div class="round-result" *ngFor="let round of roundHistory; let i = index;">
+        <div class="number-round" [ngClass]="round.playerResult.toLowerCase()">
+          <span>{{i+1}}</span>
+        </div>
+        <div class="round-cards">
+          <div class="card">
+            <div *ngIf="round.playerResult === 'LOSE'" class="card-lose"></div>
+            <app-card [name]="roundCards[i][0]"></app-card>
+          </div>
+          <div class="card">
+            <div *ngIf="round.playerResult === 'WIN'" class="card-lose"></div>
+            <app-card [name]="roundCards[i][1]"></app-card>
+          </div>
+        </div>
+        <p>"{{round.winner}} {{round.outcome}} {{round.loser}}"</p>
+      </div>
     </div>
-    <div class = "roundCards">
-      <app-card matTooltip="{{tooltipName(roundaux[0])}}"id="{{checkCardId(roundaux[2],1)}}" class="object-icon" name="{{roundaux[0]}}" ></app-card>
-      <app-card matTooltip="{{tooltipName(roundaux[1])}}"  id="{{checkCardId(roundaux[2], 2)}}" class="object-icon" name="{{roundaux[1]}}"></app-card>
+    <hr class="divider">
+    <div class="end-message">
+      <span>{{resultMessage}}</span>
+      <p>{{footerMessage}}</p>
+      <div class="buttons">
+        <button (click)="clickReplay()">Replay</button>
+        <a routerLink="" (click)="clickExit()">Sign up</a>
+      </div>
     </div>
-    <p>"Beer catches Sun"</p>
   </div>
+  <div></div>
 </div>
-<span class="message">{{message}}</span>
-<p class="messageActions">{{messageActions}}</p>

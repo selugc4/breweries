@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { MatMenuTrigger } from '@angular/material/menu';
+import { Component, OnInit, Input } from '@angular/core';
 import { MockObjectsService } from '../services/mock-objects.service';
 import { CardApiService } from 'app/services/card-api.service';
 import { RandomDeckService } from '../services/random-deck.service';
@@ -8,28 +7,13 @@ import { GameService } from 'app/services/game.service';
 import { GameMode } from 'app/models/GameMode';
 import { BattleOutcome, PlayerResult } from 'app/models/BattleOutcome';
 import { Observable, lastValueFrom } from 'rxjs';
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition,
-} from '@angular/animations';
-import { ViewContainerRef } from '@angular/core';
-import { ThemePalette } from '@angular/material/core';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss'],
-  //animations: [
-  //  trigger('scoreAnimation', [
-  //    transition('chosenCard => usedCard', animate('1ms'))
-  //  ])
-  // ]
 })
 export class GameComponent implements OnInit {
-  @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger | undefined;
   @Input() gamemode: GameMode = GameMode.Exposed;
   @Input() playerDeck!: Deck;
 
@@ -46,19 +30,16 @@ export class GameComponent implements OnInit {
 
   //Timer related Properties
   ROUND_TIME: number = 60;
+  timerInterval: any;
   currentRoundTime: number = this.ROUND_TIME;
   isPausedTimer: boolean = false;
   currentGlobalTime: number = 0;
+  isGameOver: boolean = false;
 
   //Round related Properties
   currentRound: number = 0;
   roundOutcome!: BattleOutcome;
   roundHistory: BattleOutcome[] = [];
-
-  rightClickCard: boolean = false;
-
-  activeDetails: boolean[] = Array(5);
-  activeDetail: number = 5;
 
   //Deck & Card related Properties
   enemyDeck!: Deck;
@@ -67,22 +48,18 @@ export class GameComponent implements OnInit {
   indexPlayerCard: number = -1;
   selectedCardDetails: string = '';
 
-  dialogText: string = 'END';
-  dialogBlock: boolean = false;
-  activeCard: boolean[] = Array(5);
-  dialogEnd: boolean = false;
-  putCard: boolean[] = Array(false, false, false, false, false);
-  dialogStart: boolean = true;
-  dialogResume: boolean = false;
-  endText: string = '';
-  rounds: string[][] = [];
+  userName: string = '';
+  enemyName: string = '';
+  isPausedGame: boolean = false;
 
   ngOnInit(): void {
-    this.startMatch();
+    this.startGame();
   }
 
   async playCard(cardIndex: number) {
-    //TODO: Comprobar que no se puedan lanzar dos cartas a la vez
+    if (this.isPausedTimer) {
+      return;
+    }
 
     this.pauseTimer();
 
@@ -109,15 +86,14 @@ export class GameComponent implements OnInit {
   }
 
   displayRoundResult() {
-    const roundResultComponent = document.querySelector('.round-result');
+    const roundResultComponent = document.getElementById('roundResult');
     setTimeout(() => {
       roundResultComponent?.classList.add('show-round-result');
     }, 250);
   }
 
-  closeRoundResult($event: MouseEvent) {
-    $event.stopPropagation();
-    const roundResultComponent = $event.currentTarget as HTMLElement;
+  closeRoundResult() {
+    const roundResultComponent = document.getElementById('roundResult');
     roundResultComponent?.classList.remove('show-round-result');
     this.removePlayedCards();
     this.nextRound();
@@ -126,49 +102,49 @@ export class GameComponent implements OnInit {
   removePlayedCards() {
     this.enemyDeck.cards.splice(this.indexEnemyCard, 1);
     this.playerDeckInGame.cards.splice(this.indexPlayerCard, 1);
-    this.selectedCardDetails = '';
   }
 
-  startMatch() {
+  startGame() {
     this.currentRoundTime = this.ROUND_TIME;
+    this.spinnerValue = 100;
     this.roundHistory = [];
     this.roundHistory.length = 5;
     this.currentRound = 0;
     this.currentGlobalTime = 0;
-    this.dialogStart = false;
     this.isPausedTimer = false;
+    this.isPausedGame = false;
+    this.isGameOver = false;
 
     this.selectedCardDetails = '';
     this.enemyDeck = this.randomDeckService.getRandomDeck();
     this.playerDeckInGame = structuredClone(this.playerDeck);
+
+    this.indexEnemyCard = -1;
+    this.indexPlayerCard = -1;
+    this.selectedCardDetails = '';
+
+    this.userName = 'ANONYMOUS'; //TODO: Load names with scrapping
+    this.enemyName = 'ROCKBOT';
+
     this.startTimer();
   }
 
-  //TODO: Quitarlo para que se use siempre StartMatch
-  restartMatch() {
-    this.isPausedTimer = true;
-    this.currentRoundTime = this.ROUND_TIME;
-    this.dialogBlock = false;
-    this.activeDetail = 5;
-    this.dialogEnd = false;
-    this.dialogStart = true;
-    this.putCard = [false, false, false, false, false];
-    this.startMatch();
+  endGame(replay: boolean = false) {
+    //TODO: LLamada a API para actualizar estadisticas de mazo
+    if (replay) {
+      this.startGame();
+    } else {
+      this.exitGame();
+    }
   }
 
-  //TODO: Incluir que el reseteo de datos lo haga StartMatch?
-  endMatch() {
-    this.dialogEnd = false;
-    this.dialogBlock = false;
-    this.dialogStart = true;
-    this.pauseTimer();
-    this.isPausedTimer = true;
-    this.currentRound = 0;
-    this.activeDetail = 5;
+  exitGame() {
+    this.gameService.endGame();
   }
 
   startTimer() {
-    setInterval(() => {
+    clearInterval(this.timerInterval);
+    this.timerInterval = setInterval(() => {
       if (!this.isPausedTimer) {
         this.currentGlobalTime = this.currentGlobalTime + 0.1;
         this.currentRoundTime = this.currentRoundTime - 0.1;
@@ -188,9 +164,19 @@ export class GameComponent implements OnInit {
     this.isPausedTimer = false;
   }
 
+  pauseGame() {
+    this.pauseTimer();
+    this.isPausedGame = true;
+  }
+
+  resumeGame() {
+    this.resumeTimer();
+    this.isPausedGame = false;
+  }
+
   nextRound() {
     if (this.currentRound >= 4) {
-      console.log('Implementar final de juego');
+      this.isGameOver = true;
     } else {
       this.currentRoundTime = this.ROUND_TIME;
       this.currentRound++;
@@ -200,7 +186,13 @@ export class GameComponent implements OnInit {
 
   getCardWinDetails(index: number, event: MouseEvent) {
     event.preventDefault();
-    this.selectedCardDetails = this.playerDeckInGame.cards[index];
+    const selectedCard = this.playerDeckInGame.cards[index];
+
+    if (this.selectedCardDetails === selectedCard) {
+      this.selectedCardDetails = '';
+    } else {
+      this.selectedCardDetails = selectedCard;
+    }
   }
 
   async getBattleResult(
@@ -223,88 +215,5 @@ export class GameComponent implements OnInit {
     }
 
     return outcome;
-  }
-
-  //TODO: Funciones no revisadas/usadas aun
-  openMenu() {
-    this.trigger?.openMenu();
-  }
-
-  signup() {
-    this.gameService.endGame();
-  }
-  dialogResult() {
-    this.getEndText();
-    this.dialogEnd = true;
-  }
-  getEndText() {
-    let wins: number = 0;
-    let loses: number = 0;
-    for (let i = 0; i < this.rounds.length; i++) {
-      if (this.rounds[i][2] === 'WIN') {
-        wins++;
-      } else if (this.rounds[i][2] === 'LOSE') {
-        loses++;
-      }
-    }
-    if (wins > loses) {
-      this.endText = 'YOU WIN!';
-    } else if (wins < loses) {
-      this.endText = 'YOU LOSE!';
-    } else {
-      this.endText = 'DRAW!';
-    }
-  }
-  exitGame() {
-    this.pauseTimer();
-    this.dialogBlock = true;
-    this.dialogText = 'END';
-  }
-
-  pauseGame() {
-    this.pauseTimer();
-    this.dialogResume = true;
-  }
-
-  restartGame() {
-    this.pauseTimer();
-    this.dialogBlock = true;
-    this.dialogText = 'RESTART';
-  }
-
-  changeClass(element: string): void {
-    let activeCard = document.getElementById(element);
-    activeCard!.classList.add('chosenCard');
-  }
-  activateCard(index: number) {
-    if (this.activeCard[index] === true) {
-      this.putCard[index] = true;
-      //this.rounds[this.round] = this.playRound(index);
-      this.nextRound();
-    } else {
-      for (let i = 0; i < this.activeCard.length; i++) {
-        this.activeCard[i] = false;
-      }
-      this.activeCard[index] = true;
-    }
-  }
-  changeInstructionsToDetails(index: number) {
-    for (let i = 0; i < this.activeDetails.length; i++) {
-      this.activeDetails[i] = false;
-    }
-    if (this.activeDetail === index) {
-      this.activeDetail = 5;
-    } else {
-      this.activeDetails[index] = true;
-      this.activeDetail = index;
-    }
-  }
-
-  close() {
-    this.dialogBlock = false;
-    this.startTimer();
-  }
-  reloadCurrentPage() {
-    window.location.reload();
   }
 }

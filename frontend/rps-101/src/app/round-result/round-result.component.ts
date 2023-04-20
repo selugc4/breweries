@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { BattleOutcome, PlayerResult } from 'app/models/BattleOutcome';
 
 @Component({
@@ -8,6 +8,7 @@ import { BattleOutcome, PlayerResult } from 'app/models/BattleOutcome';
 })
 export class RoundResultComponent {
   @Input() roundOutcome!: BattleOutcome;
+  @Output() closeRoundResultEvent = new EventEmitter<void>();
 
   playerCard: string = '';
   enemyCard: string = '';
@@ -37,5 +38,9 @@ export class RoundResultComponent {
         this.titleMessage = 'DRAW';
         this.titleClass = 'draw';
     }
+  }
+
+  closeRound() {
+    this.closeRoundResultEvent.emit();
   }
 }

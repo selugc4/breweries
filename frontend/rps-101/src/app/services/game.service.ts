@@ -4,22 +4,27 @@ import { GameMode } from '../models/GameMode';
 import { GameParameters } from '../models/GameParameters';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GameService {
-
   public StartGameEvent = new EventEmitter<GameParameters>();
-  public EndGameEvent = new EventEmitter(); //Parámetros de fin de partida
+  public EndGameEvent = new EventEmitter();
 
-  constructor() { }
+  private isGameOn: boolean = false;
 
-  public startGame(gamemode: GameMode, deck: Deck){
-    const parameters: GameParameters = {gamemode: gamemode, deck: deck};
+  constructor() {}
+
+  public startGame(gamemode: GameMode, deck: Deck) {
+    if (this.isGameOn) return;
+    const parameters: GameParameters = { gamemode: gamemode, deck: deck };
+    this.isGameOn = true;
     this.StartGameEvent.emit(parameters);
   }
 
-  public endGame(){
-    this.EndGameEvent.emit();
+  public endGame() {
+    if (this.isGameOn) {
+      this.isGameOn = false;
+      this.EndGameEvent.emit();
+    }
   }
 }
-

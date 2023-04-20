@@ -61,10 +61,10 @@
 
 .controls-timer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row-reverse;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 15px;
 }
 
 .controls {
@@ -239,6 +239,42 @@
 .show-round-result {
   visibility: visible;
   opacity: 1;
+}
+
+.pause {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: var(--background-opacity);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  z-index: 1000;
+}
+
+.pause button {
+  border: none;
+  color: var(--white);
+  font-size: 16px;
+  font-weight: 700;
+  width: 100px;
+  text-align: center;
+  background-image: var(--orange-gradient);
+  padding-block: 10px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.pause button:nth-child(2) {
+  background-image: var(--purple-gradient);
+}
+
+.pause button:last-child {
+  background-image: var(--pink-gradient);
 }
 
 

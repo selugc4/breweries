@@ -178,7 +178,7 @@ export class MockObjectsService {
   }
 
   getMockBattleResult(card1: string, card2: string): Observable<BattleOutcome> {
-    if (Math.round(Math.random()) == 0) {
+    if (Math.random() >= 0.5) {
       return of({
         winner: card1,
         loser: card2,
@@ -187,10 +187,10 @@ export class MockObjectsService {
       });
     } else {
       return of({
-        winner: card1,
-        loser: card2,
+        winner: card2,
+        loser: card1,
         outcome: 'starts reaction',
-        playerResult: PlayerResult.WIN,
+        playerResult: PlayerResult.LOSE,
       });
     }
   }

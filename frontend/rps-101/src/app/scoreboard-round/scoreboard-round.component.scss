@@ -23,6 +23,7 @@
   width: 25px;
   height: 25px;
   border-radius: 3px;
+  background-color: var(--blue-90);
 }
 
 .card {
@@ -72,6 +73,6 @@
   border-radius: 5px;
   top: 0;
   left: 0;
-  background-color: var(--background-opacity);
+  background-color: var(--card-opacity);
   pointer-events: none;
 }

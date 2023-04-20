@@ -4,19 +4,19 @@
       <div class="user-img">
         <img src="assets/user.svg" alt="">
       </div>
-      <span>ROCKBOT</span>
+      <span>{{enemyName}}</span>
     </div>
-    <!-- Code for determining if there's a selected card to show details 
-      <ng-container *ngIf="selectedCardDetails === ''; else cardDetails">
+
+    <ng-container *ngIf="selectedCardDetails === ''; else cardDetails">
       <app-instructions></app-instructions>
     </ng-container>
+    <div></div>
 
     <ng-template #cardDetails>
-      <app-card-detail card=selectedCardDetails></app-card-detail>
-    </ng-template> -->
-    <app-instructions></app-instructions>
-    <div></div>
+      <app-card-game-detail [name]="selectedCardDetails"></app-card-game-detail>
+    </ng-template>
   </div>
+
   <div class="game-board">
     <mat-progress-spinner class="progress colorprogress" strokeWidth="1.5" [mode]="spinnerMode" [value]=100>
     </mat-progress-spinner>
@@ -47,22 +47,31 @@
     <div class="controls-timer">
       <div class="controls">
         <button>
-          <img src="assets/pause.svg" (click)="pauseTimer()" alt="pause">
-        </button>
-        <button>
-          <img src="assets/settings.svg" alt="settings">
+          <img src="assets/pause.svg" (click)="pauseGame()" alt="pause">
         </button>
       </div>
       <span class="timer">{{ currentGlobalTime * 1000 | date:'mm:ss'}}</span>
     </div>
     <app-scoreboard [roundHistory]="roundHistory"></app-scoreboard>
     <div class="user">
-      <span>ANONYMOUS</span>
+      <span>{{userName}}</span>
       <div class="user-img">
         <img src="assets/user.svg" alt="">
       </div>
     </div>
   </div>
 </main>
-<app-round-result class="round-result" [roundOutcome]="roundOutcome"
-  (click)="closeRoundResult($event)"></app-round-result>
+<div *ngIf="isPausedGame" class="pause">
+  <button (click)="resumeGame()">Resume</button>
+  <button (click)="startGame()">Restart</button>
+  <button (click)="exitGame()">Quit</button>
+</div>
+
+<app-round-result [roundOutcome]="roundOutcome" id="roundResult" (closeRoundResultEvent)="closeRoundResult()"
+  class="round-result"></app-round-result>
+
+
+<div *ngIf="isGameOver" class="pause">
+  <app-game-end [roundHistory]="roundHistory" (exitClickEvent)="endGame()"
+    (replayClickEvent)="endGame(true)"></app-game-end>
+</div>

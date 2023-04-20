@@ -2,15 +2,28 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
   height: 100%;
   width: 100%;
   background-color: var(--blue);
   font-family: var(--titillium);
   color: var(--white);
   text-align: center;
-  padding: 40px;
+  padding: 30px;
+  padding-top: 10px;
   position: relative;
+}
+
+.close-icon {
+  color: var(--blue-60);
+  cursor: pointer;
+  font-size: 30px;
+  align-self: flex-end;
+  margin-right: -20px;
+  margin-top: -10;
+}
+
+h2 {
+  margin-bottom: 30px;
 }
 
 .dialog-info > span {
@@ -43,11 +56,3 @@ mat-icon {
   margin-right: 5px;
 }
 
-.close-icon {
-  position: absolute;
-  top: 40px;
-  right: 40px;
-  color: var(--blue-60);
-  cursor: pointer;
-  font-size: 30px;
-}

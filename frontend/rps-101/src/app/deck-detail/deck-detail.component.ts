@@ -7,38 +7,37 @@ import { Deck } from '../models/Deck';
 import { MockObjectsService } from '../services/mock-objects.service';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-deck-detail',
   templateUrl: './deck-detail.component.html',
-  styleUrls: ['./deck-detail.component.scss']
+  styleUrls: ['./deck-detail.component.scss'],
 })
 export class DeckDetailComponent implements OnInit {
-
   deck!: Deck;
 
-  constructor(private router : Router,
+  constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private location: Location,
     private dialog: MatDialog,
-    private mock: MockObjectsService){
-
-  }
+    private mock: MockObjectsService
+  ) {}
   ngOnInit(): void {
-      this.deck = this.mock.getMockDecks().find(x => x.id == parseInt(String(this.route.snapshot.paramMap.get('deckId'))))!;
+    this.deck = this.mock
+      .getMockDecks()
+      .find(
+        (x) =>
+          x.id == parseInt(String(this.route.snapshot.paramMap.get('deckId')))
+      )!;
   }
 
   onDeleteDialogClick() {
-
     this.dialog.open(DeleteDialogComponent, {
-      width: '42%',
-      height: '45%',
-      autoFocus: false
+      autoFocus: false,
     });
   }
 
-  onEditClick(){
+  onEditClick() {
     this.router.navigate([`/decks/${this.deck.id}/edit`]);
   }
-
 }

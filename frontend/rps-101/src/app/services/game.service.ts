@@ -21,10 +21,17 @@ export class GameService {
     this.StartGameEvent.emit(parameters);
   }
 
-  public endGame() {
-    if (this.isGameOn) {
-      this.isGameOn = false;
-      this.EndGameEvent.emit();
+  public endGame(shouldWarnUser: boolean = false) {
+    if (!this.isGameOn) return;
+
+    if (shouldWarnUser) {
+      const confirmation = window.confirm(
+        'Are you sure you want to end the game?'
+      );
+      if (!confirmation) return;
     }
+
+    this.isGameOn = false;
+    this.EndGameEvent.emit();
   }
 }

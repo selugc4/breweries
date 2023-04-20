@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 import { Deck } from '../models/Deck';
-import { MockObjectsService } from '../services/mock-objects.service';
+import { DeckApiService } from '../services/deck-api.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -18,22 +17,29 @@ export class DeckDetailComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private location: Location,
     private dialog: MatDialog,
-    private mock: MockObjectsService
+    private deckApi: DeckApiService
   ) {}
   ngOnInit(): void {
-    this.deck = this.mock
-      .getMockDecks()
-      .find(
-        (x) =>
-          x.id == parseInt(String(this.route.snapshot.paramMap.get('deckId')))
-      )!;
+    const deckId = parseInt(String(this.route.snapshot.paramMap.get('deckId')));
+
+    this.deckApi.getDeck(deckId).subscribe((result) => {
+      this.deck = result;
+    });
   }
 
   onDeleteDialogClick() {
-    this.dialog.open(DeleteDialogComponent, {
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
       autoFocus: false,
+    });
+
+    dialogRef.afterClosed().subscribe((confirm) => {
+      if (confirm) {
+        this.deckApi.deleteDeck(this.deck.id).subscribe((response) => {
+          //TODO: Validar response
+        });
+        this.router.navigate([`/decks`]);
+      }
     });
   }
 

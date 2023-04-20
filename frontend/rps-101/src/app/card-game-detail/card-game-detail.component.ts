@@ -1,22 +1,23 @@
-import { Component, Input} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CardComponent } from '../card/card.component';
-import { MockObjectsService } from 'app/services/mock-objects.service';
+import { CardApiService } from 'app/services/card-api.service';
 import { WinningOutcome } from 'app/models/CardOutcomes';
 
 @Component({
   selector: 'app-card-game-detail',
   templateUrl: './card-game-detail.component.html',
-  styleUrls: ['./card-game-detail.component.scss']
+  styleUrls: ['./card-game-detail.component.scss'],
 })
 export class CardGameDetailComponent {
-  @Input() name: string = "";
+  @Input() name: string = '';
 
-  winningOutcomes!: WinningOutcome[]
+  winningOutcomes!: WinningOutcome[];
 
-  constructor(private mock: MockObjectsService){}
+  constructor(private cardApiService: CardApiService) {}
 
   ngOnInit() {
-    this.winningOutcomes = this.mock.getMockWinningOutcomes(this.name);
+    this.cardApiService.getCardOutcomes(this.name).subscribe((result) => {
+      this.winningOutcomes = result.winningOutcomes;
+    });
   }
-
 }

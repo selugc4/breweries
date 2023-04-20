@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { RemoteApiService } from './remote-api.service';
+import { DeckApiService } from './deck-api.service';
 
-describe('ApiService', () => {
-  let service: RemoteApiService;
+describe('DeckApiService', () => {
+  let service: DeckApiService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(RemoteApiService);
+    service = TestBed.inject(DeckApiService);
   });
 
   it('should be created', () => {

@@ -72,6 +72,6 @@
 
 
 <div *ngIf="isGameOver" class="pause">
-  <app-game-end [roundHistory]="roundHistory" (exitClickEvent)="endGame()"
-    (replayClickEvent)="endGame(true)"></app-game-end>
+  <app-game-end [roundHistory]="roundHistory" (exitClickEvent)="endGame(false, $event)"
+    (replayClickEvent)="endGame(true, $event)"></app-game-end>
 </div>

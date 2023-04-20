@@ -8,13 +8,22 @@ import { DeckBuilderComponent } from './deck-builder/deck-builder.component';
 import { DeckDetailComponent } from './deck-detail/deck-detail.component';
 import { DeckListComponent } from './deck-list/deck-list.component';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
+import { ExitGuard } from './guards/exit.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/play', pathMatch: 'full' },
   { path: 'decks', component: DeckListComponent },
   { path: 'decks/:deckId/details', component: DeckDetailComponent },
-  { path: 'decks/create', component: DeckBuilderComponent },
-  { path: 'decks/:deckId/edit', component: DeckBuilderComponent },
+  {
+    path: 'decks/create',
+    canDeactivate: [ExitGuard],
+    component: DeckBuilderComponent,
+  },
+  {
+    path: 'decks/:deckId/edit',
+    canDeactivate: [ExitGuard],
+    component: DeckBuilderComponent,
+  },
   { path: 'play', component: GameSelectorComponent },
   { path: 'cards', component: CardListComponent },
   { path: 'cards/:name', component: CardDetailComponent },

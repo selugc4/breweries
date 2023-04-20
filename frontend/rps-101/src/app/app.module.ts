@@ -42,6 +42,13 @@ import { AutocompleteComponent } from './autocomplete/autocomplete.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ScoreboardRoundComponent } from './scoreboard-round/scoreboard-round.component';
 import { RoundResultComponent } from './round-result/round-result.component';
+import { CardApiService } from './services/card-api.service';
+import { RemoteCardApiService } from './services/remote-card-api.service';
+import { MockCardApiService } from './services/mock-card-api.service';
+import { DeckApiService } from './services/deck-api.service';
+import { RemoteDeckApiService } from './services/remote-deck-api.service';
+import { MockDeckApiService } from './services/mock-deck-api.service';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +75,7 @@ import { RoundResultComponent } from './round-result/round-result.component';
     AutocompleteComponent,
     ScoreboardRoundComponent,
     RoundResultComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -92,7 +100,11 @@ import { RoundResultComponent } from './round-result/round-result.component';
     MatProgressSpinnerModule,
     DragDropModule,
   ],
-  providers: [],
+  //Select between Mock and Remote APIs
+  providers: [
+    { provide: CardApiService, useClass: MockCardApiService },
+    { provide: DeckApiService, useClass: MockDeckApiService },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

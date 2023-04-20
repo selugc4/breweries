@@ -25,7 +25,7 @@ export class AutocompleteComponent<T> {
   filterPropertyKey!: keyof T;
   type!: string;
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
     this.filterPropertyKey = this.filterProperty as keyof T;
     this.filteredArray = this.control.valueChanges.pipe(
       startWith(''),

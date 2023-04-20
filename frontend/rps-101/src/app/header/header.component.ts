@@ -12,6 +12,6 @@ export class HeaderComponent {
   register: boolean = true;
 
   destroyGame() {
-    this.gameService.endGame();
+    this.gameService.endGame(true);
   }
 }

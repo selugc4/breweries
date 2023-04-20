@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MockObjectsService } from '../services/mock-objects.service';
+import { DeckApiService } from '../services/deck-api.service';
 import { Deck } from '../models/Deck';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
@@ -15,14 +15,12 @@ export class DeckListComponent {
   filteredDecks: Deck[] = [];
   filterProperty: string = 'name';
 
-  constructor(
-    private route: ActivatedRoute,
-    private location: Location,
-    private mock: MockObjectsService
-  ) {}
+  constructor(private deckApi: DeckApiService) {}
 
   ngOnInit() {
-    this.decks = this.mock.getMockDecks();
+    this.deckApi.getDecks().subscribe((result) => {
+      this.decks = result;
+    });
   }
 
   getFiltered(filtered: Deck[]) {

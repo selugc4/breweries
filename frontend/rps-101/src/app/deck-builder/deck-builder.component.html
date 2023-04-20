@@ -23,7 +23,7 @@
     <div class="cards-rows">
       <h4>Name* :</h4>
       <mat-form-field id="deckname" appearance="fill">
-        <input matInput value="{{deck ? deck.name : ''}}" placeholder="Deck Name" maxlength="50" />
+        <input matInput [(ngModel)]="deckName" placeholder="Deck Name" maxlength="50" />
         <div [hidden]="!requestFailed ">
           <small>{{ error }}</small>
         </div>

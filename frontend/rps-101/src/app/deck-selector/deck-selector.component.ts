@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { Deck } from '../models/Deck';
-import { MockObjectsService } from '../services/mock-objects.service';
+import { DeckApiService } from '../services/deck-api.service';
 import { RandomDeckService } from '../services/random-deck.service';
 import {
   MatDialog,
@@ -22,16 +22,21 @@ export class DeckSelectorComponent {
   filterProperty: string = 'name';
 
   constructor(
-    private mock: MockObjectsService,
+    private deckApi: DeckApiService,
     private randomDeckService: RandomDeckService,
     public dialogRef: MatDialogRef<DeckSelectorComponent>,
     @Inject(MAT_DIALOG_DATA) public selectedDeck?: Deck
   ) {}
 
-  ngOnInit() {
-    this.userDecks = this.mock.getMockDecks();
-    this.randomDeck = this.randomDeckService.getRandomDeck();
-    this.selectedDeck = this.randomDeck;
+  async ngOnInit() {
+    this.deckApi.getDecks().subscribe((result) => {
+      this.userDecks = result;
+    });
+
+    this.randomDeckService.getRandomDeck().subscribe((result) => {
+      this.randomDeck = result;
+      this.selectedDeck = result;
+    });
   }
 
   selectDeck(deck?: Deck) {

@@ -1,46 +1,58 @@
 import { Component } from '@angular/core';
-import { MockObjectsService } from '../services/mock-objects.service';
+import { DeckApiService } from '../services/deck-api.service';
+import { CardApiService } from '../services/card-api.service';
 import { Deck } from '../models/Deck';
-import { Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { onExit } from '../guards/exit.guard';
 
 @Component({
   selector: 'app-deck-builder',
   templateUrl: './deck-builder.component.html',
   styleUrls: ['./deck-builder.component.scss'],
 })
-export class DeckBuilderComponent {
+export class DeckBuilderComponent implements onExit {
   autocompleteControl = new FormControl('');
   typeName: string = 'EDITION';
+  error: string = "ERROR : Deck name can't be over 50 characters.";
+  requestFailed: boolean = false;
+
   mainCardName: string = '';
   cards: string[] = [];
   filteredCards: string[] = [];
   deck!: Deck;
   deckCards: string[] = [];
-  error: string =
-    'ERROR : El nombre de la baraja no debe superar los 50 caracteres';
-  requestFailed: boolean = false;
+
+  deckName: string = '';
+
+  deckId!: number;
+  unsavedChanges: boolean = true;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private mock: MockObjectsService
+    private deckApi: DeckApiService,
+    private cardApi: CardApiService
   ) {}
 
   ngOnInit() {
-    const deckId = this.route.snapshot.paramMap.get('deckId');
-    if (deckId) {
-      this.deck = this.mock
-        .getMockDecks()
-        .find((x) => x.id == parseInt(String(deckId)))!;
-      this.deckCards = this.deck.cards;
-      this.mainCardName = this.deck.cards[0];
+    this.deckId = parseInt(String(this.route.snapshot.paramMap.get('deckId')));
+
+    if (this.deckId) {
+      this.deckApi.getDeck(this.deckId).subscribe((result) => {
+        this.deck = result;
+        this.deckCards = structuredClone(result.cards);
+        this.deckName = result.name;
+        this.mainCardName = result.cards[0];
+      });
     } else {
       this.typeName = 'CREATION';
     }
-    this.cards = this.mock.getMockObjects();
+
+    this.cardApi.getCards().subscribe((result) => {
+      this.cards = result;
+    });
   }
 
   onAdd(card: string) {
@@ -61,11 +73,35 @@ export class DeckBuilderComponent {
   }
 
   onSave() {
-    //falta código de adición a BD
-    this.router.navigate([`/decks/${this.deck.id}/details`]);
+    this.unsavedChanges = false;
+
+    if (this.deckId) {
+      this.deck.name = this.deckName;
+      this.deck.cards = this.deckCards;
+
+      this.deckApi.updateDeck(this.deckId, this.deck).subscribe((response) => {
+        //TODO: Validar response
+      });
+      this.router.navigate([`/decks/${this.deck.id}/details`]);
+    } else {
+      this.deck = {
+        id: -1,
+        name: this.deckName,
+        cards: this.deckCards,
+        wins: 0,
+        draws: 0,
+        loses: 0,
+      };
+      this.deckApi.addDeck(this.deck).subscribe((response) => {
+        //TODO: Validar response
+        const addedDeck = response;
+        this.router.navigate([`/decks/${addedDeck.id}/details`]);
+      });
+    }
   }
 
   onCancel() {
+    this.unsavedChanges = false;
     if (this.deck) this.router.navigate([`/decks/${this.deck.id}/details`]);
     else this.router.navigate([`/decks`]);
   }
@@ -81,5 +117,26 @@ export class DeckBuilderComponent {
       $event.currentIndex
     );
     this.mainCardName = this.deckCards[0].toLowerCase();
+  }
+
+  onExit() {
+    if (!this.unsavedChanges) return true;
+
+    if (!this.deck && this.deckName === '' && this.deckCards.length == 0) {
+      return true;
+    }
+
+    if (
+      this.deck &&
+      this.deck.name === this.deckName &&
+      this.deck.cards.toString() === this.deckCards.toString()
+    ) {
+      return true;
+    }
+
+    const confirmExit = confirm(
+      'You have unsaved changes on the deck. Are you sure you want to leave?'
+    );
+    return confirmExit;
   }
 }

@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { MockObjectsService } from '../services/mock-objects.service';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { CardApiService } from 'app/services/card-api.service';
+import { DeckApiService } from 'app/services/deck-api.service';
 import { RandomDeckService } from '../services/random-deck.service';
 import { Deck } from 'app/models/Deck';
 import { GameService } from 'app/services/game.service';
@@ -21,7 +21,7 @@ export class GameComponent implements OnInit {
     private randomDeckService: RandomDeckService,
     private cardApiService: CardApiService,
     private gameService: GameService,
-    private mockService: MockObjectsService
+    private deckApiService: DeckApiService
   ) {}
 
   //Spinner Properties
@@ -52,8 +52,16 @@ export class GameComponent implements OnInit {
   enemyName: string = '';
   isPausedGame: boolean = false;
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.startGame();
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  onBeforeUnload($event: any) {
+    if (true) {
+      $event.returnValue = true;
+      return true;
+    }
   }
 
   async playCard(cardIndex: number) {
@@ -116,7 +124,9 @@ export class GameComponent implements OnInit {
     this.isGameOver = false;
 
     this.selectedCardDetails = '';
-    this.enemyDeck = this.randomDeckService.getRandomDeck();
+    this.randomDeckService.getRandomDeck().subscribe((result) => {
+      this.enemyDeck = result;
+    });
     this.playerDeckInGame = structuredClone(this.playerDeck);
 
     this.indexEnemyCard = -1;
@@ -129,8 +139,27 @@ export class GameComponent implements OnInit {
     this.startTimer();
   }
 
-  endGame(replay: boolean = false) {
-    //TODO: LLamada a API para actualizar estadisticas de mazo
+  endGame(replay: boolean = false, gameResult: PlayerResult) {
+    if (this.playerDeck.id != -1) {
+      switch (gameResult) {
+        case PlayerResult.WIN:
+          this.playerDeck.wins++;
+          break;
+        case PlayerResult.LOSE:
+          this.playerDeck.loses++;
+          break;
+        case PlayerResult.DRAW:
+          this.playerDeck.draws++;
+          break;
+      }
+
+      this.deckApiService
+        .updateDeck(this.playerDeck.id, this.playerDeck)
+        .subscribe((response) => {
+          //TODO: Validate response
+        });
+    }
+
     if (replay) {
       this.startGame();
     } else {
@@ -200,7 +229,7 @@ export class GameComponent implements OnInit {
     enemyCard: string
   ): Promise<BattleOutcome> {
     let outcome = await lastValueFrom(
-      this.mockService.getMockBattleResult(
+      this.cardApiService.getBattleResult(
         playerCard,
         enemyCard
       ) as Observable<BattleOutcome>

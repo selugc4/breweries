@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { BattleOutcome, PlayerResult } from 'app/models/BattleOutcome';
+import { Deck } from 'app/models/Deck';
 
 @Component({
   selector: 'app-game-end',
@@ -8,8 +9,8 @@ import { BattleOutcome, PlayerResult } from 'app/models/BattleOutcome';
 })
 export class GameEndComponent {
   @Input() roundHistory: BattleOutcome[] = [];
-  @Output() replayClickEvent = new EventEmitter<void>();
-  @Output() exitClickEvent = new EventEmitter<void>();
+  @Output() replayClickEvent = new EventEmitter<PlayerResult>();
+  @Output() exitClickEvent = new EventEmitter<PlayerResult>();
 
   message: string = '';
   footerMessage: string = '';
@@ -19,6 +20,7 @@ export class GameEndComponent {
   resultMessage: string = '';
 
   roundCards: [string, string][] = [];
+  gameResult!: PlayerResult;
 
   ngOnInit() {
     let wins = 0;
@@ -48,16 +50,19 @@ export class GameEndComponent {
       this.resultMessage =
         "Congratulations, you've won this match of JANKEN 101!";
       this.resultClass = 'win';
+      this.gameResult = PlayerResult.WIN;
     } else if (losses > wins) {
       this.resultTitle = 'LOST';
       this.resultMessage =
         'Oops! You lost this match of JANKEN 101. Better luck next time!';
       this.resultClass = 'lose';
+      this.gameResult = PlayerResult.LOSE;
     } else {
       this.resultTitle = 'DRAW';
       this.resultMessage =
         "It's a tie! You and your opponent both played well in this match of JANKEN 101.";
       this.resultClass = 'draw';
+      this.gameResult = PlayerResult.DRAW;
     }
 
     this.footerMessage =
@@ -65,10 +70,10 @@ export class GameEndComponent {
   }
 
   clickReplay() {
-    this.replayClickEvent.emit();
+    this.replayClickEvent.emit(this.gameResult);
   }
 
   clickExit() {
-    this.exitClickEvent.emit();
+    this.exitClickEvent.emit(this.gameResult);
   }
 }

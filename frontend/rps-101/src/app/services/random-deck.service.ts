@@ -18,8 +18,8 @@ export class RandomDeckService {
       selectedCards[i] = cards[random];
       cards.splice(random, 1);
     }
-    
-    return { id: -1, name: "Random", cards: selectedCards };
+
+    return { id: -1, name: "Random", cards: selectedCards,  wins: 0, draws: 0, loses: 0 };
   }
 
   private getRandom101(index: number): number {

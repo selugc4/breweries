@@ -7,7 +7,7 @@ import { WinningOutcome } from '../models/CardOutcomes';
 })
 export class MockObjectsService {
   constructor() {}
-  
+
   getMockObjects() {
     return [
       'Air',
@@ -120,36 +120,57 @@ export class MockObjectsService {
         id: 12,
         name: 'Dr. Nice',
         cards: ['Video game', 'Airplane', 'Alien', 'Axe', 'Baby'],
+        wins: 0,
+        draws: 0,
+        loses: 0
       },
       {
         id: 13,
         name: 'Bombasto',
         cards: ['Laser', 'Law', 'Video game', 'Man', 'Math'],
+        wins: 0,
+        draws: 0,
+        loses: 0
       },
       {
         id: 14,
         name: 'Celeritas',
         cards: ['Cup', 'Death', 'Devil', 'Diamond', 'Dragon'],
+        wins: 0,
+        draws: 0,
+        loses: 0
       },
       {
         id: 15,
         name: 'Magneta',
         cards: ['Laser', 'Law', 'Lightning', 'Man', 'Math'],
+        wins: 0,
+        draws: 0,
+        loses: 0
       },
       {
         id: 18,
         name: 'Dr. IQ',
         cards: ['Satan', 'School', 'Scissors', 'Sky', 'Snake'],
+        wins: 0,
+        draws: 0,
+        loses: 0
       },
       {
         id: 19,
         name: 'Magma',
         cards: ['Sponge', 'Sun', 'Sword', 'T.V.', 'Tank'],
+        wins: 0,
+        draws: 0,
+        loses: 0
       },
       {
         id: 20,
         name: 'Tornado',
         cards: ['Wall', 'Water', 'Whip', 'Wolf', 'Woman'],
+        wins: 0,
+        draws: 0,
+        loses: 0
       },
     ];
   }

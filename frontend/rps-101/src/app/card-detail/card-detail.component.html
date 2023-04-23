@@ -19,6 +19,7 @@
   </div>
   <div class="column-right">
     <span> Winning outcomes: </span>
+    <app-loader *ngIf="isLoading"></app-loader>
     <div class="grid-list" *ngIf="filteredCards?.length != 0; else notFound">
       <app-card (click)="versus = card" class="clickable" *ngFor="let card of filteredCards"
         [name]="card.losingCard"></app-card>

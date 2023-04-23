@@ -28,6 +28,7 @@ export class DeckBuilderComponent implements onExit {
 
   deckId!: number;
   unsavedChanges: boolean = true;
+  isLoading = true;
 
   constructor(
     private router: Router,
@@ -52,6 +53,7 @@ export class DeckBuilderComponent implements onExit {
 
     this.cardApi.getCards().subscribe((result) => {
       this.cards = result;
+      this.isLoading = false;
     });
   }
 

@@ -16,6 +16,7 @@ export class CardDetailComponent {
   versus?: WinningOutcome;
   filteredCards!: WinningOutcome[];
   filterProperty: string = 'losingCard';
+  isLoading: boolean = true;
 
   constructor(private route: ActivatedRoute, private cardApi: CardApiService) {}
 
@@ -23,6 +24,7 @@ export class CardDetailComponent {
     this.cardName = String(this.route.snapshot.paramMap.get('name'));
     this.cardApi.getCardOutcomes(this.cardName).subscribe((response) => {
       this.winningOutcomes = response.winningOutcomes;
+      this.isLoading = false;
     });
   }
 

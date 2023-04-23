@@ -54,6 +54,7 @@
       [control]="autocompleteControl"></app-autocomplete>
   </div>
 
+  <app-loader *ngIf="isLoading"></app-loader>
   <div class="grid-list">
     <div *ngFor="let card of filteredCards ">
       <div class="choose-card-container">

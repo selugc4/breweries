@@ -17,7 +17,7 @@
     </ng-template>
   </div>
 
-  <div class="game-board">
+  <div class="game-board" *ngIf="!isLoading">
     <mat-progress-spinner class="progress colorprogress" strokeWidth="1.5" [mode]="spinnerMode" [value]=100>
     </mat-progress-spinner>
     <mat-progress-spinner class="progress" strokeWidth="1.5" [mode]="spinnerMode" [value]="spinnerValue">
@@ -43,6 +43,7 @@
       </div>
     </div>
   </div>
+  <app-loader *ngIf="isLoading"></app-loader>
   <div class="side-content">
     <div class="controls-timer">
       <div class="controls">

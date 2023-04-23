@@ -51,6 +51,7 @@ export class GameComponent implements OnInit {
   userName: string = '';
   enemyName: string = '';
   isPausedGame: boolean = false;
+  isLoading: boolean = true;
 
   ngOnInit() {
     this.startGame();
@@ -113,6 +114,8 @@ export class GameComponent implements OnInit {
   }
 
   startGame() {
+    this.isLoading = true;
+
     this.currentRoundTime = this.ROUND_TIME;
     this.spinnerValue = 100;
     this.roundHistory = [];
@@ -124,8 +127,10 @@ export class GameComponent implements OnInit {
     this.isGameOver = false;
 
     this.selectedCardDetails = '';
+
     this.randomDeckService.getRandomDeck().subscribe((result) => {
       this.enemyDeck = result;
+      this.isLoading = false;
     });
     this.playerDeckInGame = structuredClone(this.playerDeck);
 

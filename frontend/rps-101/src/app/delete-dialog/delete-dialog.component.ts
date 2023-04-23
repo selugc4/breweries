@@ -17,8 +17,4 @@ export class DeleteDialogComponent {
     public dialogRef: MatDialogRef<DeleteDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public confirm: boolean
   ) {}
-
-  onConfirm() {
-    this.confirm = true;
-  }
 }

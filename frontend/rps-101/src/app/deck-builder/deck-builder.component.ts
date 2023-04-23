@@ -73,6 +73,8 @@ export class DeckBuilderComponent implements onExit {
   }
 
   onSave() {
+    if (!this.canSave()) return;
+
     this.unsavedChanges = false;
 
     if (this.deckId) {
@@ -104,6 +106,10 @@ export class DeckBuilderComponent implements onExit {
     this.unsavedChanges = false;
     if (this.deck) this.router.navigate([`/decks/${this.deck.id}/details`]);
     else this.router.navigate([`/decks`]);
+  }
+
+  canSave(): boolean {
+    return this.deckName.trim().length > 0 && this.deckCards.length == 5;
   }
 
   getFiltered(filtered: string[]) {

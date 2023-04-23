@@ -2,7 +2,7 @@
   <mat-toolbar class="section-header">
     <h2>DECK {{typeName}}</h2>
     <div class="buttons">
-      <button mat-raised-button=""
+      <button mat-raised-button="" [disabled]="!canSave()"
         class="mdc-button mdc-button--raised mat-mdc-raised-button mat-primary mat-mdc-button-base" (click)="onSave()">
         <mat-icon aria-hidden="false" fontIcon="check"></mat-icon>
         <span class="mdc-buttonlabel">Save</span>

@@ -2,7 +2,7 @@ version: '3'
 services:
   db:
     image: postgres
-    restart: always
+    restart: unless-stopped
     environment:
       POSTGRES_USER: janken
       POSTGRES_PASSWORD: janken
@@ -22,7 +22,7 @@ services:
     build: ./backend
     
     depends_on:
-      - postgres
+      - db
     ports:
       - "8081:8081"
     restart: unless-stopped

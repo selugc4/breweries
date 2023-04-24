@@ -12,12 +12,12 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     align-items: flex-end;
-    gap: 5%;
+    justify-items: center;
 }
 
 img {
     position: relative;
-    width: 80%;
+    width: 67%;
     height: auto;
     cursor: pointer;
     transition: all 0.3s ease-in-out;

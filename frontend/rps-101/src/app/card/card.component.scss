@@ -1,6 +1,10 @@
 .svg-card {
-    position: relative;
-    container-type: inline-size;
+  position: relative;
+  container-type: inline-size;
+  background-color: var(--blue-90);
+  height: 0;
+  padding-bottom: 150%;
+  border-radius: 11%;
 }
 
 .card-name {
@@ -23,7 +27,7 @@
 .svg-card>div {
   width: 100%;
   position: absolute;
-  bottom: 15%;
+  bottom: 12%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;

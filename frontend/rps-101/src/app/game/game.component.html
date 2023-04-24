@@ -27,7 +27,7 @@
       <div class="cards oponent-cards">
         <div></div>
         <div class="empty-card"></div>
-        <app-card class="oponent-card" *ngFor="let card of enemyDeck.cards; let i = index" [name]="card"
+        <app-card class="oponent-card" [flipCard]="flippedEnemyCards[i]" *ngFor="let card of enemyDeck.cards; let i = index" [name]="card"
           [id]="'oponent-card-' + i"></app-card>
         <div class="empty-card"></div>
       </div>

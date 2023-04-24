@@ -102,8 +102,8 @@ import { LoaderComponent } from './loader/loader.component';
     ],
     //Select between Mock and Remote APIs
     providers: [
-        { provide: CardApiService, useClass: RemoteCardApiService },
-        { provide: DeckApiService, useClass: RemoteDeckApiService },
+        { provide: CardApiService, useClass: MockCardApiService },
+        { provide: DeckApiService, useClass: MockDeckApiService },
     ],
     bootstrap: [AppComponent],
 })

@@ -79,6 +79,7 @@ mat-toolbar.section-header {
     margin: 0;
     padding: 0;
     margin-bottom: 40px;
+    align-items: flex-start;
 }
 
 mat-icon {
@@ -102,6 +103,10 @@ app-root {
 
 .clickable {
     cursor: pointer;
+}
+
+.forbidden {
+    cursor: not-allowed;
 }
 
 .clickable label{
@@ -143,4 +148,12 @@ app-deck {
 
 app-card {
     width: 100%;
+}
+
+@media (max-width: 800px) {
+    mat-toolbar.section-header {
+        flex-direction: column;
+        height: auto;
+        gap: 10px;
+    }
 }

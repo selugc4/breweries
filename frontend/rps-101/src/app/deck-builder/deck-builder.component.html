@@ -30,7 +30,8 @@
       </mat-form-field>
 
       <h4>Deck cards :</h4>
-      <div cdkDropList cdkDropListOrientation="horizontal" class="deck-container" [cdkDropListData]="deckCards" (cdkDropListDropped)="drop($event)">
+      <div cdkDropList cdkDropListOrientation="horizontal" class="deck-container" [cdkDropListData]="deckCards"
+        (cdkDropListDropped)="drop($event)">
         <div cdkDrag class="deck-item" *ngFor="let empty of [].constructor(5); let i=index">
           <div *ngIf="deckCards[i]" class="deck-card-container">
             <img class="delete-card clickable" (click)="onDelete(deckCards[i])" src="assets/delete_button_template.svg "
@@ -62,7 +63,8 @@
           <img class="added-background" src="assets/empty_card_template.svg " style="opacity: 90%;" alt="Empty card " />
           <img class="added-card" src="assets/added_template.svg " alt="Added card " />
         </div>
-        <app-card class="clickable" [name]="card " (click)="onAdd(card) "></app-card>
+        <app-card [ngClass]="deckCards.length === 5 ? 'forbidden' : 'clickable'" [name]="card "
+          (click)="onAdd(card) "></app-card>
       </div>
     </div>
   </div>

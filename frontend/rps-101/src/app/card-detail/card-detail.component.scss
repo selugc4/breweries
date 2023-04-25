@@ -46,11 +46,12 @@ span {
 }
 
 .column-right {
-  flex: 75%;
+  width: 100%;
 }
 
 .column-left {
-  flex: 25%;
+  width: 100%;
+  max-width: 400px;
 }
 
 .grid-list {

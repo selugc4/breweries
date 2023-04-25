@@ -21,6 +21,40 @@
     width: 80%;
 }
 
+@media (max-width: 900px) {
+
+    .deck-contents-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .main-card {
+        width: 100%;
+        max-width: 150px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .cards-rows {
+        width: 100%;
+    }
+}
+
+.delete-card {
+    position: absolute;
+    z-index: 50;
+    width: 25px;
+    top: -7px;
+    right: -10px;
+}
+
+@media (max-width: 800px){
+    .delete-card {
+        width: 20px;
+        right: -7px;
+    }
+}
+
 .deck-container {
     display: flex;
     flex-direction: row;
@@ -37,12 +71,7 @@
     width: 100%;
 }
 
-.delete-card {
-    position: absolute;
-    z-index: 50;
-    transform: translate(600%, -30%);
-    width: 15%;
-}
+
 
 .cards-container {
     display: flex;
@@ -55,6 +84,8 @@
     justify-content: space-between;
     flex-direction: row;
     align-items: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
 }
 
 .deck-card-container {
@@ -78,7 +109,7 @@
     z-index: 40;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -51%);
+    transform: translate(-50%, -50%);
     width: 101%;
     height: 101%;
 }

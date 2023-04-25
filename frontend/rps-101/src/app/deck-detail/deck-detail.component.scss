@@ -57,3 +57,23 @@
         grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     }
   }
+
+@media (max-width: 650px) {
+    .deck-info {
+        gap: 20px;
+        flex-direction: column;
+    }
+
+    .deck-info app-deck {
+        width: 100%;
+        max-width: 150px;
+        margin: auto;
+    }
+
+    .stats-container {
+        width: 100%;
+        gap: 15px;
+        display: flex;
+        flex-direction: row;
+    }
+}

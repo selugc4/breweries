@@ -31,6 +31,11 @@ mat-toolbar > div:first-child {
     font-size: 30px;
     color: var(--blue-60);
     cursor: pointer;
+    transition: color 0.1s ease-in-out;
+}
+
+.search-close mat-icon:hover {
+    color: var(--white);
 }
 
 .subtitle {
@@ -98,7 +103,7 @@ mat-toolbar > div:first-child {
 }
 
 .mat-mdc-raised-button:not(:disabled) {
-    color: var(--white);
+    color: var(--white) !important;
     font-size: 16px;
     font-weight: 700;
     width: 100px;
@@ -107,4 +112,29 @@ mat-toolbar > div:first-child {
     padding: 20px;
     border-radius: 12px;
     margin-top: 12px
+}
+
+
+@media (max-width: 1100px) {
+    .section-header > div:first-child {
+        flex-direction: column;
+        gap: 0px;
+    }
+}
+
+@media (max-width: 900px) {
+    mat-toolbar {
+        position: relative;
+    }
+    mat-toolbar.section-header {
+        flex-direction: column;
+        height: auto;
+        gap: 20px;
+    }
+
+    .search-close > mat-icon {
+        position: absolute;
+        top: 5px;
+        right: 0;
+    }
 }

@@ -10,6 +10,7 @@
   align-items: center;
   justify-content: space-evenly;
   z-index: 1000;
+  overflow-y: auto;
 }
 
 .game-result-title {
@@ -169,4 +170,14 @@
   padding-block: 10px;
   border-radius: 12px;
   cursor: pointer;
+}
+
+@media (max-width: 1275px) {
+  .game-result {
+    justify-content: unset;
+  }
+
+  .end-message{
+    margin-bottom: 25px;
+  }
 }

@@ -20,6 +20,11 @@
   align-self: flex-end;
   margin-right: -20px;
   margin-top: -10;
+  transition: color 0.1s ease-in-out;
+}
+
+.close-icon:hover {
+  color: var(--white);
 }
 
 h2 {

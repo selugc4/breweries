@@ -27,7 +27,7 @@ jobs:
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
-          branch: gh-pages
+          branch: gh-pages-deployment
           folder: frontend/rps-101/dist/rps-101
           clean: true
           single-commit: true

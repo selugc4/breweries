@@ -4,9 +4,9 @@ services:
     image: postgres
     restart: unless-stopped
     environment:
+      POSTGRES_DB: janken
       POSTGRES_USER: janken
       POSTGRES_PASSWORD: janken
-      POSTGRES_DB: janken
     ports:
       - "5432:5432"
     volumes:
@@ -19,8 +19,7 @@ services:
     restart: unless-stopped
 
   backend:
-    build: ./backend
-    
+    build: ./backend    
     depends_on:
       - db
     ports:

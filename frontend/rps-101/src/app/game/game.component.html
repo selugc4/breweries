@@ -1,78 +1,113 @@
 <main class="game">
-  <div class="side-content">
-    <div class="user">
-      <div class="user-img">
-        <img src="assets/user.svg" alt="">
-      </div>
-      <span>{{enemyName}}</span>
-    </div>
+    <div class="side-content">
+        <div class="user">
+            <div class="user-img">
+                <img src="{{ enemyImage }}" alt="" />
+            </div>
+            <span>{{ enemyName }}</span>
+        </div>
 
-    <ng-container *ngIf="selectedCardDetails === ''; else cardDetails">
-      <app-instructions></app-instructions>
-    </ng-container>
-    <div></div>
-
-    <ng-template #cardDetails>
-      <app-card-game-detail [name]="selectedCardDetails"></app-card-game-detail>
-    </ng-template>
-  </div>
-
-  <div class="game-board" *ngIf="!isLoading">
-    <mat-progress-spinner class="progress colorprogress" strokeWidth="1.5" [mode]="spinnerMode" [value]=100>
-    </mat-progress-spinner>
-    <mat-progress-spinner class="progress" strokeWidth="1.5" [mode]="spinnerMode" [value]="spinnerValue">
-    </mat-progress-spinner>
-
-    <div class="game-round">
-      <div class="cards oponent-cards">
+        <ng-container *ngIf="selectedCardDetails === ''; else cardDetails">
+            <app-instructions></app-instructions>
+        </ng-container>
         <div></div>
-        <div class="empty-card"></div>
-        <app-card class="oponent-card" [flipCard]="flippedEnemyCards[i]" *ngFor="let card of enemyDeck.cards; let i = index" [name]="card"
-          [id]="'oponent-card-' + i"></app-card>
-        <div class="empty-card"></div>
-      </div>
-      <div class="game-board-center">
-        <span>JANKEN 101</span>
-      </div>
-      <div class="cards user-cards">
-        <div></div>
-        <div class="empty-card"></div>
-        <app-card class="user-card" *ngFor="let card of playerDeckInGame.cards; let i = index" [name]="card"
-          (click)="playCard(i)" (contextmenu)="getCardWinDetails(i, $event)" [id]="'user-card-' + i"></app-card>
-        <div class="empty-card"></div>
-      </div>
+
+        <ng-template #cardDetails>
+            <app-card-game-detail
+                [name]="selectedCardDetails"
+            ></app-card-game-detail>
+        </ng-template>
     </div>
-  </div>
-  <app-loader *ngIf="isLoading"></app-loader>
-  <div class="side-content">
-    <div class="controls-timer">
-      <div class="controls">
-        <button>
-          <img src="assets/pause.svg" (click)="pauseGame()" alt="pause">
-        </button>
-      </div>
-      <span class="timer">{{ currentGlobalTime * 1000 | date:'mm:ss'}}</span>
+
+    <div class="game-board" *ngIf="!isLoading">
+        <mat-progress-spinner
+            class="progress colorprogress"
+            strokeWidth="1.5"
+            [mode]="spinnerMode"
+            [value]="100"
+        >
+        </mat-progress-spinner>
+        <mat-progress-spinner
+            class="progress"
+            strokeWidth="1.5"
+            [mode]="spinnerMode"
+            [value]="spinnerValue"
+        >
+        </mat-progress-spinner>
+
+        <div class="game-round">
+            <div class="cards oponent-cards">
+                <div></div>
+                <div class="empty-card"></div>
+                <app-card
+                    class="oponent-card"
+                    [flipCard]="flippedEnemyCards[i]"
+                    *ngFor="let card of enemyDeck.cards; let i = index"
+                    [name]="card"
+                    [id]="'oponent-card-' + i"
+                ></app-card>
+                <div class="empty-card"></div>
+            </div>
+            <div class="game-board-center">
+                <span>JANKEN 101</span>
+            </div>
+            <div class="cards user-cards">
+                <div></div>
+                <div class="empty-card"></div>
+                <app-card
+                    class="user-card"
+                    *ngFor="let card of playerDeckInGame.cards; let i = index"
+                    [name]="card"
+                    (click)="playCard(i)"
+                    (contextmenu)="getCardWinDetails(i, $event)"
+                    [id]="'user-card-' + i"
+                ></app-card>
+                <div class="empty-card"></div>
+            </div>
+        </div>
     </div>
-    <app-scoreboard [roundHistory]="roundHistory"></app-scoreboard>
-    <div class="user">
-      <span>{{userName}}</span>
-      <div class="user-img">
-        <img src="assets/user.svg" alt="">
-      </div>
+    <app-loader *ngIf="isLoading"></app-loader>
+    <div class="side-content">
+        <div class="controls-timer">
+            <div class="controls">
+                <button>
+                    <img
+                        src="assets/pause.svg"
+                        (click)="pauseGame()"
+                        alt="pause"
+                    />
+                </button>
+            </div>
+            <span class="timer">{{
+                currentGlobalTime * 1000 | date : "mm:ss"
+            }}</span>
+        </div>
+        <app-scoreboard [roundHistory]="roundHistory"></app-scoreboard>
+        <div class="user">
+            <span>{{ userName }}</span>
+            <div class="user-img">
+                <img src="assets/user.svg" alt="" />
+            </div>
+        </div>
     </div>
-  </div>
 </main>
 <div *ngIf="isPausedGame" class="pause">
-  <button (click)="resumeGame()">Resume</button>
-  <button (click)="startGame()">Restart</button>
-  <button (click)="exitGame()">Quit</button>
+    <button (click)="resumeGame()">Resume</button>
+    <button (click)="startGame()">Restart</button>
+    <button (click)="exitGame()">Quit</button>
 </div>
 
-<app-round-result [roundOutcome]="roundOutcome" id="roundResult" (closeRoundResultEvent)="closeRoundResult()"
-  class="round-result"></app-round-result>
-
+<app-round-result
+    [roundOutcome]="roundOutcome"
+    id="roundResult"
+    (closeRoundResultEvent)="closeRoundResult()"
+    class="round-result"
+></app-round-result>
 
 <div *ngIf="isGameOver" class="pause">
-  <app-game-end [roundHistory]="roundHistory" (exitClickEvent)="endGame(false, $event)"
-    (replayClickEvent)="endGame(true, $event)"></app-game-end>
+    <app-game-end
+        [roundHistory]="roundHistory"
+        (exitClickEvent)="endGame(false, $event)"
+        (replayClickEvent)="endGame(true, $event)"
+    ></app-game-end>
 </div>

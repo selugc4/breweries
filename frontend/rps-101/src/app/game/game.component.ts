@@ -8,6 +8,7 @@ import { GameMode } from 'app/models/GameMode';
 import { BattleOutcome, PlayerResult } from 'app/models/BattleOutcome';
 import { Observable, lastValueFrom } from 'rxjs';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
+import { ScrapperService } from 'app/services/scrapper.service';
 @Component({
     selector: 'app-game',
     templateUrl: './game.component.html',
@@ -21,7 +22,8 @@ export class GameComponent implements OnInit {
         private randomDeckService: RandomDeckService,
         private cardApiService: CardApiService,
         private gameService: GameService,
-        private deckApiService: DeckApiService
+        private deckApiService: DeckApiService,
+        private scrapperService: ScrapperService
     ) {}
 
     //Spinner Properties
@@ -49,8 +51,11 @@ export class GameComponent implements OnInit {
     selectedCardDetails: string = '';
     flippedEnemyCards: boolean[] = [];
 
-    userName: string = '';
+    enemyImage: string = '';
     enemyName: string = '';
+
+    userName: string = '';
+
     isPausedGame: boolean = false;
     isLoading: boolean = true;
 
@@ -125,6 +130,8 @@ export class GameComponent implements OnInit {
     startGame() {
         this.isLoading = true;
 
+        this.getOpponentData();
+
         this.currentRoundTime = this.ROUND_TIME;
         this.spinnerValue = 100;
         this.roundHistory = [];
@@ -159,7 +166,6 @@ export class GameComponent implements OnInit {
         }
 
         this.userName = 'ANONYMOUS'; //TODO: Load names with scrapping
-        this.enemyName = 'ROCKBOT';
 
         this.startTimer();
     }
@@ -277,5 +283,15 @@ export class GameComponent implements OnInit {
         }
 
         return outcome;
+    }
+
+    getOpponentData() {
+        this.enemyImage = 'assets/user.svg';
+        this.enemyName = 'ANONYMOUS';
+
+        this.scrapperService.getOpponentData().subscribe((result) => {
+            this.enemyImage = result.image;
+            this.enemyName = result.name.toUpperCase();
+        });
     }
 }

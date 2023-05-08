@@ -49,6 +49,8 @@ import { DeckApiService } from './services/deck-api.service';
 import { RemoteDeckApiService } from './services/remote-deck-api.service';
 import { MockDeckApiService } from './services/mock-deck-api.service';
 import { LoaderComponent } from './loader/loader.component';
+import { RemoteScrapperService } from './services/remote-scrapper.service';
+import { ScrapperService } from './services/scrapper.service';
 
 @NgModule({
     declarations: [
@@ -102,8 +104,9 @@ import { LoaderComponent } from './loader/loader.component';
     ],
     //Select between Mock and Remote APIs
     providers: [
-        { provide: CardApiService, useClass: MockCardApiService },
-        { provide: DeckApiService, useClass: MockDeckApiService },
+        { provide: CardApiService, useClass: RemoteCardApiService },
+        { provide: DeckApiService, useClass: RemoteDeckApiService },
+        { provide: ScrapperService, useClass: RemoteScrapperService },
     ],
     bootstrap: [AppComponent],
 })

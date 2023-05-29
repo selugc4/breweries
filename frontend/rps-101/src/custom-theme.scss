@@ -55,12 +55,12 @@ body {
 
 mat-form-field div.mat-mdc-text-field-wrapper {
     border-radius: 10px;
-    background-color: #282e54 !important;
+    background-color: rgb(255, 251, 235)!important;
     color: #818ebb;
 }
 
 .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input {
-    color: white;
+    color: #000000;
 }
 
 .mdc-text-field:not(.mdc-text-field--disabled)
@@ -81,7 +81,7 @@ mat-form-field div.mat-mdc-text-field-wrapper {
 }
 
 span.mdc-list-item__primary-text {
-    color: white;
+    color: rgb(146, 64, 14);
 }
 
 .mat-mdc-raised-button:not(:disabled) {

@@ -1,8 +1,7 @@
 .sidenav-links {
-    width: 100px;
+    width: 130px;
     height: calc(100vh - 170px);
-    min-height: 450px;
-    padding: 30px 0;
+    min-height: 300px;
     border-radius: 12px;
     background-color: var(--blue-80);
     position: fixed;
@@ -39,7 +38,9 @@
     align-items: center;
     justify-content: center;
 }
-
+img {
+    height: 80px;
+}
 .sidenav-links mat-icon {
     font-size: 30px;
     height: auto;

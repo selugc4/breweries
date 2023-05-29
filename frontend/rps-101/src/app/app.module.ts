@@ -51,6 +51,7 @@ import { MockDeckApiService } from './services/mock-deck-api.service';
 import { LoaderComponent } from './loader/loader.component';
 import { RemoteScrapperService } from './services/remote-scrapper.service';
 import { ScrapperService } from './services/scrapper.service';
+import { UbicationSearchComponent } from './ubication-search/ubication-search.component';
 
 @NgModule({
     declarations: [
@@ -78,6 +79,7 @@ import { ScrapperService } from './services/scrapper.service';
         ScoreboardRoundComponent,
         RoundResultComponent,
         LoaderComponent,
+        UbicationSearchComponent
     ],
     imports: [
         BrowserModule,

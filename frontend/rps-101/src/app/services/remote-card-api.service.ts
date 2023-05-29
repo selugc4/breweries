@@ -39,4 +39,5 @@ export class RemoteCardApiService implements CardApiService {
       `${this.rps101Url}/match?object_one=${card1}&object_two=${card2}`
     );
   }
+  
 }

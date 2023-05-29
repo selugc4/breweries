@@ -1,18 +1,20 @@
 <mat-toolbar class="header">
     <a routerLink="/" (click)="destroyGame()" class="logo">
-        <span>JANKEN</span>
-        <span>101</span>
+        <span>BreweriesLover</span>
     </a>
-    <div *ngIf="!register; else noRegister" class="user">
-        <span>KAPUT1234</span>
-        <div class="user-img">
-            <img src="assets/user.svg" alt="">
-        </div>
-    </div>
-    <ng-template #noRegister>
-        <div class="links">
-            <a routerLink="" (click)="destroyGame()">Sign up</a>
-            <a routerLink="" (click)="destroyGame()">Log in</a>
-        </div>
-    </ng-template>
+    <mat-form-field class= "search" appearance="fill">
+        <input
+          type="text"
+          placeholder="{{ placeholder }}"
+          [formControl]="control"
+          matInput
+        />
+        <mat-icon matPrefix>search</mat-icon>
+      </mat-form-field>
+      <a (click)="ubication= !ubication">
+        <mat-icon class="icon">room</mat-icon>
+      </a>
+      <ng-container *ngIf="ubication">
+        <app-ubication-search class="ubicatesearch"></app-ubication-search>
+      </ng-container>
 </mat-toolbar>

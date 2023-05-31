@@ -1,14 +1,9 @@
 import {
     Component,
-    ComponentFactoryResolver,
-    Injector,
     ViewChild,
     ViewContainerRef,
 } from '@angular/core';
-import { GameService } from './services/game.service';
-import { GameParameters } from './models/GameParameters';
-import { DeckComponent } from './deck/deck.component';
-import { GameComponent } from './game/game.component';
+import { BreweriesComponent } from './breweries/breweries.component';
 
 @Component({
     selector: 'app-root',
@@ -16,38 +11,7 @@ import { GameComponent } from './game/game.component';
     styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-    @ViewChild('gameContainer', { read: ViewContainerRef, static: true })
+    @ViewChild(BreweriesComponent) brewery! : BreweriesComponent;
     gameContainerElement?: ViewContainerRef;
-
-    title = 'Janken 101';
-
-    constructor(
-        private gameService: GameService,
-        private resolver: ComponentFactoryResolver,
-        private injector: Injector
-    ) {}
-
-    ngOnInit() {
-        this.gameService.StartGameEvent.subscribe((parameters) => {
-            this.renderGame(parameters);
-        });
-        this.gameService.EndGameEvent.subscribe(() => {
-            this.destroyGame();
-        });
-    }
-
-    renderGame(parameters: GameParameters) {
-        const factory = this.resolver.resolveComponentFactory(GameComponent);
-        const componentRef = factory.create(this.injector);
-        componentRef.instance.playerDeck = parameters.deck;
-        componentRef.instance.gamemode = parameters.gamemode;
-        componentRef.location.nativeElement.className = 'game-container';
-
-        this.gameContainerElement!.clear();
-        this.gameContainerElement!.insert(componentRef.hostView);
-    }
-
-    destroyGame() {
-        this.gameContainerElement!.clear();
-    }
+    title = 'Breweries';
 }

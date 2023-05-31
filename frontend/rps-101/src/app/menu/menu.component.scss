@@ -1,11 +1,12 @@
 .sidenav-links {
     width: 130px;
     height: calc(100vh - 170px);
-    min-height: 300px;
+    max-height: 699px;
+    min-height:284px;
     border-radius: 12px;
     background-color: var(--blue-80);
     position: fixed;
-    top: 100px;
+    top: 164px;
     left: 40px;
     z-index: 999;
     display: flex;

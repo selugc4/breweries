@@ -1,0 +1,12 @@
+<main class="breweries">
+<div *ngFor="let brewery of getBrewereisPage()">
+    <app-brewery [brewery]="brewery" ></app-brewery>
+</div>
+</main>
+<section *ngIf="numPages.length != 0" class="pagination">
+    <ul>
+        <li *ngIf="page > 0"><a (click)="page = page - 1"><<</a></li>
+        <li *ngFor="let i of numPages"><a (click)="page = i" [ngClass]="{'active': i===page}" >{{i+1}}</a></li>
+        <li *ngIf="page < numPages.length - 1"><a (click)="page = page + 1">>></a></li>
+    </ul>
+</section>

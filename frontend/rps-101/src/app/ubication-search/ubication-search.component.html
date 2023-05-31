@@ -1,19 +1,22 @@
-<div class="newMargin">   
+<div class="newMargin">
     <mat-form-field class= "search" appearance="fill">
     <input
-      type="text"
-      placeholder="Altitud..."
-      [formControl]="control"
-      matInput
+        matInput [(ngModel)]="longitude"
+        type="number"
+        placeholder="Longitude..."
+        [formControl]="control"
+        ng-pattern="/^[0-9]/"
     />
   </mat-form-field>
 
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="fill" class= "search">
     <input
-      type="text"
-      placeholder="Latitud..."
-      [formControl]="control"
-      matInput
+        matInput [(ngModel)]="latitude"
+        type="number"
+        placeholder="Latitude..."
+        [formControl]="control"
+        required ng-pattern="/^[0-9]{5}$/"
     />
   </mat-form-field>
+  <mat-icon class="icon" (click) = "searchByUbication()" matPrefix>location_searching</mat-icon>
 </div>

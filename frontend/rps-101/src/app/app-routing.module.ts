@@ -11,7 +11,7 @@ import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { ExitGuard } from './guards/exit.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/play', pathMatch: 'full' },
+  { path: '', redirectTo: '/breweries', pathMatch: 'full' },
   { path: 'decks', component: DeckListComponent },
   { path: 'decks/:deckId/details', component: DeckDetailComponent },
   {

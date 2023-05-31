@@ -52,6 +52,9 @@ import { LoaderComponent } from './loader/loader.component';
 import { RemoteScrapperService } from './services/remote-scrapper.service';
 import { ScrapperService } from './services/scrapper.service';
 import { UbicationSearchComponent } from './ubication-search/ubication-search.component';
+import { BreweriesComponent } from './breweries/breweries.component';
+import { BreweryComponent } from './brewery/brewery.component';
+import { BreweriesApiService } from './services/breweries-api.service';
 
 @NgModule({
     declarations: [
@@ -67,6 +70,8 @@ import { UbicationSearchComponent } from './ubication-search/ubication-search.co
         CardDetailComponent,
         HeaderComponent,
         MenuComponent,
+        BreweriesComponent,
+        BreweryComponent,
         GameSelectorComponent,
         DeckSelectorComponent,
         GameComponent,
@@ -109,6 +114,7 @@ import { UbicationSearchComponent } from './ubication-search/ubication-search.co
         { provide: CardApiService, useClass: RemoteCardApiService },
         { provide: DeckApiService, useClass: RemoteDeckApiService },
         { provide: ScrapperService, useClass: RemoteScrapperService },
+        { provide: BreweriesApiService, useClass: BreweriesApiService },
     ],
     bootstrap: [AppComponent],
 })

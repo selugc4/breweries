@@ -1,1 +1,26 @@
-<p>brewery-detail works!</p>
+<div class="details">
+<div class="title">
+    <h1>{{brewery?.name}}</h1>
+    <mat-icon (click) = "changeFavourite();" [ngClass] = "{'coloreado': favourite}">star</mat-icon>
+</div>
+<h2 class="subtitle">{{brewery?.city}}</h2>
+<div class = "dates">
+    <div class= "map">
+        <div class="my-map">
+            <iframe frameborder="0" [src]="url"></iframe>
+        </div>
+    </div>
+    <div class = "text">
+        <p>Type: {{brewery?.brewery_type}}.</p>
+        <p>Address: {{brewery?.address_1}} {{brewery?.state_province}}, {{brewery?.country}}.</p>
+        <p>Phone: {{brewery?.phone}}.</p>
+        <p>Website: <a href="{{brewery?.website_url}}">{{brewery?.website_url}}</a></p>
+    </div>
+</div>
+<div class = "state">
+    <h2 class="subtitle">Information about the place</h2>
+    <p class = "information">{{stateInformation}}.</p>
+</div>
+</div>
+
+

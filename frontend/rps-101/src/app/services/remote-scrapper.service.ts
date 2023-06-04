@@ -2,15 +2,15 @@ import { Injectable } from '@angular/core';
 import { ScrapperService } from './scrapper.service';
 import { Observable } from 'rxjs';
 import { RemoteApiService } from './remote-api.service';
-import { Opponent } from 'app/models/Opponent';
+import { wiki } from 'app/models/wiki';
 
 @Injectable()
 export class RemoteScrapperService implements ScrapperService {
-    private scrapperUrl = 'http://localhost:8081/api/bot';
+    private scrapperUrl = 'http://localhost:8081/api/state';
 
     constructor(private remoteApi: RemoteApiService) {}
-    public getOpponentData(): Observable<Opponent> {
-        return this.remoteApi.get<Opponent>(`${this.scrapperUrl}/data`);
+    public getStateData(state: String): Observable<wiki> {
+        return this.remoteApi.get<wiki>(`${this.scrapperUrl}/${state}`);
     }
 
 }

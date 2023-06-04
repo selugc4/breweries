@@ -1,33 +1,12 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ViewChild } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CardDetailComponent } from './card-detail/card-detail.component';
-import { CardListComponent } from './card-list/card-list.component';
-import { GameSelectorComponent } from './game-selector/game-selector.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { DeckBuilderComponent } from './deck-builder/deck-builder.component';
-import { DeckDetailComponent } from './deck-detail/deck-detail.component';
-import { DeckListComponent } from './deck-list/deck-list.component';
-import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
-import { ExitGuard } from './guards/exit.guard';
+import { BreweryDetailComponent } from './brewery-detail/brewery-detail.component';
+import { TopBreweriesComponent } from './top-breweries/top-breweries.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/breweries', pathMatch: 'full' },
-  { path: 'decks', component: DeckListComponent },
-  { path: 'decks/:deckId/details', component: DeckDetailComponent },
-  {
-    path: 'decks/create',
-    canDeactivate: [ExitGuard],
-    component: DeckBuilderComponent,
-  },
-  {
-    path: 'decks/:deckId/edit',
-    canDeactivate: [ExitGuard],
-    component: DeckBuilderComponent,
-  },
-  { path: 'play', component: GameSelectorComponent },
-  { path: 'cards', component: CardListComponent },
-  { path: 'cards/:name', component: CardDetailComponent },
-  { path: '**', pathMatch: 'full', component: NotFoundComponent },
+  { path: 'breweries', redirectTo: '', pathMatch: 'full'},
+  { path: 'brewery/:id', component: BreweryDetailComponent},
+  { path: 'top', component: TopBreweriesComponent}
 ];
 
 @NgModule({

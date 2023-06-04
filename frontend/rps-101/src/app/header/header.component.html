@@ -1,20 +1,23 @@
+
 <mat-toolbar class="header">
     <a routerLink="/" (click)="restart()" class="logo">
         <span>BreweriesLover</span>
     </a>
-    <mat-form-field class= "search" appearance="fill">
-        <input
-            matInput [(ngModel)]="name"
-            type="text"
-            placeholder="{{ placeholder }}"
-            [formControl]="control"
-        />
-        <mat-icon (click) = "search()" matPrefix>search</mat-icon>
-    </mat-form-field>
-    <a (click)="ubication= !ubication">
-        <mat-icon class="icon">room</mat-icon>
-    </a>
-    <ng-container *ngIf="ubication">
-        <app-ubication-search [brewery] = "brewery" class="ubicatesearch"></app-ubication-search>
-    </ng-container>
+    <div *ngIf="!hideList">
+        <mat-form-field class= "search" appearance="fill">
+            <input
+                matInput [(ngModel)]="name"
+                type="text"
+                placeholder="{{ placeholder }}"
+                [formControl]="control"
+            />
+            <mat-icon (click) = "search()" matPrefix>search</mat-icon>
+        </mat-form-field>
+        <a (click)="ubication= !ubication">
+            <mat-icon class="icon">room</mat-icon>
+        </a>
+        <ng-container *ngIf="ubication">
+            <app-ubication-search [brewery] = "brewery!" class="ubicatesearch"></app-ubication-search>
+        </ng-container>
+    </div>
 </mat-toolbar>

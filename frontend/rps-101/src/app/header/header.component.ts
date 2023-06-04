@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Brewery } from 'app/models/Brewery';
-import { BreweriesApiService } from 'app/services/breweries-api.service';
+import { NavigationEnd, Router } from '@angular/router';
 import { BreweriesComponent } from 'app/breweries/breweries.component';
+import { TopBreweriesComponent } from 'app/top-breweries/top-breweries.component';
 
 @Component({
   selector: 'app-header',
@@ -11,39 +11,46 @@ import { BreweriesComponent } from 'app/breweries/breweries.component';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  ubication: boolean = false;
-  @Input() placeholder: string = 'Search...';
-  @Input() array!: [];
-  @Input() control = new FormControl('');
-  @Input() brewery!: BreweriesComponent;
-  @Input() name: string = "";
-  constructor(
-    private breweriesApi: BreweriesApiService
-    ) {
-
-  }
-
-  search(){
-    console.log(this.placeholder);
-    this.breweriesApi.getBreweriesByName(this.name).subscribe((result) => {
-        this.brewery.breweries = result;
-        this.brewery.page = 0;
-        let num = Math.ceil(this.brewery.breweries.length/8);
-        this.brewery.numPages = [];
-        for(let i = 0; i < num; i++){
-            this.brewery.numPages.push(i);
+    ubication: boolean = false;
+    @Input() placeholder: string = 'Search...';
+    @Input() array!: [];
+    @Input() control = new FormControl('');
+    @Input() brewery!: BreweriesComponent;
+    @Input() topbrewery!: TopBreweriesComponent;
+    @Input() name: string = "";
+    state: boolean = false;
+    hideList: boolean = false;
+    constructor(private router: Router){
+        router.events.subscribe((val) => {
+            if (val instanceof NavigationEnd){
+                if(val.url !== '/top'){
+                    this.hideList = false;
+                }else{
+                    this.hideList = true;
+                }
+            }
+        });
+    }
+    ngOnInit() {
+        this.brewery!.breweryDetail;
+        let url = this.router.url.split("/");
+        if(url[url.length-1] == "top"){
+            this.state = true;
         }
-    });
-  }
-  restart(){
-    this.breweriesApi.getBreweries().subscribe((result) => {
-        this.brewery.breweries = result;
-        this.brewery.page= 0;
-        let num = Math.ceil(this.brewery.breweries.length/8);
-        this.brewery.numPages = [];
-        for(let i = 0; i < num; i++){
-            this.brewery.numPages.push(i);
+        else{
+            this.state = false;
         }
-    });
-  }
+    }
+    search(){
+        if(this.state == true){
+            this.topbrewery.search(this.name);
+        }
+        else{
+            this.brewery.search(this.name);
+        }
+    }
+    restart(){
+        this.brewery.restart();
+    }
 }
+

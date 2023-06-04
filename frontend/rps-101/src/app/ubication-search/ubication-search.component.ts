@@ -2,7 +2,7 @@ import { Component} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Input } from '@angular/core';
 import { BreweriesComponent } from 'app/breweries/breweries.component';
-import { BreweriesApiService } from 'app/services/breweries-api.service';
+import { RemoteBreweriesApiService } from 'app/services/remote-breweries-api.service';
 
 @Component({
   selector: 'app-ubication-search',
@@ -16,10 +16,10 @@ export class UbicationSearchComponent {
   @Input() longitude: number = 0;
   @Input() latitude: number = 0;
   constructor(
-    private breweriesApi: BreweriesApiService
+    private RemotebreweriesApi: RemoteBreweriesApiService
 ) {}
   searchByUbication(){
-    this.breweriesApi.getBreweriesByUbication(this.longitude, this.latitude).subscribe((result) => {
+    this.RemotebreweriesApi.getBreweriesByUbication(this.longitude, this.latitude).subscribe((result) => {
         this.brewery.breweries = result;
         this.brewery.page = 0;
         let num = Math.ceil(this.brewery.breweries.length/8);

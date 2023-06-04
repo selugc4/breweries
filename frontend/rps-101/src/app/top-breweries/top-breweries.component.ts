@@ -1,35 +1,23 @@
 import { Component} from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Brewery } from 'app/models/Brewery';
-import { RemoteBreweriesApiService } from 'app/services/remote-breweries-api.service';
-
+import { BreweriesApiService } from 'app/services/local-breweries-api.service';
 @Component({
-  selector: 'app-breweries',
-  templateUrl: './breweries.component.html',
-  styleUrls: ['./breweries.component.scss']
+  selector: 'app-top-breweries',
+  templateUrl: './top-breweries.component.html',
+  styleUrls: ['./top-breweries.component.scss']
 })
-export class BreweriesComponent {
+export class TopBreweriesComponent {
     breweries: Brewery[]= [];
     page: number = 0;
     numPages: number[] = [];
     breweryDetail: boolean = false;
-    hideList: boolean = false;
     constructor(
-        private RemotebreweriesApi: RemoteBreweriesApiService,
-        private router: Router
-    ) {router.events.subscribe((val) => {
-        if (val instanceof NavigationEnd){
-            if(val.url !== '/'){
-                this.hideList = true;
-            }else{
-                this.hideList = false;
-            }
-        }
-    });
-
+        private BreweriesApi: BreweriesApiService,
+    ) {
     }
     ngOnInit() {
-        this.RemotebreweriesApi.getBreweries().subscribe((result) => {
+        this.BreweriesApi.getBreweries().subscribe((result) => {
             this.breweries = result;
             this.page= 0;
             let num = Math.ceil(this.breweries.length/8);
@@ -52,7 +40,7 @@ export class BreweriesComponent {
         return filteredBreweries;
     }
     search(name: string){
-        this.RemotebreweriesApi.getBreweriesByName(name).subscribe((result) => {
+        this.BreweriesApi.getBreweriesByName(name).subscribe((result) => {
             this.breweries! = result;
             this.page = 0;
             let num = Math.ceil(this.breweries.length/8);
@@ -63,7 +51,7 @@ export class BreweriesComponent {
         });
     }
     restart(){
-        this.RemotebreweriesApi.getBreweries().subscribe((result) => {
+        this.BreweriesApi.getBreweries().subscribe((result) => {
             this.breweries = result;
             this.page= 0;
             let num = Math.ceil(this.breweries.length/8);

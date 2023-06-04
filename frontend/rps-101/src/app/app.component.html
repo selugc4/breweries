@@ -1,5 +1,7 @@
 <div class="app-container">
-    <app-header [brewery]="brewery"></app-header>
-    <app-menu class = "menu"></app-menu>
-    <app-breweries #brewery class="breweries"> </app-breweries>
+    <app-header [topbrewery]="topBreweries" [brewery]="breweries"></app-header>
+    <app-menu [brewery]="breweries" class = "menu"></app-menu>
+    <app-breweries #breweries class = "breweries"> </app-breweries>
+    <router-outlet class="breweries"></router-outlet>
 </div>
+

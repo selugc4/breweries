@@ -21,7 +21,6 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { NotFoundComponent } from './not-found/not-found.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { RemoteScrapperService } from './services/remote-scrapper.service';
 import { ScrapperService } from './services/scrapper.service';
@@ -41,7 +40,6 @@ import { TopBreweriesComponent } from './top-breweries/top-breweries.component';
         BreweriesComponent,
         BreweryComponent,
         BreweryDetailComponent,
-        NotFoundComponent,
         UbicationSearchComponent,
         TopBreweriesComponent
     ],

@@ -14,7 +14,7 @@
         <p>Type: {{brewery?.brewery_type}}.</p>
         <p>Address: {{brewery?.address_1}} {{brewery?.state_province}}, {{brewery?.country}}.</p>
         <p>Phone: {{brewery?.phone}}.</p>
-        <p>Website: <a *ngIf= "brewery!.website_url != 'No se puede obtener'" href="{{brewery?.website_url}}">{{brewery?.website_url}}</a></p>
+        <p>Website: <a *ngIf= "brewery!.website_url != 'No se puede obtener'" href="{{brewery?.website_url}}">{{brewery?.website_url}}</a>{{brewery!.website_url == 'No se puede obtener'? brewery?.website_url: ''}}</p>
     </div>
 </div>
 <div class = "state">

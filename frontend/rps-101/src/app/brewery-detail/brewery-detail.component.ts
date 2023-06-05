@@ -44,6 +44,9 @@ export class BreweryDetailComponent {
                 phone: auxBrewery[0].phone,
                 website_url: auxBrewery[0].website_url
             }
+            if(this.brewery.website_url == null){
+                this.brewery.website_url = "No se puede obtener";
+            }
             this.url = this.sanitizer.bypassSecurityTrustResourceUrl("https://www.google.com/maps/embed/v1/search?q="+auxBrewery[0].latitude+",+"+auxBrewery[0].longitude+"&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8");
             this.BreweriesApi.getBreweriesById(this.id).subscribe((result) => {
                 let id = result.id;

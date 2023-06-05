@@ -4,10 +4,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-
+//Tabla de datos local breweries
 @Entity
 @Table(name = "breweries")
 public class Brewery {
+
+//Atributos de la tabla breweries
     @Id
     @NotBlank(message = "Id is mandatory")
     private String id;
@@ -39,8 +41,10 @@ public class Brewery {
     @NotBlank(message = "Website is mandatory")
     private String website_url;
 
-    public Brewery() {
+    //Constructor por defecto
+    private Brewery() {
     }
+    //Constructor con todos los atributos
     public Brewery(String id, String name, String brewery_type, String address_1, String city, String state_province, String country, Double longitude, Double latitude, Long phone, String website_url) {
         this.id = id;
         this.name = name;
@@ -54,6 +58,8 @@ public class Brewery {
         this.phone = phone;
         this.website_url = website_url;
     }
+
+    //Getters de los atributos
     public String getName() {
         return name;
     }

@@ -1,3 +1,4 @@
+//Datos obtenidos de cada brewery
 export interface Brewery {
     id: string;
     name: string;

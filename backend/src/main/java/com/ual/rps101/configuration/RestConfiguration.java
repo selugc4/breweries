@@ -7,6 +7,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 import com.ual.rps101.entity.Brewery;
 
+//Configuracion de la api rest para que muestre el id de la tabla breweries
 @Configuration
 public class RestConfiguration implements RepositoryRestConfigurer {
     @Override

@@ -8,5 +8,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import com.ual.rps101.entity.Brewery;
 @RepositoryRestResource
 public interface BreweryRepository extends CrudRepository<Brewery, String> {
+    //Permitir busqueda por nombre similar
     public List<Brewery> findByNameContainingIgnoreCase(String name);
 }

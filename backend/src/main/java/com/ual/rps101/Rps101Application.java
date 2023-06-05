@@ -9,6 +9,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+//CORS filter para permitir el acceso a la api rest desde el frontend
 @SpringBootApplication
 public class Rps101Application {
 	@Bean
